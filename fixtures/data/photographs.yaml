@@ -1,0 +1,304 @@
+-
+  uuid: 7815ca60-17a6-4ecd-8406-88597a7c1034
+  title: 'Starry Night'
+  description: 'Various interpretations ranging from religious symbolism to representations of Van Gogh’s emotional turmoil.'
+  filepath: '/images/7815ca60-17a6-4ecd-8406-88597a7c1034.jpg'
+  createdAt: '2025-10-01 00:00:00'
+  updatedAt: '2025-10-01 00:00:00'
+
+-
+  uuid: c5d05276-8be2-495c-b5bb-28d20f3709be
+  title: 'Cafe Terrace At Night'
+  description: 'I enormously enjoy painting on the spot at night.'
+  filepath: '/images/c5d05276-8be2-495c-b5bb-28d20f3709be.jpg'
+  createdAt: '2025-10-02 01:00:00'
+  updatedAt: '2025-10-02 01:00:00'
+
+-
+  uuid: b013fd73-9bc0-4224-ba33-c818ab5b7ecf
+  title: 'The Bedroom'
+  description: 'Van Gogh made this painting of his bedroom in the Yellow House.'
+  filepath: '/images/b013fd73-9bc0-4224-ba33-c818ab5b7ecf.jpg'
+  createdAt: '2025-10-02 02:00:00'
+  updatedAt: '2025-10-02 02:00:00'
+
+-
+  uuid: 42da7891-7572-4489-ad22-5ad095845685
+  title: 'Mediterranean Landscape'
+  description: 'It embodies harmony and tranquility, reflecting a hopeful vision'
+  filepath: '/images/42da7891-7572-4489-ad22-5ad095845685.jpg'
+  createdAt: '2025-10-03 03:00:00'
+  updatedAt: '2025-10-03 03:00:00'
+
+-
+  uuid: 99a5f89b-d3b4-4e83-9b33-a1f65ba55801
+  title: 'Femme a la montre'
+  description: 'Femme a la montre'
+  filepath: '/images/99a5f89b-d3b4-4e83-9b33-a1f65ba55801.jpg'
+  createdAt: '2025-10-03 04:00:00'
+  updatedAt: '2025-10-03 04:00:00'
+
+-
+  uuid: b91f33be-38ee-4c16-8714-0672e205b70f
+  title: 'Portrait of Marie-Thérèse Walter'
+  description: 'Portrait of Marie-Thérèse Walter'
+  filepath: '/images/b91f33be-38ee-4c16-8714-0672e205b70f.jpg'
+  createdAt: '2025-10-03 04:00:00'
+  updatedAt: '2025-10-03 04:00:00'
+
+-
+  uuid: eedbb94e-eeb6-4441-b1bb-837e4c96366d
+  title: 'Woman with flower'
+  description: 'Woman with flower'
+  filepath: '/images/eedbb94e-eeb6-4441-b1bb-837e4c96366d.jpg'
+  createdAt: '2025-10-03 04:00:00'
+  updatedAt: '2025-10-03 04:00:00'
+
+-
+  uuid: 26341620-2a71-44b2-8567-20ab99c16331
+  title: 'Still life with candlestick'
+  description: 'Still life with candlestick'
+  filepath: '/images/26341620-2a71-44b2-8567-20ab99c16331.jpg'
+  createdAt: '2025-10-03 04:00:00'
+  updatedAt: '2025-10-03 04:00:00'
+
+-
+  uuid: 6fd38edc-feb6-4ad5-9d7e-bfa9aff5dd71
+  title: 'Bathers at La Grenouillère'
+  description: 'Monet and Renoir painted together at La Grenouillère, a slightly raffish resort on the river Seine some 12 kilometres west of Paris.'
+  filepath: '/images/6fd38edc-feb6-4ad5-9d7e-bfa9aff5dd71.jpg'
+  createdAt: '2025-10-03 05:00:00'
+  updatedAt: '2025-10-03 05:00:00'
+
+-
+  uuid: de2ba34a-6eb7-4cbf-b1ed-ccdf3c7f87f5
+  title: 'Cliffs at Étretat'
+  description: 'Cliffs at Étretat.'
+  filepath: '/images/de2ba34a-6eb7-4cbf-b1ed-ccdf3c7f87f5.jpg'
+  createdAt: '2025-10-03 06:00:00'
+  updatedAt: '2025-10-03 06:00:00'
+
+-
+  uuid: b71ba843-de0b-4002-a346-c49b01dad52c
+  title: 'The Cliff Walk at Pourville'
+  description: 'The Cliff Walk at Pourville.'
+  filepath: '/images/b71ba843-de0b-4002-a346-c49b01dad52c.jpg'
+  createdAt: '2025-10-03 07:00:00'
+  updatedAt: '2025-10-03 07:00:00'
+
+-
+  uuid: 62750d33-79d3-416b-a7be-1be73604cd13
+  title: 'Water Lilies and Japanese Bridge'
+  description: 'Water Lilies and Japanese Bridge.'
+  filepath: '/images/62750d33-79d3-416b-a7be-1be73604cd13.jpg'
+  createdAt: '2025-10-03 08:00:00'
+  updatedAt: '2025-10-03 08:00:00'
+
+-
+  uuid: e8264551-9976-4a07-a5d0-e15ec3205487
+  title: 'Impression Sunrise'
+  description: 'Monet himself saw the work as unfinished.'
+  filepath: '/images/e8264551-9976-4a07-a5d0-e15ec3205487.jpg'
+  createdAt: '2025-10-03 09:00:00'
+  updatedAt: '2025-10-03 09:00:00'
+
+-
+  uuid: f1b4c50d-3ae7-47a5-9acb-d38fc6b456fb
+  title: 'San Giorgio Maggiore at Dusk'
+  description: 'It depicts mysterious buildings that seem to magically appear from the surrounding landscape.'
+  filepath: '/images/f1b4c50d-3ae7-47a5-9acb-d38fc6b456fb.jpg'
+  createdAt: '2025-10-03 10:00:00'
+  updatedAt: '2025-10-03 10:00:00'
+
+-
+  uuid: c6589f34-0ce4-4eb1-af30-ab533dcd25d3
+  title: 'The Poppy Field near Argenteuil'
+  description: 'This beautifully depicted summer''s day is captured in all its glory with the vibrant poppies.'
+  filepath: '/images/c6589f34-0ce4-4eb1-af30-ab533dcd25d3.jpg'
+  createdAt: '2025-10-03 11:00:00'
+  updatedAt: '2025-10-03 11:00:00'
+
+-
+  uuid: ce1b4f70-b3ef-4fed-ae87-6f8f5caa4bbb
+  title: 'Poppy Field'
+  description: 'From a distance the painting appears a brilliant and real evocation of a poppy field under a bright sun, but close up the canvas dissolves into a blur of opposing colors and brushstrokes.'
+  filepath: '/images/ce1b4f70-b3ef-4fed-ae87-6f8f5caa4bbb.jpg'
+  createdAt: '2025-10-03 12:00:00'
+  updatedAt: '2025-10-03 12:00:00'
+
+-
+  uuid: 5336de7f-df2b-4b24-badf-dd9f1781a70a
+  title: 'Monet Tulip Fields With The Rijnsburg Windmill'
+  description: 'Monet Tulip Fields With The Rijnsburg Windmill.'
+  filepath: '/images/5336de7f-df2b-4b24-badf-dd9f1781a70a.jpg'
+  createdAt: '2025-10-03 13:00:00'
+  updatedAt: '2025-10-03 13:00:00'
+
+-
+  uuid: 4c20b9d2-ce50-4a5e-819b-00c7e5d747bb
+  title: 'Persistence of Memory'
+  description: 'The painting challenges conventional ideas about reality and perception.'
+  filepath: '/images/4c20b9d2-ce50-4a5e-819b-00c7e5d747bb.jpg'
+  createdAt: '2025-10-04 14:00:00'
+  updatedAt: '2025-10-04 14:00:00'
+
+-
+  uuid: a5e04b77-1af0-439d-9295-fb581df2ff7a
+  title: 'Elephants'
+  description: 'I am making things that inspire me with a profound emotion and I am trying to paint them honestly.'
+  filepath: '/images/a5e04b77-1af0-439d-9295-fb581df2ff7a.jpg'
+  createdAt: '2025-10-04 14:00:00'
+  updatedAt: '2025-10-04 14:00:00'
+
+-
+  uuid: 12c0a68a-2066-47a6-8ae2-03ff9b342a0a
+  title: 'The Enigma of Desire'
+  description: 'Sometimes I spit with pleasure on my mother''s portrait.'
+  filepath: '/images/12c0a68a-2066-47a6-8ae2-03ff9b342a0a.jpg'
+  createdAt: '2025-10-04 14:00:00'
+  updatedAt: '2025-10-04 14:00:00'
+
+-
+  uuid: 511e38b6-91e2-467d-85ca-7d6d29529b1d
+  title: 'Le Sommeil'
+  description: 'Sleep and dreams are par excellence in the realm of the unconscious, and consequently of special interest to psychoanalysts and Surrealists.'
+  filepath: '/images/511e38b6-91e2-467d-85ca-7d6d29529b1d.jpg'
+  createdAt: '2025-10-04 14:00:00'
+  updatedAt: '2025-10-04 14:00:00'
+
+-
+  uuid: 96ce8bac-5e97-49d2-8a68-5975fa292f88
+  title: 'The Face of War'
+  description: 'A reminiscence of the Spanish Civil War.'
+  filepath: '/images/96ce8bac-5e97-49d2-8a68-5975fa292f88.jpg'
+  createdAt: '2025-10-04 15:00:00'
+  updatedAt: '2025-10-04 15:00:00'
+
+-
+  uuid: 22bfd44c-6ec1-4021-ae73-df78572c297e
+  title: 'The Galatea of the Spheres'
+  description: 'It is the outcome of a Dali impassioned by science and for the theories of the disintegration of the atom.'
+  filepath: '/images/22bfd44c-6ec1-4021-ae73-df78572c297e.jpg'
+  createdAt: '2025-10-04 16:00:00'
+  updatedAt: '2025-10-04 16:00:00'
+
+-
+  uuid: 90130dae-3518-4bd9-bdf9-954260981b31
+  title: 'The Sacrament of the Last Supper'
+  description: 'The figure of Christ is transparent, and above him the arms and chest of a man appear in the sky, suggesting that he is already ascending to heaven.'
+  filepath: '/images/90130dae-3518-4bd9-bdf9-954260981b31.jpg'
+  createdAt: '2025-10-04 17:00:00'
+  updatedAt: '2025-10-04 17:00:00'
+
+-
+  uuid: 5603d8ff-9e3c-4a81-9b67-757be9b1e0cc
+  title: 'Mont Sainte-Victoire seen from Bellevue'
+  description: 'Cézanne made his series of paintings of Mont Sainte-Victoire, which now are considered some of his most iconic works.'
+  filepath: '/images/5603d8ff-9e3c-4a81-9b67-757be9b1e0cc.jpg'
+  createdAt: '2025-10-04 18:00:00'
+  updatedAt: '2025-10-04 18:00:00'
+
+-
+  uuid: 9f83fdfd-19fb-4cbd-9ecc-e4c9ae3ed94d
+  title: 'Mont Sainte-Victoire and the Viaduct of the Arc River Valley'
+  description: 'The painting depicts the Montagne Sainte-Victoire, which dominates the landscape of his native city of Aix-en-Provence (southern France).'
+  filepath: '/images/9f83fdfd-19fb-4cbd-9ecc-e4c9ae3ed94d.jpg'
+  createdAt: '2025-10-04 19:00:00'
+  updatedAt: '2025-10-04 19:00:00'
+
+-
+  uuid: 65d97cba-d618-4656-8809-5a59f2f1eef7
+  title: 'The Card Players'
+  description: 'The Card Players is a series of oil paintings by French artist Paul Cézanne. Each painting depicts Provençal peasants immersed in their pipes and playing cards.'
+  filepath: '/images/65d97cba-d618-4656-8809-5a59f2f1eef7.jpg'
+  createdAt: '2025-10-04 20:00:00'
+  updatedAt: '2025-10-04 20:00:00'
+
+-
+  uuid: d29b09ea-2720-48f9-b261-632c36c36c6c
+  title: 'Smoker with a Restful Arm'
+  description: 'Paul Cézanne’s pictures of card players and smokers from the 1890s radiate a perceptible sense of calm, bordering on aloofness.'
+  filepath: '/images/d29b09ea-2720-48f9-b261-632c36c36c6c.jpg'
+  createdAt: '2025-10-04 21:00:00'
+  updatedAt: '2025-10-04 21:00:00'
+
+-
+  uuid: 6b1b357b-bd5e-448d-ad68-2bc12b1fe02f
+  title: 'The Basket of apples'
+  description: 'The table depicted in the painting is tilted, with no right angles, creating an impossible shape.'
+  filepath: '/images/6b1b357b-bd5e-448d-ad68-2bc12b1fe02f.jpg'
+  createdAt: '2025-10-04 22:00:00'
+  updatedAt: '2025-10-04 22:00:00'
+
+-
+  uuid: f3c81aff-a887-4b12-b240-382147f2cdbb
+  title: 'Pyramid of Skulls'
+  description: 'Cézanne, though obviously unbeknownst to him, had just five years left of his life when he painted this formation of skulls. He was, however, preoccupied with death in his later years.'
+  filepath: '/images/f3c81aff-a887-4b12-b240-382147f2cdbb.jpg'
+  createdAt: '2025-10-04 23:00:00'
+  updatedAt: '2025-10-04 23:00:00'
+
+-
+  uuid: 9ecb9d43-d0f5-4721-b514-570dba58138c
+  title: 'L''Estaque with Red Roofs'
+  description: 'The composition is anchored by the vibrant blue sea that serves as a backdrop, suggesting a harmonious interaction between the natural and the built environments.'
+  filepath: '/images/9ecb9d43-d0f5-4721-b514-570dba58138c.jpg'
+  createdAt: '2025-10-04 23:01:00'
+  updatedAt: '2025-10-04 23:01:00'
+
+-
+  uuid: 374b9f16-e98b-491f-8638-672dad311843
+  title: 'Maison Maria with a View of Château Noir'
+  description: 'Cézanne had devised his hallmark manner of applying color in short parallel strokes, no differently for objects than for empty space.'
+  filepath: '/images/374b9f16-e98b-491f-8638-672dad311843.jpg'
+  createdAt: '2025-10-04 23:02:00'
+  updatedAt: '2025-10-04 23:02:00'
+
+-
+  uuid: dbdc2a6a-2633-4215-8d74-a99b4c3a5183
+  title: 'The Pool at Jas de Bouffan'
+  description: null
+  filepath: '/images/dbdc2a6a-2633-4215-8d74-a99b4c3a5183.jpg'
+  createdAt: '2025-10-04 23:03:00'
+  updatedAt: '2025-10-04 23:03:00'
+
+-
+  uuid: 90e40ff2-06c9-4cdd-a548-2e98ac5348f2
+  title: 'Sun sets sail'
+  description: 'A sailing ship that appears to be setting sail into the sun. The painting is a celebration of the beauty and wonder of nature.'
+  filepath: '/images/90e40ff2-06c9-4cdd-a548-2e98ac5348f2.jpg'
+  createdAt: '2025-10-04 23:04:00'
+  updatedAt: '2025-10-04 23:04:00'
+
+-
+  uuid: 03e05f1b-3952-4edb-adbf-3e6e12e49958
+  title: 'Candlelit Cloister'
+  description: 'This is cool but kinda eerie at the same time.'
+  filepath: '/images/03e05f1b-3952-4edb-adbf-3e6e12e49958.jpg'
+  createdAt: '2025-10-04 23:04:00'
+  updatedAt: '2025-10-04 23:04:00'
+
+-
+  uuid: 87cdbb1d-fdb2-4f3f-b58d-27912147c53b
+  title: 'Medieval Moonlight'
+  description: 'Medieval Moonlight by Rob Gonsalves.'
+  filepath: '/images/87cdbb1d-fdb2-4f3f-b58d-27912147c53b.jpg'
+  createdAt: '2025-10-04 23:04:00'
+  updatedAt: '2025-10-04 23:04:00'
+
+-
+  uuid: 189b2f0d-3684-45c7-9960-73f32a7faf99
+  title: 'Water Dancing'
+  description: 'Water Dancing by Rob Gonsalves.'
+  filepath: '/images/189b2f0d-3684-45c7-9960-73f32a7faf99.jpg'
+  createdAt: '2025-10-04 23:04:00'
+  updatedAt: '2025-10-04 23:04:00'
+
+-
+  uuid: 181ff70b-4cbe-4ac6-b63a-bdd6c465fcdb
+  title: 'The Dancing Wind'
+  description: 'The Dancing Wind by Rob Gonsalves.'
+  filepath: '/images/181ff70b-4cbe-4ac6-b63a-bdd6c465fcdb.jpg'
+  createdAt: '2025-10-04 23:04:00'
+  updatedAt: '2025-10-04 23:04:00'
+

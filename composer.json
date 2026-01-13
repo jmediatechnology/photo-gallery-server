@@ -1,0 +1,153 @@
+{
+    "type": "project",
+    "license": "proprietary",
+    "name": "jmediatechnology/photo-gallery-server",
+    "description": "Demonstration of coding skills",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=8.5",
+        "ext-ctype": "*",
+        "ext-iconv": "*",
+        "ext-simplexml": "*",
+        "doctrine/dbal": "^4.4",
+        "doctrine/doctrine-bundle": "^3.1",
+        "doctrine/doctrine-migrations-bundle": "^4.0",
+        "doctrine/orm": "^3.5",
+        "lexik/jwt-authentication-bundle": "^3.1",
+        "nelmio/cors-bundle": "^2.6",
+        "phpdocumentor/reflection-docblock": "^5.6",
+        "phpstan/phpdoc-parser": "^2.3",
+        "symfony/cache": "^8.0",
+        "symfony/clock": "^8.0",
+        "symfony/config": "^8.0",
+        "symfony/console": "^8.0",
+        "symfony/dependency-injection": "^8.0",
+        "symfony/dom-crawler": "^8.0",
+        "symfony/dotenv": "^8.0",
+        "symfony/doctrine-bridge": "^8.0",
+        "symfony/error-handler": "^8.0",
+        "symfony/event-dispatcher": "^8.0",
+        "symfony/flex": "^2.10",
+        "symfony/filesystem": "^8.0",
+        "symfony/finder": "^8.0",
+        "symfony/framework-bundle": "^8.0",
+        "symfony/http-foundation": "^8.0",
+        "symfony/http-kernel": "^8.0",
+        "symfony/messenger": "^8.0",
+        "symfony/mime": "^8.0",
+        "symfony/password-hasher": "^8.0",
+        "symfony/property-access": "^8.0",
+        "symfony/property-info": "^8.0",
+        "symfony/routing": "^8.0",
+        "symfony/runtime": "^8.0",
+        "symfony/security-core": "^8.0",
+        "symfony/security-csrf": "^8.0",
+        "symfony/security-bundle": "^8.0",
+        "symfony/security-http": "^8.0",
+        "symfony/serializer": "^8.0",
+        "symfony/string": "^8.0",
+        "symfony/type-info": "^8.0",
+        "symfony/uid": "^8.0",
+        "symfony/validator": "^8.0",
+        "symfony/var-dumper": "^8.0",
+        "symfony/var-exporter": "^8.0",
+        "symfony/yaml": "^8.0"
+    },
+    "require-dev": {
+        "dg/bypass-finals": "^1.9",
+        "doctrine/doctrine-fixtures-bundle": "^4.3.1",
+        "liip/test-fixtures-bundle": "^3.7",
+        "phpunit/phpunit": "^12.4.1",
+        "symfony/browser-kit": "^8.0",
+        "symfony/css-selector": "^8.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true,
+            "symfony/flex": true,
+            "symfony/runtime": true
+        },
+        "bump-after-update": true,
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Tests\\": "tests/",
+            "App\\Fixtures\\": "fixtures/"
+        }
+    },
+    "replace": {
+        "symfony/polyfill-ctype": "*",
+        "symfony/polyfill-iconv": "*",
+        "symfony/polyfill-php72": "*",
+        "symfony/polyfill-php73": "*",
+        "symfony/polyfill-php74": "*",
+        "symfony/polyfill-php80": "*",
+        "symfony/polyfill-php81": "*",
+        "symfony/polyfill-php82": "*",
+        "symfony/polyfill-php83": "*",
+        "symfony/polyfill-php84": "*",
+        "symfony/polyfill-php85": "*"
+    },
+    "scripts": {
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+        },
+        "post-install-cmd": [
+            "@auto-scripts"
+        ],
+        "post-update-cmd": [
+            "@auto-scripts"
+        ],
+        "test-execute": [
+            "bin/console --env=test cache:clear",
+            "bin/console --env=test doctrine:schema:create",
+            "./vendor/bin/phpunit tests || true"
+        ],
+        "test-execute-dev": [
+            "bin/console --env=dev cache:clear",
+            "@test-db-recreate",
+            "bin/console --env=dev doctrine:fixtures:load --no-interaction",
+            "./vendor/bin/phpunit tests || true",
+            "@test-db-drop"
+        ],
+        "test-execute-dev-application": [
+            "bin/console --env=dev cache:clear",
+            "@test-db-recreate",
+            "bin/console --env=dev doctrine:fixtures:load --no-interaction",
+            "./vendor/bin/phpunit tests/Application || true",
+            "@test-db-drop"
+        ],
+        "test-load-fixtures": [
+            "@test-db-recreate",
+            "bin/console --env=dev doctrine:fixtures:load --no-interaction"
+        ],
+        "test-db-drop": [
+            "bin/console --env=dev doctrine:database:drop --if-exists --force"
+        ],
+        "test-db-create": [
+            "bin/console --env=dev doctrine:database:create",
+            "bin/console --env=dev doctrine:schema:create"
+        ],
+        "test-db-recreate": [
+            "@test-db-drop",
+            "@test-db-create"
+        ]
+    },
+    "conflict": {
+        "symfony/symfony": "*"
+    },
+    "extra": {
+        "symfony": {
+            "allow-contrib": false,
+            "require": "7.3.*"
+        }
+    }
+}

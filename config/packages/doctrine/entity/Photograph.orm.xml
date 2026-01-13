@@ -1,0 +1,19 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity
+        name="App\Domain\Entity\Photograph"
+        repository-class="App\Infrastructure\Doctrine\Repository\PhotographRepository"
+    >
+        <id name="uuid" type="uuid" column="uuid">
+            <generator strategy="CUSTOM"/>
+            <custom-id-generator class="App\Infrastructure\Doctrine\Generator\CustomUUIDGenerator"/>
+        </id>
+        <field name="title" type="title" length="255" unique="true" />
+        <field name="description" type="description" nullable="true" />
+        <field name="filePath" type="file_path"/>
+        <field name="createdAt" type="created_at" />
+        <field name="updatedAt" type="updated_at" />
+    </entity>
+</doctrine-mapping>

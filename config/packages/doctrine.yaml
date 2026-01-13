@@ -1,0 +1,81 @@
+doctrine:
+    dbal:
+        url: '%env(resolve:DATABASE_URL)%'
+
+        # IMPORTANT: You MUST configure your server version,
+        # either here or in the DATABASE_URL env var (see .env file)
+        #server_version: '16'
+
+        profiling_collect_backtrace: '%kernel.debug%'
+        types:
+            uuid: App\Infrastructure\Doctrine\Types\UUIDType
+            title: App\Infrastructure\Doctrine\Types\TitleType
+            description: App\Infrastructure\Doctrine\Types\DescriptionType
+            file_path: App\Infrastructure\Doctrine\Types\FilePathType
+            custom_datetime_immutable: App\Infrastructure\Doctrine\Types\DateTimeImmutableType
+            created_at: App\Infrastructure\Doctrine\Types\CreatedAtType
+            updated_at: App\Infrastructure\Doctrine\Types\UpdatedAtType
+
+    orm:
+#        auto_generate_proxy_classes: true
+#        enable_lazy_ghost_objects: true
+#        report_fields_where_declared: true
+
+        controller_resolver:
+            auto_mapping: false
+
+        entity_managers:
+            default:
+                connection: default
+                auto_mapping: true
+                validate_xml_mapping: true
+                naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+
+                identity_generation_preferences:
+                    Doctrine\DBAL\Platforms\PostgreSQLPlatform: identity
+
+                mappings:
+                    photograph:
+                        type: xml
+                        is_bundle: false
+                        dir: '%kernel.project_dir%/config/packages/doctrine/entity'
+                        prefix: 'App\Domain\Entity'
+                        alias: photograph
+                    user:
+                        type: xml
+                        is_bundle: false
+                        dir: '%kernel.project_dir%/config/packages/doctrine/user'
+                        prefix: 'App\Infrastructure\Symfony\Security\User'
+                        alias: user
+
+when@dev:
+    doctrine:
+        dbal:
+            # "TEST_TOKEN" is typically set by ParaTest
+            dbname_suffix: '%env(default::TEST_TOKEN)%'
+
+when@test:
+    doctrine:
+        dbal:
+            driver: 'pdo_sqlite'
+            url: 'sqlite://file::memory:?cache=shared'
+
+when@prod:
+    doctrine:
+        orm:
+#            auto_generate_proxy_classes: false
+#            proxy_dir: '%kernel.build_dir%/doctrine/orm/Proxies'
+            query_cache_driver:
+                type: pool
+                pool: doctrine.system_cache_pool
+            result_cache_driver:
+                type: pool
+                pool: doctrine.result_cache_pool
+
+    framework:
+        cache:
+            pools:
+                doctrine.result_cache_pool:
+                    adapter: cache.app
+                doctrine.system_cache_pool:
+                    adapter: cache.system

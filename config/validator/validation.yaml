@@ -1,0 +1,7 @@
+App\Application\Commands\Photograph\CreateCommand:
+    constraints:
+        - App\Infrastructure\Symfony\Validator\Photograph\CreateCommandConstraint:
+            message: 'Title is already in use.'
+    properties:
+        title:
+            - NotBlank: ~

@@ -1,0 +1,42 @@
+api_login_check:
+    path: /api/login_check
+
+anonymous_login:
+    path: /api/login/anonymous
+    controller: App\Presentation\Action\Security\AnonymousLoginAction
+    methods:    GET
+
+photograph_create:
+    path:       /photographs
+    controller: App\Presentation\Action\Photograph\CreateAction
+    methods:    POST
+    defaults:
+        _format: json
+
+photograph_delete:
+    path:       /photographs/{id}
+    controller: App\Presentation\Action\Photograph\DeleteAction
+    methods:    DELETE
+    defaults:
+        _format: json
+
+photograph_get_all:
+    path:       /photographs
+    controller: App\Presentation\Action\Photograph\GetAllAction
+    methods:    GET
+    defaults:
+        _format: json
+
+photograph_get_one:
+    path:       /photographs/{id}
+    controller: App\Presentation\Action\Photograph\GetOneAction
+    methods:    GET
+    defaults:
+        _format: json
+
+photograph_update:
+    path:       /photographs/{id}
+    controller: App\Presentation\Action\Photograph\UpdateAction
+    methods:    PATCH
+    defaults:
+        _format: json

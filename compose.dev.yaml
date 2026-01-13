@@ -1,0 +1,23 @@
+services:
+  server:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+      target: development
+    user: "${UID:-1000}:${GID:-1000}"
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - 9000:80
+    entrypoint: ["/var/www/html/docker/entrypoint-dev.sh"]
+    command: ["apache2-foreground"]
+    depends_on:
+      db:
+        condition: service_healthy
+    secrets:
+      - db-password
+    environment:
+      - PASSWORD_FILE_PATH=/run/secrets/db-password
+      - DB_HOST=db
+      - DB_NAME=photo-gallery
+      - DB_USER=root
