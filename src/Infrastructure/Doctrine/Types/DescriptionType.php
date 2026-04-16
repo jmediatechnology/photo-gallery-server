@@ -8,7 +8,7 @@ use Doctrine\DBAL\Types\StringType;
 
 class DescriptionType extends StringType
 {
-    private const int LENGTH = 255;
+    private const int LENGTH = 512;
 
     public const string NAME = 'description';
 

@@ -302,3 +302,67 @@
   createdAt: '2025-10-04 23:04:00'
   updatedAt: '2025-10-04 23:04:00'
 
+-
+    uuid: 7ba4aa84-bd8d-45ca-b324-d726db5e7de5
+    title: 'Stilleven met gemberpot I'
+    description: 'Het werk is geïnspireerd op de Franse schilder Paul Cézanne, die vormen uit de werkelijkheid vertaalde in geometrische vormen, zoals bollen, rechthoeken en cilinders.'
+    filepath: '/images/7ba4aa84-bd8d-45ca-b324-d726db5e7de5.jpg'
+    createdAt: '2026-01-01 00:00:00'
+    updatedAt: '2025-01-01 00:00:00'
+
+-
+    uuid: 7c45169a-6a7e-43a3-9ca2-8f7add1d0844
+    title: 'Stilleven met gemberpot II'
+    description: 'Het is een geabstraheerde versie van Stilleven met gemberpot I. Op Stilleven met gemberpot II zijn alle details vervangen door geometrische vormen, behalve de gemberpot, die het middelpunt vormt van een uitgebalanceerde compositie.'
+    filepath: '/images/7c45169a-6a7e-43a3-9ca2-8f7add1d0844.jpg'
+    createdAt: '2026-01-01 00:00:01'
+    updatedAt: '2025-01-01 00:00:01'
+
+-
+    uuid: b931ecda-cb36-4937-9cfd-c3c01f80b60d
+    title: 'Composition No. XVI'
+    description: 'The composition shows typical features of Cubism, with the fragmenting of the contours and the dissolution of traditional perspective.'
+    filepath: '/images/b931ecda-cb36-4937-9cfd-c3c01f80b60d.jpg'
+    createdAt: '2026-01-01 00:00:02'
+    updatedAt: '2025-01-01 00:00:02'
+
+-
+    uuid: 559f8f9f-2359-4ae0-8d47-5848e102dcc8
+    title: 'Farm near Duivendrecht'
+    description: 'Though Piet Mondrian is best known for his nonrepresentational paintings, his basic vision was rooted in landscape.'
+    filepath: '/images/559f8f9f-2359-4ae0-8d47-5848e102dcc8.jpg'
+    createdAt: '2026-01-01 00:00:03'
+    updatedAt: '2025-01-01 00:00:03'
+
+-
+    uuid: 17f89e91-2867-4178-9397-16f20dce33c9
+    title: 'Composition with Red, Blue and Yellow'
+    description: 'Mondrian composed this painting as a harmony of contrasts that signifies both balance and the tension of dynamic forces.'
+    filepath: '/images/17f89e91-2867-4178-9397-16f20dce33c9.jpg'
+    createdAt: '2026-01-01 00:00:04'
+    updatedAt: '2025-01-01 00:00:04'
+
+-
+    uuid: 64c42be1-be68-471f-a114-3a2fa04cafa2
+    title: 'Composition 10 in Black and White'
+    description: 'This painting is considered a turning point in his journey toward abstraction. Although it has influence from the breakwater (the pier is the vertical lines, while the waves are horizontal), it is generally abstract. After this painting, Mondrian moved away from recognizable representations of nature and toward visual harmony.'
+    filepath: '/images/64c42be1-be68-471f-a114-3a2fa04cafa2.jpg'
+    createdAt: '2026-01-01 00:00:04'
+    updatedAt: '2025-01-01 00:00:04'
+
+-
+    uuid: b445d107-a030-4114-8b6f-bc449458457b
+    title: 'Windmill in sunlight'
+    description: 'There is another canvas hanging in front of you, on which a windmill in the sun. You have never seen anything so murderous in color. It is golden yellow, Indian yellow, and cadmium light with radiant vermilion and orange, teeming like a rain of color from the blessed sky.'
+    filepath: '/images/b445d107-a030-4114-8b6f-bc449458457b.jpg'
+    createdAt: '2026-01-01 00:00:05'
+    updatedAt: '2025-01-01 00:00:05'
+
+-
+    uuid: 5c654c45-4c10-464e-8068-554c25f26b6c
+    title: 'Evening; Red Tree'
+    description: 'The tree remains in conflict as forces of air and light pull it upwards toward growth and expansion, and gravity pulls it down into dispersal and decay.'
+    filepath: '/images/5c654c45-4c10-464e-8068-554c25f26b6c.jpg'
+    createdAt: '2026-01-01 00:00:06'
+    updatedAt: '2025-01-01 00:00:06'
+
