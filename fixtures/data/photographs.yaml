@@ -366,3 +366,43 @@
     createdAt: '2026-01-01 00:00:06'
     updatedAt: '2025-01-01 00:00:06'
 
+-
+    uuid: 96146488-44e7-415f-bdea-373ce1ec9d99
+    title: 'AD84'
+    description: 'Beksinski AD84.'
+    filepath: '/images/96146488-44e7-415f-bdea-373ce1ec9d99.jpg'
+    createdAt: '2026-01-02 00:00:00'
+    updatedAt: '2025-01-02 00:00:00'
+
+-
+    uuid: bd69c7e5-bd6f-4836-ad4d-78b6a3937748
+    title: 'Utitled (Orange Organism)'
+    description: 'Beksinski Untitled Orange Organism.'
+    filepath: '/images/bd69c7e5-bd6f-4836-ad4d-78b6a3937748.jpg'
+    createdAt: '2026-01-02 00:00:01'
+    updatedAt: '2025-01-02 00:00:01'
+
+-
+    uuid: e8ff7279-89a0-4b1d-a8b6-636444bff49b
+    title: 'AG76'
+    description: 'Beksinski AG76.'
+    filepath: '/images/e8ff7279-89a0-4b1d-a8b6-636444bff49b.jpg'
+    createdAt: '2026-01-02 00:00:01'
+    updatedAt: '2025-01-02 00:00:01'
+
+-
+    uuid: 850503d2-9c01-4ff7-a50a-aee862c4c243
+    title: 'AE73'
+    description: 'Beksinski AE73.'
+    filepath: '/images/850503d2-9c01-4ff7-a50a-aee862c4c243.jpg'
+    createdAt: '2026-01-02 00:00:01'
+    updatedAt: '2025-01-02 00:00:01'
+
+-
+    uuid: afd735c2-d02d-4285-84fa-5934ac15856d
+    title: 'Untitled (The Cathedral)'
+    description: 'Beksinski The Cathedral.'
+    filepath: '/images/afd735c2-d02d-4285-84fa-5934ac15856d.jpg'
+    createdAt: '2026-01-02 00:00:03'
+    updatedAt: '2025-01-02 00:00:03'
+
