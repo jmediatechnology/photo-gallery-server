@@ -23,6 +23,70 @@
   updatedAt: '2025-10-02 02:00:00'
 
 -
+  uuid: 87c8eed7-b65d-40cd-9526-87e3a30ad3d8
+  title: 'The Potato Eaters'
+  description: 'Vincent was painting the authentic, no-frills life of Dutch peasants. With its moody tones and earnest faces, this painting might not be the glitzy dinner party we’re used to, but it’s a hearty serving of reality.'
+  filepath: '/images/87c8eed7-b65d-40cd-9526-87e3a30ad3d8.jpg'
+  createdAt: '2025-10-02 02:00:00'
+  updatedAt: '2025-10-02 02:00:00'
+
+-
+  uuid: 2adca6a7-57ff-4d65-99f2-e6a195fbf4f1
+  title: 'De oogst'
+  description: 'De oogst toont het boerenleven op de hooivelden van de dorre Crau-vlakte, tijdens een heldere zomerdag. Afgebeeld zijn de verschillende fasen van het oogsten. Het werk is opgebouwd in lagen. De essentie van het werk is echter de weergave van wat hij noemde het "zomerzon-effect" en de specifieke sfeer van de zomerdag. Hij maakt de zwoele hitte van de zon bijna voelbaar.'
+  filepath: '/images/2adca6a7-57ff-4d65-99f2-e6a195fbf4f1.jpg'
+  createdAt: '2025-10-02 02:00:00'
+  updatedAt: '2025-10-02 02:00:00'
+
+-
+  uuid: e23017d4-1e01-42d9-bc5d-5342057d5a6d
+  title: 'Het gele huis'
+  description: 'Het raam op de eerste etage met de geopende luiken is Van Goghs logeerkamer waar zijn vriend de kunstschilder Paul Gauguin in oktober introk, toen zij het Atelier van het Zuiden wilden oprichten. Het raam met de gesloten luiken is Van Goghs eigen kamer, vereeuwigd in het schilderij De slaapkamer.'
+  filepath: '/images/e23017d4-1e01-42d9-bc5d-5342057d5a6d.jpg'
+  createdAt: '2025-10-02 02:00:00'
+  updatedAt: '2025-10-02 02:00:00'
+
+-
+  uuid: 0b733b9d-82ef-4c89-a8da-ed9f4d9eea8e
+  title: 'Het nachtcafé'
+  description: 'Vandaag ga ik waarschijnlijk beginnen aan het interieur van het café waar ik logeer, ''s avonds bij gaslicht. Het is wat men hier een “nachtcafé” noemt (die zijn er genoeg hier) die de hele nacht door open blijven. De nachtbrakers kunnen er een toevlucht vinden, wanneer ze geen logement kunnen betalen of te dronken zijn om naar binnen te mogen.'
+  filepath: '/images/0b733b9d-82ef-4c89-a8da-ed9f4d9eea8e.jpg'
+  createdAt: '2025-10-02 02:00:00'
+  updatedAt: '2025-10-02 02:00:00'
+
+-
+  uuid: 8618e652-21c6-45b8-bd1c-aa39634f7bef
+  title: 'Korenveld met cipressen'
+  description: 'Er bestaan drie versies van het schilderij, alle drie geschilderd in Saint-Rémy-de-Provence in 1889.'
+  filepath: '/images/8618e652-21c6-45b8-bd1c-aa39634f7bef.jpg'
+  createdAt: '2025-10-02 02:00:00'
+  updatedAt: '2025-10-02 02:00:00'
+
+-
+  uuid: e538d2b6-8521-477c-8523-a40f381fc68b
+  title: 'The Sower'
+  description: 'He painted this sower in the autumn of 1888. At the time, Van Gogh was working together with Paul Gauguin (1848-1903). Gauguin believed that in his work Van Gogh should draw less on reality and more on his imagination.'
+  filepath: '/images/e538d2b6-8521-477c-8523-a40f381fc68b.jpg'
+  createdAt: '2025-10-02 02:00:00'
+  updatedAt: '2025-10-02 02:00:00'
+
+-
+  uuid: 68032dde-36ef-4440-9f54-d4cc086b8a95
+  title: 'Fishing Boats on the Beach at Les Saintes-Maries-de-la-Mer'
+  description: 'Can you see why these fishermen''s boats appear slightly unreal? Compared to the irregular surface of the sandy beach, they''ve been painted in an overly two-dimensional way. The boats are made up of areas of uniform colour within strong outlines. Furthermore, the boats don''t cast shadows on the beach. These stylistic elements were familiar to Van Gogh from his collection of Japanese prints.'
+  filepath: '/images/68032dde-36ef-4440-9f54-d4cc086b8a95.jpg'
+  createdAt: '2025-10-02 02:00:00'
+  updatedAt: '2025-10-02 02:00:00'
+
+-
+  uuid: 559b6aaf-85ef-4011-b806-d7f17b10f6e4
+  title: 'Sterrennacht boven de Rhône'
+  description: 'Van Gogh schilderde Sterrennacht boven de Rhone kort na een avondwandeling, waarin hij volgens zijn eigen correspondentie een soort van mystieke samenhang ervoer van water, gras en lucht. In zijn weergave laat hij deze drie elementen dan ook samenvloeien tot een dynamisch geheel.'
+  filepath: '/images/559b6aaf-85ef-4011-b806-d7f17b10f6e4.jpg'
+  createdAt: '2025-10-02 02:00:00'
+  updatedAt: '2025-10-02 02:00:00'
+
+-
   uuid: 42da7891-7572-4489-ad22-5ad095845685
   title: 'Mediterranean Landscape'
   description: 'It embodies harmony and tranquility, reflecting a hopeful vision'
@@ -69,6 +133,14 @@
   filepath: '/images/6fd38edc-feb6-4ad5-9d7e-bfa9aff5dd71.jpg'
   createdAt: '2025-10-03 05:00:00'
   updatedAt: '2025-10-03 05:00:00'
+
+-
+  uuid: 8556484f-964e-45ee-82d9-93f40c041b7f
+  title: 'Flower beds at Vétheuil'
+  description: 'In 1878 Monet went to live in the town of Vétheuil, west of Paris along the Seine. The town provided him with an escape from city life and an opportunity to cultivate the riverbank garden whose climbing nasturtiums he represented with swirls and splashes of orange in this composition.'
+  filepath: '/images/8556484f-964e-45ee-82d9-93f40c041b7f.jpg'
+  createdAt: '2025-10-03 05:00:01'
+  updatedAt: '2025-10-03 05:00:01'
 
 -
   uuid: de2ba34a-6eb7-4cbf-b1ed-ccdf3c7f87f5
@@ -661,4 +733,68 @@
     filepath: '/images/7286eede-24d9-4270-a03a-242c436d6a5b.jpg'
     createdAt: '2026-01-02 00:00:26'
     updatedAt: '2025-01-02 00:00:26'
+
+-
+    uuid: c340a2a2-d2ad-45c7-bd78-1e6c383c2820
+    title: 'Untitled (ancient gateway)'
+    description: 'Beksinski''s ancient gateway.'
+    filepath: '/images/c340a2a2-d2ad-45c7-bd78-1e6c383c2820.jpg'
+    createdAt: '2026-01-02 00:00:27'
+    updatedAt: '2025-01-02 00:00:27'
+
+-
+    uuid: 8e34ac6d-ffd7-40c7-a517-6da6b6a414b7
+    title: 'Untitled (rising ship)'
+    description: 'Beksinski''s rising ship.'
+    filepath: '/images/8e34ac6d-ffd7-40c7-a517-6da6b6a414b7.jpg'
+    createdAt: '2026-01-02 00:00:28'
+    updatedAt: '2025-01-02 00:00:28'
+
+-
+    uuid: e124a2b1-4a23-4f75-83de-6c29e878e4e4
+    title: 'Untitled (city on fire)'
+    description: 'Beksinski''s city on fire.'
+    filepath: '/images/e124a2b1-4a23-4f75-83de-6c29e878e4e4.jpg'
+    createdAt: '2026-01-02 00:00:29'
+    updatedAt: '2025-01-02 00:00:29'
+
+-
+    uuid: 133d03f2-5f45-4a9d-a790-f853b6f4e90c
+    title: 'Untitled (the airplane)'
+    description: 'Beksinski''s the airplane.'
+    filepath: '/images/133d03f2-5f45-4a9d-a790-f853b6f4e90c.jpg'
+    createdAt: '2026-01-02 00:00:30'
+    updatedAt: '2025-01-02 00:00:30'
+
+-
+    uuid: 9957c1fe-45f1-4375-8d6b-d949f13f521f
+    title: 'Untitled (the fortress)'
+    description: 'Beksinski''s the fortress.'
+    filepath: '/images/9957c1fe-45f1-4375-8d6b-d949f13f521f.jpg'
+    createdAt: '2026-01-02 00:00:31'
+    updatedAt: '2025-01-02 00:00:31'
+
+-
+    uuid: 8dac74a0-d38c-4b0d-9f99-591365642d5e
+    title: 'Untitled (automatons)'
+    description: 'Beksinski''s automatons.'
+    filepath: '/images/8dac74a0-d38c-4b0d-9f99-591365642d5e.jpg'
+    createdAt: '2026-01-02 00:00:32'
+    updatedAt: '2025-01-02 00:00:32'
+
+-
+    uuid: c8664942-e1c8-4448-a0f0-b6041603093f
+    title: 'Untitled (the dungeon)'
+    description: 'Beksinski''s the dungeon.'
+    filepath: '/images/c8664942-e1c8-4448-a0f0-b6041603093f.jpg'
+    createdAt: '2026-01-02 00:00:32'
+    updatedAt: '2025-01-02 00:00:32'
+
+-
+    uuid: 8d3ad086-3d24-4aa8-8c4e-26295cf199d6
+    title: 'Untitled (ancestral dog)'
+    description: 'Beksinski''s ancestral dog.'
+    filepath: '/images/8d3ad086-3d24-4aa8-8c4e-26295cf199d6.jpg'
+    createdAt: '2026-01-02 00:00:33'
+    updatedAt: '2025-01-02 00:00:33'
 
