@@ -368,41 +368,297 @@
 
 -
     uuid: 96146488-44e7-415f-bdea-373ce1ec9d99
-    title: 'AD84'
-    description: 'Beksinski AD84.'
+    title: 'Untitled (faceless women)'
+    description: 'Beksinski''s faceless woman.'
     filepath: '/images/96146488-44e7-415f-bdea-373ce1ec9d99.jpg'
     createdAt: '2026-01-02 00:00:00'
     updatedAt: '2025-01-02 00:00:00'
 
 -
     uuid: bd69c7e5-bd6f-4836-ad4d-78b6a3937748
-    title: 'Utitled (Orange Organism)'
-    description: 'Beksinski Untitled Orange Organism.'
+    title: 'Untitled (orange organism)'
+    description: 'Beksinski''s orange organism.'
     filepath: '/images/bd69c7e5-bd6f-4836-ad4d-78b6a3937748.jpg'
     createdAt: '2026-01-02 00:00:01'
     updatedAt: '2025-01-02 00:00:01'
 
 -
     uuid: e8ff7279-89a0-4b1d-a8b6-636444bff49b
-    title: 'AG76'
-    description: 'Beksinski AG76.'
+    title: 'Untitled (emerald sea)'
+    description: 'Beksinski''s Emerald Sea: Szmaragdowe morze wyrzucające na brzeg wszelkiego rodzaju kosztowności – biżuterię, naszyjniki, puzderka, szlachetne kamienie oraz czerwonego ptaka.'
     filepath: '/images/e8ff7279-89a0-4b1d-a8b6-636444bff49b.jpg'
     createdAt: '2026-01-02 00:00:01'
     updatedAt: '2025-01-02 00:00:01'
 
 -
     uuid: 850503d2-9c01-4ff7-a50a-aee862c4c243
-    title: 'AE73'
-    description: 'Beksinski AE73.'
+    title: 'Untitled (night creeper)'
+    description: 'Beksinski''s night creeper.'
     filepath: '/images/850503d2-9c01-4ff7-a50a-aee862c4c243.jpg'
     createdAt: '2026-01-02 00:00:01'
     updatedAt: '2025-01-02 00:00:01'
 
 -
     uuid: afd735c2-d02d-4285-84fa-5934ac15856d
-    title: 'Untitled (The Cathedral)'
-    description: 'Beksinski The Cathedral.'
+    title: 'Untitled (cathedral)'
+    description: 'Beksinski''s cathedral.'
     filepath: '/images/afd735c2-d02d-4285-84fa-5934ac15856d.jpg'
     createdAt: '2026-01-02 00:00:03'
     updatedAt: '2025-01-02 00:00:03'
+
+-
+    uuid: 86ff32dd-0643-463c-9e59-dddb481d70e8
+    title: 'Untitled (olympic fire)'
+    description: 'Beksinski''s olympic fire.'
+    filepath: '/images/86ff32dd-0643-463c-9e59-dddb481d70e8.jpg'
+    createdAt: '2026-01-02 00:00:04'
+    updatedAt: '2025-01-02 00:00:04'
+
+-
+    uuid: e77baccb-196a-499e-8467-bd0730cfbee1
+    title: 'Untitled (floating city)'
+    description: 'Beksinski''s floating city.'
+    filepath: '/images/e77baccb-196a-499e-8467-bd0730cfbee1.jpg'
+    createdAt: '2026-01-02 00:00:05'
+    updatedAt: '2025-01-02 00:00:05'
+
+-
+    uuid: c27c5bb3-cb93-45c0-8a88-94a4dd12c629
+    title: 'Untitled (yellow face)'
+    description: 'Beksinski''s yellow face sticking out of ground.'
+    filepath: '/images/c27c5bb3-cb93-45c0-8a88-94a4dd12c629.jpg'
+    createdAt: '2026-01-02 00:00:05'
+    updatedAt: '2025-01-02 00:00:05'
+
+-
+    uuid: ea45cafe-295f-49f2-8b0c-6b66126f972a
+    title: 'Untitled (death valley)'
+    description: 'Beksinski''s death valley.'
+    filepath: '/images/ea45cafe-295f-49f2-8b0c-6b66126f972a.jpg'
+    createdAt: '2026-01-02 00:00:06'
+    updatedAt: '2025-01-02 00:00:06'
+
+-
+    uuid: 2bf10c96-dfc0-4b96-a63b-80fcb994438f
+    title: 'Untitled (the violinist)'
+    description: 'Beksinski''s the violinist.'
+    filepath: '/images/2bf10c96-dfc0-4b96-a63b-80fcb994438f.jpg'
+    createdAt: '2026-01-02 00:00:06'
+    updatedAt: '2025-01-02 00:00:06'
+
+-
+    uuid: 15e40385-61a1-4829-a8a6-f4058afe3282
+    title: 'Untitled (little island)'
+    description: 'Beksinski''s the little island.'
+    filepath: '/images/15e40385-61a1-4829-a8a6-f4058afe3282.jpg'
+    createdAt: '2026-01-02 00:00:07'
+    updatedAt: '2025-01-02 00:00:07'
+
+-
+    uuid: b40408f0-ba66-4223-bbc2-f1c44e42f803
+    title: 'Untitled (battlefield when it is over)'
+    description: 'Beksinski''s when battlefield is over.'
+    filepath: '/images/b40408f0-ba66-4223-bbc2-f1c44e42f803.jpg'
+    createdAt: '2026-01-02 00:00:08'
+    updatedAt: '2025-01-02 00:00:08'
+
+-
+    uuid: a296f6e9-d68a-47c7-ad00-72b48e854a2d
+    title: 'Untitled (battlefield 1971)'
+    description: 'Beksinski''s battlefield 1971.'
+    filepath: '/images/a296f6e9-d68a-47c7-ad00-72b48e854a2d.jpg'
+    createdAt: '2026-01-02 00:00:09'
+    updatedAt: '2025-01-02 00:00:09'
+
+-
+    uuid: 8a15c76d-1115-4713-9d44-efa3a1f8e5d3
+    title: 'Untitled (eating spider people)'
+    description: 'Beksinski''s eating spider people.'
+    filepath: '/images/8a15c76d-1115-4713-9d44-efa3a1f8e5d3.jpg'
+    createdAt: '2026-01-02 00:00:10'
+    updatedAt: '2025-01-02 00:00:10'
+
+-
+    uuid: 0f0d1cc4-ae3c-4708-bfb8-33df5f102ed7
+    title: 'Untitled (sand face)'
+    description: 'Beksinski''s sand face.'
+    filepath: '/images/0f0d1cc4-ae3c-4708-bfb8-33df5f102ed7.jpg'
+    createdAt: '2026-01-02 00:00:11'
+    updatedAt: '2025-01-02 00:00:11'
+
+-
+    uuid: 21e1e8b2-d2b4-46f2-acb2-9f5ea41a5dae
+    title: 'Untitled (doom cube)'
+    description: 'Beksinski''s doom cube.'
+    filepath: '/images/21e1e8b2-d2b4-46f2-acb2-9f5ea41a5dae.jpg'
+    createdAt: '2026-01-02 00:00:11'
+    updatedAt: '2025-01-02 00:00:11'
+
+-
+    uuid: 73ef913b-54ab-49be-8471-a5313800b771
+    title: 'Untitled (portal)'
+    description: 'Beksinski''s portal.'
+    filepath: '/images/73ef913b-54ab-49be-8471-a5313800b771.jpg'
+    createdAt: '2026-01-02 00:00:12'
+    updatedAt: '2025-01-02 00:00:12'
+
+-
+    uuid: 9ff4ba61-1fd3-4ee7-9c12-0fd978c5a5aa
+    title: 'Untitled (waves)'
+    description: 'Beksinski''s vessel floating on a vast, blue, undulating sea beneath a dark sky.'
+    filepath: '/images/9ff4ba61-1fd3-4ee7-9c12-0fd978c5a5aa.jpg'
+    createdAt: '2026-01-02 00:00:12'
+    updatedAt: '2025-01-02 00:00:12'
+
+-
+    uuid: e3e0c570-4e2a-4658-9e5c-bc4a5c9bdc8e
+    title: 'Untitled (soldier)'
+    description: 'Beksinski''s soldier.'
+    filepath: '/images/e3e0c570-4e2a-4658-9e5c-bc4a5c9bdc8e.jpg'
+    createdAt: '2026-01-02 00:00:13'
+    updatedAt: '2025-01-02 00:00:13'
+
+-
+    uuid: c0e72623-dc94-4a57-b588-d31374e851f8
+    title: 'Untitled (behind the skin)'
+    description: 'Beksinski''s behind the skin.'
+    filepath: '/images/c0e72623-dc94-4a57-b588-d31374e851f8.jpg'
+    createdAt: '2026-01-02 00:00:13'
+    updatedAt: '2025-01-02 00:00:13'
+
+-
+    uuid: eb0c2faf-8dc2-4611-905a-d9ade78b8915
+    title: 'Untitled (open sky)'
+    description: 'Beksinski''s open sky.'
+    filepath: '/images/eb0c2faf-8dc2-4611-905a-d9ade78b8915.jpg'
+    createdAt: '2026-01-02 00:00:14'
+    updatedAt: '2025-01-02 00:00:14'
+
+-
+    uuid: 38ba56a9-655d-4799-87ed-c3cbe6c2390b
+    title: 'Untitled (campfire)'
+    description: 'Beksinski''s campfire.'
+    filepath: '/images/38ba56a9-655d-4799-87ed-c3cbe6c2390b.jpg'
+    createdAt: '2026-01-02 00:00:15'
+    updatedAt: '2025-01-02 00:00:15'
+
+-
+    uuid: bf1e8a6c-6389-488f-8856-d33d1b8b0672
+    title: 'Untitled (tombstones hill)'
+    description: 'Beksinski''s tombstones hill.'
+    filepath: '/images/bf1e8a6c-6389-488f-8856-d33d1b8b0672.jpg'
+    createdAt: '2026-01-02 00:00:16'
+    updatedAt: '2025-01-02 00:00:16'
+
+-
+    uuid: 0169a34f-411d-45a9-b1be-096ca5743c1f
+    title: 'Untitled (the lovers)'
+    description: 'Beksinski''s the lovers.'
+    filepath: '/images/0169a34f-411d-45a9-b1be-096ca5743c1f.jpg'
+    createdAt: '2026-01-02 00:00:17'
+    updatedAt: '2025-01-02 00:00:17'
+
+-
+    uuid: be546a64-5cc3-4638-bc63-9e444063d426
+    title: 'Untitled (the house)'
+    description: 'Beksinski''s the house.'
+    filepath: '/images/be546a64-5cc3-4638-bc63-9e444063d426.jpg'
+    createdAt: '2026-01-02 00:00:18'
+    updatedAt: '2025-01-02 00:00:18'
+
+-
+    uuid: 6e2e9236-eb58-4b52-8cbc-925bdbc6bd8b
+    title: 'Untitled (assembly)'
+    description: 'Beksinski''s assembly.'
+    filepath: '/images/6e2e9236-eb58-4b52-8cbc-925bdbc6bd8b.jpg'
+    createdAt: '2026-01-02 00:00:19'
+    updatedAt: '2025-01-02 00:00:19'
+
+-
+    uuid: a56e6034-f2e3-4631-98dc-cafd02df028d
+    title: 'Untitled (endometriosis)'
+    description: 'Beksinski''s Endometriosis.'
+    filepath: '/images/a56e6034-f2e3-4631-98dc-cafd02df028d.jpg'
+    createdAt: '2026-01-02 00:00:20'
+    updatedAt: '2025-01-02 00:00:20'
+
+-
+    uuid: edeead1f-5936-4287-8524-ae4cff969fbc
+    title: 'Untitled (galactic ocean)'
+    description: 'Beksinski''s galatic ocean.'
+    filepath: '/images/edeead1f-5936-4287-8524-ae4cff969fbc.jpg'
+    createdAt: '2026-01-02 00:00:21'
+    updatedAt: '2025-01-02 00:00:21'
+
+-
+    uuid: 072b9bc0-cdd0-4c9f-8ed1-f02652d5caf6
+    title: 'Untitled (flutist)'
+    description: 'Beksinski''s flutist.'
+    filepath: '/images/072b9bc0-cdd0-4c9f-8ed1-f02652d5caf6.jpg'
+    createdAt: '2026-01-02 00:00:21'
+    updatedAt: '2025-01-02 00:00:21'
+
+-
+    uuid: bbbad8eb-f07a-48d7-9390-1acd0bf1cb17
+    title: 'Untitled (fiat maluch)'
+    description: 'Beksinski''s fiat maluch.'
+    filepath: '/images/bbbad8eb-f07a-48d7-9390-1acd0bf1cb17.jpg'
+    createdAt: '2026-01-02 00:00:22'
+    updatedAt: '2025-01-02 00:00:22'
+
+-
+    uuid: e40f8205-0135-449a-89d6-c44e18422096
+    title: 'Untitled (red sky)'
+    description: 'Beksinski''s red sky.'
+    filepath: '/images/e40f8205-0135-449a-89d6-c44e18422096.jpg'
+    createdAt: '2026-01-02 00:00:22'
+    updatedAt: '2025-01-02 00:00:22'
+
+-
+    uuid: 59513b1f-fb52-42a6-8fbf-565ad1c9089f
+    title: 'Untitled (the governor)'
+    description: 'Beksinski''s the governor.'
+    filepath: '/images/59513b1f-fb52-42a6-8fbf-565ad1c9089f.jpg'
+    createdAt: '2026-01-02 00:00:23'
+    updatedAt: '2025-01-02 00:00:23'
+
+-
+    uuid: bd630457-9d36-4c99-b16e-179835b66917
+    title: 'Untitled (burning mountain)'
+    description: 'Beksinski''s burning mountain.'
+    filepath: '/images/bd630457-9d36-4c99-b16e-179835b66917.jpg'
+    createdAt: '2026-01-02 00:00:24'
+    updatedAt: '2025-01-02 00:00:24'
+
+-
+    uuid: cef80a67-cdf1-4c2c-857a-a5f81921bdce
+    title: 'Untitled (the blue face)'
+    description: 'Beksinski''s the blue face.'
+    filepath: '/images/cef80a67-cdf1-4c2c-857a-a5f81921bdce.jpg'
+    createdAt: '2026-01-02 00:00:24'
+    updatedAt: '2025-01-02 00:00:24'
+
+-
+    uuid: 461fd0f1-82af-4aa3-9f62-c11971928e77
+    title: 'Untitled (the blue face with hand)'
+    description: 'Beksinski''s the blue face with hand.'
+    filepath: '/images/461fd0f1-82af-4aa3-9f62-c11971928e77.jpg'
+    createdAt: '2026-01-02 00:00:25'
+    updatedAt: '2025-01-02 00:00:25'
+
+-
+    uuid: 11f772ff-4d6e-4cf0-9450-ce9863ae67a4
+    title: 'Untitled (tree of eden)'
+    description: 'Beksinski''s tree of eden.'
+    filepath: '/images/11f772ff-4d6e-4cf0-9450-ce9863ae67a4.jpg'
+    createdAt: '2026-01-02 00:00:25'
+    updatedAt: '2025-01-02 00:00:25'
+
+-
+    uuid: 7286eede-24d9-4270-a03a-242c436d6a5b
+    title: 'Untitled (the spartan)'
+    description: 'Beksinski''s the spartan.'
+    filepath: '/images/7286eede-24d9-4270-a03a-242c436d6a5b.jpg'
+    createdAt: '2026-01-02 00:00:26'
+    updatedAt: '2025-01-02 00:00:26'
 
