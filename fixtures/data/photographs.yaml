@@ -64,7 +64,7 @@
 
 -
   uuid: e538d2b6-8521-477c-8523-a40f381fc68b
-  title: 'The Sower'
+  title: 'The Sower with Setting Sun'
   description: 'He painted this sower in the autumn of 1888. At the time, Van Gogh was working together with Paul Gauguin (1848-1903). Gauguin believed that in his work Van Gogh should draw less on reality and more on his imagination.'
   filepath: '/images/e538d2b6-8521-477c-8523-a40f381fc68b.jpg'
   createdAt: '2025-10-02 02:00:00'
@@ -85,6 +85,80 @@
   filepath: '/images/559b6aaf-85ef-4011-b806-d7f17b10f6e4.jpg'
   createdAt: '2025-10-02 02:00:00'
   updatedAt: '2025-10-02 02:00:00'
+
+-
+    uuid: 0617d8f8-0746-4fb6-bc1b-de9a77dd0964
+    title: 'Laan bij Arles'
+    description: 'De weg naar deze oude abdij legde de schilder op Laan bij Arles vast. Hij koos daarbij een opvallende compositie. De voorgrond wordt volledig in beslag genomen door een brede sloot. Deze leidt leidt het oog van de toeschouwer naar de typische Provençaalse weg met bomen en huizen die het linkerdeel van het asymmetrische schilderij vult.'
+    filepath: '/images/0617d8f8-0746-4fb6-bc1b-de9a77dd0964.jpg'
+    createdAt: '2025-10-02 02:00:00'
+    updatedAt: '2025-10-02 02:00:00'
+
+-
+    uuid: c343b9cf-8020-4a13-bdc5-797397d6e5fa
+    title: 'Entrance Gate to a Farm with Haystacks'
+    description: 'Van Gogh mentioned the liveliness and interplay of "a wedding of two complementary colors, their mingling and opposition, the mysterious vibrations of two kindred souls."'
+    filepath: '/images/c343b9cf-8020-4a13-bdc5-797397d6e5fa.jpg'
+    createdAt: '2025-10-02 02:00:00'
+    updatedAt: '2025-10-02 02:00:00'
+
+-
+    uuid: a93f29da-ffe2-40bd-aca2-80886ed14ca3
+    title: 'Wheatfield with Crows'
+    description: 'Many have claimed it as his last painting, while it is likely that Tree Roots was his final painting.'
+    filepath: '/images/a93f29da-ffe2-40bd-aca2-80886ed14ca3.jpg'
+    createdAt: '2025-10-02 02:00:00'
+    updatedAt: '2025-10-02 02:00:00'
+
+-
+    uuid: b88fe80e-df2b-4287-8b51-c9a879e6abb8
+    title: 'Self-Portrait, September 1889'
+    description: 'Many have claimed it as his last painting, while it is likely that Tree Roots was his final painting.'
+    filepath: '/images/b88fe80e-df2b-4287-8b51-c9a879e6abb8.jpg'
+    createdAt: '2025-10-02 02:00:00'
+    updatedAt: '2025-10-02 02:00:00'
+
+-
+    uuid: 90308019-a099-4fed-a109-c52a6694679e
+    title: 'Ploughed Fields (''The Furrows'')'
+    description: 'He was fairly satisfied with this landscape. In a letter to his brother, he wrote that Theo would like it too, because it was ''calmer than some other canvases''. He hoped that this quality would attract a buyer. But the painting was never sold.'
+    filepath: '/images/90308019-a099-4fed-a109-c52a6694679e.jpg'
+    createdAt: '2025-10-02 02:00:00'
+    updatedAt: '2025-10-02 02:00:00'
+
+-
+    uuid: e985c4b9-5ae3-4d00-a692-7cdc5424a678
+    title: 'Farmhouse in a Wheatfield'
+    description: 'For this farmhouse in a field near Arles (FR), Van Gogh used bright, unmixed colours. This work illustrates what he had learned in Paris. There he had encountered a variety of new art movements, including Impressionism and Pointillism.'
+    filepath: '/images/e985c4b9-5ae3-4d00-a692-7cdc5424a678.jpg'
+    createdAt: '2025-10-02 02:00:00'
+    updatedAt: '2025-10-02 02:00:00'
+
+-
+    uuid: 4e64e6cc-cea8-40b4-915b-64bee4dd3c27
+    title: 'Veld met klaprozen'
+    description: 'Het schilderij vertegenwoordigt een geïdealiseerde, groene en vruchtbare landelijke omgeving. Klaprozen in Van Goghs werk symboliseren vaak de overgang van openende bloei naar rijpheid, en soms de breekbaarheid van het leven.'
+    filepath: '/images/4e64e6cc-cea8-40b4-915b-64bee4dd3c27.jpg'
+    createdAt: '2025-10-02 02:00:00'
+    updatedAt: '2025-10-02 02:00:00'
+
+-
+    uuid: ca9a5f76-a6d0-4ee6-8d77-4ee40bc6f124
+    title: 'Almond Blossoms'
+    description: 'He enjoyed them aesthetically and found joy in painting flowering trees. The works reflect the influence of Impressionism, Divisionism, and Japanese woodcuts. Almond Blossom was made to celebrate the birth of his nephew and namesake, son of his brother Theo and sister-in-law Jo.'
+    filepath: '/images/ca9a5f76-a6d0-4ee6-8d77-4ee40bc6f124.jpg'
+    createdAt: '2025-10-02 02:00:00'
+    updatedAt: '2025-10-02 02:00:00'
+
+-
+    uuid: c654ccf3-da09-4773-9c00-a69dcea01b42
+    title: 'Hospital in Arles'
+    description: 'Hospital at Arles is the subject of two paintings that Vincent van Gogh made of the hospital in which he stayed in December 1888 and again in January 1889. The hospital is located in Arles in southern France.'
+    filepath: '/images/c654ccf3-da09-4773-9c00-a69dcea01b42.jpg'
+    createdAt: '2025-10-02 02:00:00'
+    updatedAt: '2025-10-02 02:00:00'
+
+
 
 -
   uuid: 42da7891-7572-4489-ad22-5ad095845685
@@ -375,6 +449,94 @@
   updatedAt: '2025-10-04 23:04:00'
 
 -
+  uuid: bbe374ab-b928-41aa-a848-55cd149c1b94
+  title: 'Bedtime Aviation'
+  description: 'Bedtime Aviation by Rob Gonsalves.'
+  filepath: '/images/bbe374ab-b928-41aa-a848-55cd149c1b94.jpg'
+  createdAt: '2025-10-04 23:04:00'
+  updatedAt: '2025-10-04 23:04:00'
+
+-
+  uuid: b25ed64a-8c8b-4f78-931e-0d98f426f990
+  title: 'The Lake of Ladies'
+  description: 'The Lake of Ladies by Rob Gonsalves.'
+  filepath: '/images/b25ed64a-8c8b-4f78-931e-0d98f426f990.jpg'
+  createdAt: '2025-10-04 23:04:00'
+  updatedAt: '2025-10-04 23:04:00'
+
+-
+  uuid: 5417ae41-2589-4408-92bc-e62cc3248ab8
+  title: 'White Blanket'
+  description: 'White Blanket by Rob Gonsalves.'
+  filepath: '/images/5417ae41-2589-4408-92bc-e62cc3248ab8.jpg'
+  createdAt: '2025-10-04 23:04:00'
+  updatedAt: '2025-10-04 23:04:00'
+
+-
+  uuid: 2ac8cb9c-88f7-4615-85a9-837d3334e74d
+  title: 'Cathedral of Commerce'
+  description: 'Cathedral of Commerce by Rob Gonsalves.'
+  filepath: '/images/2ac8cb9c-88f7-4615-85a9-837d3334e74d.jpg'
+  createdAt: '2025-10-04 23:04:00'
+  updatedAt: '2025-10-04 23:04:00'
+
+-
+  uuid: 746a0e80-c76f-466c-bff0-0cfd3b9cf262
+  title: 'Arboreal Office'
+  description: 'Arboreal Office by Rob Gonsalves.'
+  filepath: '/images/746a0e80-c76f-466c-bff0-0cfd3b9cf262.jpg'
+  createdAt: '2025-10-04 23:04:00'
+  updatedAt: '2025-10-04 23:04:00'
+
+-
+  uuid: 05f279bd-328d-413a-a7f1-2fff5749dc06
+  title: 'Night Lights'
+  description: 'Night Lights by Rob Gonsalves.'
+  filepath: '/images/05f279bd-328d-413a-a7f1-2fff5749dc06.jpg'
+  createdAt: '2025-10-04 23:04:00'
+  updatedAt: '2025-10-04 23:04:00'
+
+-
+  uuid: 071cbd9f-de36-402c-b25f-ccc74fd4ae7a
+  title: 'The Phenomenon of Floating'
+  description: 'The Phenomenon of Floating by Rob Gonsalves.'
+  filepath: '/images/071cbd9f-de36-402c-b25f-ccc74fd4ae7a.jpg'
+  createdAt: '2025-10-04 23:04:00'
+  updatedAt: '2025-10-04 23:04:00'
+
+-
+  uuid: 1fd513c5-f8ce-449d-a7fd-1e3a0294d0d6
+  title: 'Beyond The Reef'
+  description: 'Beyond The Reef by Rob Gonsalves.'
+  filepath: '/images/1fd513c5-f8ce-449d-a7fd-1e3a0294d0d6.jpg'
+  createdAt: '2025-10-04 23:04:00'
+  updatedAt: '2025-10-04 23:04:00'
+
+-
+  uuid: 1cbf1377-2fab-4103-bf2a-5979727ca3f3
+  title: 'The Chalkboard Universe'
+  description: 'The Chalkboard Universe by Rob Gonsalves.'
+  filepath: '/images/1cbf1377-2fab-4103-bf2a-5979727ca3f3.jpg'
+  createdAt: '2025-10-04 23:04:00'
+  updatedAt: '2025-10-04 23:04:00'
+
+-
+  uuid: 31e9d630-6067-4e9d-ac07-a688cb61315b
+  title: 'The Weaving of A Spring Dream'
+  description: 'The Weaving of A Spring Dream by Rob Gonsalves.'
+  filepath: '/images/31e9d630-6067-4e9d-ac07-a688cb61315b.jpg'
+  createdAt: '2025-10-04 23:04:00'
+  updatedAt: '2025-10-04 23:04:00'
+
+-
+  uuid: 34bfd328-2ebb-4d3b-ad6b-89d8e54c04cd
+  title: 'Flight Plan'
+  description: 'Flight Plan by Rob Gonsalves.'
+  filepath: '/images/34bfd328-2ebb-4d3b-ad6b-89d8e54c04cd.jpg'
+  createdAt: '2025-10-04 23:04:00'
+  updatedAt: '2025-10-04 23:04:00'
+
+-
     uuid: 7ba4aa84-bd8d-45ca-b324-d726db5e7de5
     title: 'Stilleven met gemberpot I'
     description: 'Het werk is geïnspireerd op de Franse schilder Paul Cézanne, die vormen uit de werkelijkheid vertaalde in geometrische vormen, zoals bollen, rechthoeken en cilinders.'
@@ -623,10 +785,10 @@
     updatedAt: '2025-01-02 00:00:16'
 
 -
-    uuid: 0169a34f-411d-45a9-b1be-096ca5743c1f
+    uuid: f7aec676-2729-4102-8799-30b7de413c82
     title: 'Untitled (the lovers)'
     description: 'Beksinski''s the lovers.'
-    filepath: '/images/0169a34f-411d-45a9-b1be-096ca5743c1f.jpg'
+    filepath: '/images/f7aec676-2729-4102-8799-30b7de413c82.jpg'
     createdAt: '2026-01-02 00:00:17'
     updatedAt: '2025-01-02 00:00:17'
 
