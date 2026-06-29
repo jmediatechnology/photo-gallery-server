@@ -40,3 +40,10 @@ photograph_update:
     methods:    PATCH
     defaults:
         _format: json
+
+photograph_generate_description:
+    path:       /photographs/{id}/generate-description
+    controller: App\Presentation\Action\Photograph\GenerateDescriptionAction
+    methods:    POST
+    defaults:
+        _format: json
