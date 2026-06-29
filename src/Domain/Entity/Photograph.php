@@ -59,7 +59,7 @@ class Photograph
         );
     }
 
-    public function filePath(): ?FilePath
+    public function filePath(): FilePath
     {
         return $this->filePath;
     }

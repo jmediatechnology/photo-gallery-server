@@ -41,30 +41,13 @@ class InputDTOResolverTest extends TestCase
     {
         $this->expectException(UnsupportedMediaTypeHttpException::class);
 
-        $fileBag = $this->createMock(FileBag::class);
+        $uploadedFile = $this->createStub(UploadedFile::class);
 
-        $fileBag
-            ->expects($this->once())
-            ->method('has')
-            ->with(0)
-            ->willReturn(true);
-
-        $fileBag
-            ->expects($this->once())
-            ->method('get')
-            ->with(0)
-            ->willReturn($this->createStub(UploadedFile::class));
-
-        $headerBag = $this->createMock(HeaderBag::class);
-        $headerBag
-            ->expects($this->once())
-            ->method('get')
-            ->with('Content-Type')
-            ->willReturn('application/json');
-
-        $request = $this->createStub(Request::class);
-        $request->files = $fileBag;
-        $request->headers = $headerBag;
+        $request = Request::create(uri: '/', method: 'POST');
+        $request->initialize(
+            files: [0 => $uploadedFile],
+            server: ['CONTENT_TYPE' => 'application/json'],
+        );
 
         $argument = $this->createMock(ArgumentMetadata::class);
         $argument

@@ -2,12 +2,13 @@
 
 namespace App\Presentation\Action\Photograph;
 
-use App\Application\Commands\Photograph\CreateCommand;
+use App\Application\Query\Photograph\GenerateDescriptionForKnownPhotographUuidQuery;
 use App\Domain\Entity\Photograph;
-use App\Presentation\DTO\Photograph\InputDTO;
-use App\Presentation\DTO\Photograph\OutputDTO;
+use App\Presentation\DTO\Photograph\DescriptionOutputDTO;
+use App\Presentation\DTO\Photograph\UuidInputDTO;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Messenger\Exception\ExceptionInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
@@ -16,7 +17,7 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 #[IsGranted('ROLE_ADMIN', statusCode: 423)]
-class CreateAction
+class GenerateDescriptionAction
 {
     public function __construct(
         private MessageBusInterface $bus,
@@ -26,39 +27,31 @@ class CreateAction
     /**
      * @throws ExceptionInterface
      */
-    public function __invoke(InputDTO $dto): JsonResponse
+    public function __invoke(UuidInputDTO $dto): JsonResponse
     {
-        $createCommand = new CreateCommand(
+        $query = new GenerateDescriptionForKnownPhotographUuidQuery(
             uuid: $dto->uuid(),
-            title: $dto->title(),
-            description: $dto->description(),
-            file: $dto->file(),
         );
 
-        $violations = $this->validator->validate($createCommand);
+        $violations = $this->validator->validate($query);
         if (count($violations) > 0) {
             return $this->buildJsonResponseForViolations($violations);
         }
 
-        $envelope = $this->bus->dispatch($createCommand);
+        $envelope = $this->bus->dispatch($query);
         $handled = $envelope->last(HandledStamp::class);
-        $photograph = $handled?->getResult();
+        $description = $handled?->getResult();
 
-        if (!$photograph instanceof Photograph) {
+        if (!is_string($description)) {
             return new JsonResponse(
-                data: ['errors' => 'Something went wrong while creating the photograph.'],
+                data: ['errors' => 'Something went wrong while generating the description.'],
                 status: Response::HTTP_CONFLICT,
             );
         }
 
-        return new JsonResponse(new OutputDTO(
-            uuid: $photograph->uuid()?->__toString(),
-            title: $photograph->title()->__toString(),
-            description: $photograph->description()?->__toString(),
-            filePath: $photograph->filePath()->__toString(),
-            createdAt: $photograph->createdAt()->format('Y-m-d H:i:s'),
-            updatedAt: $photograph->updatedAt()->format('Y-m-d H:i:s'),
-        ));
+        return new JsonResponse([
+            'description' => $description,
+        ]);
     }
 
     private function buildJsonResponseForViolations(ConstraintViolationListInterface $violations): JsonResponse
@@ -71,8 +64,8 @@ class CreateAction
         return new JsonResponse(
             data: ['errors' => array_reduce(
                 array: $violationMessages,
-                callback: static function($carry, string $item) {
-                    return $carry . $item . '.';
+                callback: static function(string $carry, string $violationMessage) {
+                    return $carry . $violationMessage . '. ';
                 },
                 initial: '',
             )],

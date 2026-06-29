@@ -1,0 +1,20 @@
+
+parameters:
+    public_images_dir: '%kernel.project_dir%/%env(UPLOAD_DIR)%'
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+        bind:
+            $publicImageDir: '%public_images_dir%'
+
+    App\Infrastructure\Anthropic\Client\ImageDescriptionGenerator:
+        arguments:
+            $model: '%env(ANTHROPIC_MODEL)%'
+            $maxTokens: 150
+
+    App\Application\Handler\Photograph\GenerateDescriptionHandler:
+        arguments:
+            $imageDescriptionGenerator: '@App\Infrastructure\Anthropic\Client\ImageDescriptionGeneratorCustom'

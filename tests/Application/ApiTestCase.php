@@ -23,12 +23,12 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 abstract class ApiTestCase extends WebTestCase
 {
     private static ?string $projectDir = null;
+    protected static string $publicImagesDir = '';
 
     private const string TEST_FILE_NAME = 'portrait-of-dora-maar.jpg';
 
     protected KernelBrowser $client;
     protected PhotographRepository $photographRepository;
-    protected string $publicImages = '';
 
     /**
      * @throws Exception
@@ -43,9 +43,9 @@ abstract class ApiTestCase extends WebTestCase
             $this->recreateSqliteSchema();
         }
 
-        self::copyTestFile();
+        self::copyTestFileToTempFolder();
 
-        $this->publicImages = static::getContainer()->getParameter('public_images_dir');
+        self::$publicImagesDir = static::getContainer()->getParameter('public_images_dir');
     }
 
     protected function createAnonymousAuthenticatedClient(): KernelBrowser
@@ -168,7 +168,7 @@ abstract class ApiTestCase extends WebTestCase
      */
     public static function provideUploadedFile(): array
     {
-        self::copyTestFile();
+        self::copyTestFileToTempFolder();
 
         return [
             [UploadedFileMother::create(
@@ -199,7 +199,7 @@ abstract class ApiTestCase extends WebTestCase
         $schemaTool->createSchema($metadata);
     }
 
-    private static function getProjectDir(): string
+    protected static function getProjectDir(): string
     {
         if (self::$projectDir === null) {
             $kernelFile = new ReflectionClass(Kernel::class)->getFileName();
@@ -220,7 +220,7 @@ abstract class ApiTestCase extends WebTestCase
         return self::getProjectDir() . '/var/tmp/' . self::TEST_FILE_NAME;
     }
 
-    private static function copyTestFile(): void
+    private static function copyTestFileToTempFolder(): void
     {
         $fullPathToTestFile = self::getFullPathToTestFile();
         $fullPathToTemporaryTestFile = self::getFullPathToTemporaryTestFile();

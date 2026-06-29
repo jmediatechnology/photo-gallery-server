@@ -37,3 +37,12 @@ services:
 
     App\Infrastructure\Symfony\Event\ExceptionEventListener:
         tags: [ 'kernel.event_listener' ]
+
+    App\Infrastructure\Anthropic\Client\ImageDescriptionGenerator:
+        arguments:
+            $model: '%env(ANTHROPIC_MODEL)%'
+            $maxTokens: 150
+
+    Anthropic\Client:
+        arguments:
+            $apiKey: '%env(ANTHROPIC_API_KEY)%'

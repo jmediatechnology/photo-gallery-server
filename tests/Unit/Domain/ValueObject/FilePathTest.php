@@ -13,9 +13,9 @@ final class FilePathTest extends TestCase
     public function canCreate(): void
     {
         $string = '/public/images/image.jpg';
-        $title = new FilePath($string);
+        $filePath = new FilePath($string);
 
-        $this->assertSame($string, $title-> __toString());
+        $this->assertSame($string, $filePath-> __toString());
     }
 
     #[Test]
@@ -27,5 +27,15 @@ final class FilePathTest extends TestCase
         $this->expectExceptionMessage('Max length exceeded');
 
         new FilePath($string);
+    }
+
+    #[Test]
+    public function canGetBasename(): void
+    {
+        $basename = 'awesome-basename.jpg';
+        $string = '/images/' . $basename;
+
+        $filePath = new FilePath($string);
+        $this->assertSame($basename, $filePath->getBasename());
     }
 }

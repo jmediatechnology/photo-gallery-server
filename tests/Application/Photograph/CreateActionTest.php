@@ -50,14 +50,14 @@ class CreateActionTest extends ApiTestCase
         self::assertSame('Description for canCreatePhotographWithUUID', $json['description']);
         self::assertSame('/images/' . $json['uuid'] . '.' . $uploadedFile->getExtension(), $json['filePath']);
 
-        self::assertFileExists($this->publicImages . '/' . $json['uuid'] . '.' . $uploadedFile->getExtension());
+        self::assertFileExists(self::$publicImagesDir . '/' . $json['uuid'] . '.' . $uploadedFile->getExtension());
 
         $photograph = $this->photographRepository->find('def58982-4487-4c9b-8f3a-f55865b45c3d');
         self::assertInstanceOf(Photograph::class, $photograph);
         self::assertEquals('def58982-4487-4c9b-8f3a-f55865b45c3d', $photograph->uuid()?->__toString());
         self::assertEquals('Title for canCreatePhotographWithUUID', $photograph->title()->__toString());
         self::assertEquals('Description for canCreatePhotographWithUUID', $photograph->description()?->__toString());
-        self::assertSame('/images/' . $json['uuid'] . '.' . $uploadedFile->getExtension(), $photograph->filePath()?->__toString());
+        self::assertSame('/images/' . $json['uuid'] . '.' . $uploadedFile->getExtension(), $photograph->filePath()->__toString());
     }
 
     #[Test]
@@ -80,7 +80,7 @@ class CreateActionTest extends ApiTestCase
         );
 
         self::assertResponseIsSuccessful();
-        self::assertFileExists($this->publicImages . '/' . $uploadedFile->getFilename());
+        self::assertFileExists(self::$publicImagesDir . '/' . $uploadedFile->getFilename());
 
         self::assertArrayHasKey('uuid', $json);
         self::assertArrayHasKey('title', $json);
@@ -91,14 +91,14 @@ class CreateActionTest extends ApiTestCase
         self::assertSame('Description for canCreatePhotographWithoutUUID', $json['description']);
         self::assertSame('/images/' . $uploadedFile->getFilename(), $json['filePath']);
 
-        self::assertFileExists($this->publicImages . '/' . $uploadedFile->getFilename());
+        self::assertFileExists(self::$publicImagesDir . '/' . $uploadedFile->getFilename());
 
         $photograph = $this->photographRepository->find($json['uuid']);
         self::assertInstanceOf(Photograph::class, $photograph);
         self::assertHasValidUUID($photograph->uuid()?->__toString());
         self::assertSame('Title for canCreatePhotographWithoutUUID', $photograph->title()->__toString());
         self::assertSame('Description for canCreatePhotographWithoutUUID', $photograph->description()?->__toString());
-        self::assertSame('/images/' . $uploadedFile->getFilename(), $photograph->filePath()?->__toString());
+        self::assertSame('/images/' . $uploadedFile->getFilename(), $photograph->filePath()->__toString());
     }
 
     #[Test]

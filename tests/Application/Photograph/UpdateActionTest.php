@@ -55,6 +55,6 @@ class UpdateActionTest extends ApiTestCase
         self::assertEquals('f4bd198a-beac-4a71-b814-a6197fc55a6d', $photograph->uuid()?->__toString());
         self::assertEquals('New Title', $photograph->title()->__toString());
         self::assertEquals('New description', $photograph->description()?->__toString());
-        self::assertEquals('public/images/f4bd198a-beac-4a71-b814-a6197fc55a6d.jpg', $photograph->filePath()?->__toString());
+        self::assertEquals('public/images/f4bd198a-beac-4a71-b814-a6197fc55a6d.jpg', $photograph->filePath()->__toString());
     }
 }

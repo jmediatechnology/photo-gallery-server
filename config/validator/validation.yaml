@@ -5,3 +5,11 @@ App\Application\Commands\Photograph\CreateCommand:
     properties:
         title:
             - NotBlank: ~
+
+App\Application\Query\Photograph\GenerateDescriptionForKnownPhotographUuidQuery:
+    constraints:
+        - App\Infrastructure\Symfony\Validator\Photograph\GenerateDescriptionForKnownPhotographUuidConstraint:
+            message: 'Uuid is not known.'
+    properties:
+        uuid:
+            - NotBlank: ~

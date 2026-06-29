@@ -21,6 +21,11 @@ class FilePath implements Stringable
         $this->value = $value;
     }
 
+    public function getBasename(): string
+    {
+        return pathinfo($this->value, PATHINFO_BASENAME);
+    }
+
     public function __toString(): string
     {
         return $this->value;

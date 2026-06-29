@@ -14,7 +14,7 @@ class GetOneAction
             uuid: $photograph->uuid()?->__toString(),
             title: $photograph->title()->__toString(),
             description: $photograph->description()?->__toString(),
-            filePath: $photograph->filePath()?->__toString(),
+            filePath: $photograph->filePath()->__toString(),
             createdAt: $photograph->createdAt()->format('Y-m-d H:i:s'),
             updatedAt: $photograph->updatedAt()->format('Y-m-d H:i:s'),
         );
