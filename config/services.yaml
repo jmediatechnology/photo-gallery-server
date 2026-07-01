@@ -46,3 +46,35 @@ services:
     Anthropic\Client:
         arguments:
             $apiKey: '%env(ANTHROPIC_API_KEY)%'
+
+when@dev:
+
+    parameters:
+        public_images_dir: '%kernel.project_dir%/%env(UPLOAD_DIR)%'
+
+    services:
+        _defaults:
+            autowire: true
+            autoconfigure: true
+            bind:
+                $publicImageDir: '%public_images_dir%'
+
+        App\Application\Handler\Photograph\GenerateDescriptionHandler:
+            arguments:
+                $imageDescriptionGenerator: '@App\Infrastructure\Anthropic\Client\ImageDescriptionGeneratorCustom'
+
+when@prod:
+
+    parameters:
+        public_images_dir: '%kernel.project_dir%/%env(UPLOAD_DIR)%'
+
+    services:
+        _defaults:
+            autowire: true
+            autoconfigure: true
+            bind:
+                $publicImageDir: '%public_images_dir%'
+
+        App\Application\Handler\Photograph\GenerateDescriptionHandler:
+            arguments:
+                $imageDescriptionGenerator: '@App\Infrastructure\Anthropic\Client\ImageDescriptionGenerator'
