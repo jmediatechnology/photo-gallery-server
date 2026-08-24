@@ -4,7 +4,7 @@ Everyone heard the old saying:
 
 > A picture is worth a thousand words
 
-Let's figure out if Anthrophic AI is able to describe those thousands words. 
+Let's figure out if Anthropic AI is able to describe those thousands words. 
 
 Photo Gallery Server is able to send his photographs to Claude to let it generate a textual description.
 

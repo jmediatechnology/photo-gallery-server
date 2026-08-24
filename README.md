@@ -33,7 +33,7 @@ More information about running tests can be found at [Testing](docs/testing/Test
 
 ## AI
 
-Anthrophic AI SDK is integrated in Photo Gallery Server to generate text-by-image. 
+Anthropic AI SDK is integrated in Photo Gallery Server to generate text-by-image. 
 
 More information about can be found at [AI](docs/ai/AI.md).
 
