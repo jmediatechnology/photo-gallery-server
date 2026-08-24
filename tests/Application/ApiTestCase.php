@@ -8,9 +8,6 @@ use App\Infrastructure\Symfony\Security\User\User;
 use App\Kernel;
 use App\Tests\Utils\ObjectMother\UploadedFileMother;
 use Doctrine\DBAL\Exception;
-use Doctrine\DBAL\Platforms\SqlitePlatform;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Tools\SchemaTool;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use ReflectionClass;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
@@ -38,10 +35,6 @@ abstract class ApiTestCase extends WebTestCase
         $this->client = static::createClient();
 
         $this->photographRepository = static::getContainer()->get(PhotographRepository::class);
-
-        if ($this->isUsingSqlite()) {
-            $this->recreateSqliteSchema();
-        }
 
         self::copyTestFileToTempFolder();
 
@@ -176,27 +169,6 @@ abstract class ApiTestCase extends WebTestCase
                 originalName: self::TEST_FILE_NAME,
             )],
         ];
-    }
-
-    /**
-     * @throws Exception
-     */
-    private function isUsingSqlite(): bool
-    {
-        $em = static::getContainer()->get(EntityManagerInterface::class);
-        $connection = $em->getConnection();
-        $databasePlatform = $connection->getDatabasePlatform();
-        return $databasePlatform instanceof SqlitePlatform;
-    }
-
-    private function recreateSqliteSchema(): void
-    {
-        $em = static::getContainer()->get(EntityManagerInterface::class);
-        $metadata = $em->getMetadataFactory()->getAllMetadata();
-
-        $schemaTool = new SchemaTool($em);
-        $schemaTool->dropSchema($metadata);
-        $schemaTool->createSchema($metadata);
     }
 
     protected static function getProjectDir(): string

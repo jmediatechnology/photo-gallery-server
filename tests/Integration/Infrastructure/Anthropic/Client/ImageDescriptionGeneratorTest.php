@@ -18,6 +18,10 @@ final class ImageDescriptionGeneratorTest extends KernelTestCase
 
         self::bootKernel();
 
+        if ($this->getBoolEnv('USE_REAL_IMAGE_DESCRIPTION_GENERATOR') === false) {
+            $this->markTestSkipped('Skipped to cut costs and spare real tokens.');
+        }
+
         $this->imageDescriptionGenerator = static::getContainer()->get(ImageDescriptionGenerator::class);
     }
 
@@ -51,5 +55,10 @@ final class ImageDescriptionGeneratorTest extends KernelTestCase
 
         self::assertGreaterThan(30, count($words));
         self::assertStringEndsWith('.', trim($description));
+    }
+
+    private function getBoolEnv(string $key, bool $default = false): bool
+    {
+        return filter_var($_ENV[$key] ?? $default, FILTER_VALIDATE_BOOL);
     }
 }

@@ -3,12 +3,9 @@
 namespace App\Presentation\Action\Photograph;
 
 use App\Application\Query\Photograph\GenerateDescriptionForKnownPhotographUuidQuery;
-use App\Domain\Entity\Photograph;
-use App\Presentation\DTO\Photograph\DescriptionOutputDTO;
 use App\Presentation\DTO\Photograph\UuidInputDTO;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Messenger\Exception\ExceptionInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;

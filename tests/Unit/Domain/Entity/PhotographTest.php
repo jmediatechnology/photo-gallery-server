@@ -42,6 +42,28 @@ final class PhotographTest extends TestCase
     }
 
     #[Test]
+    public function canBeCreatedWithNullUUID(): void
+    {
+        $uuid = null;
+        $title = $this->createStub(Title::class);
+        $description = $this->createStub(Description::class);
+        $filePath = $this->createStub(FilePath::class);
+        $createdAt = $this->createStub(CreatedAt::class);
+        $updatedAt = $this->createStub(UpdatedAt::class);
+
+        $photograph = new Photograph(
+            uuid: $uuid,
+            title: $title,
+            description: $description,
+            filePath: $filePath,
+            createdAt: $createdAt,
+            updatedAt: $updatedAt,
+        );
+
+        $this->assertNull($photograph->uuid());
+    }
+
+    #[Test]
     public function canBeUpdated(): void
     {
         $uuid = $this->createStub(UUID::class);

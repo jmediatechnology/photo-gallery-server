@@ -15,9 +15,6 @@ use App\Infrastructure\Doctrine\Repository\PhotographRepository;
 use DateTimeImmutable;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
-use Doctrine\DBAL\Platforms\SqlitePlatform;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Tools\SchemaTool;
 use PHPUnit\Framework\Attributes\Test;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -36,10 +33,6 @@ class PhotographRepositoryTest extends KernelTestCase
         $container = static::getContainer();
 
         $this->photographRepository = $container->get(PhotographRepository::class);
-
-        if ($this->isUsingSqlite()) {
-            $this->createSqliteSchema();
-        }
     }
 
     #[Test]
@@ -328,26 +321,6 @@ class PhotographRepositoryTest extends KernelTestCase
         $em = self::getContainer()->get('doctrine')->getManager();
         $em->getConnection()->close();
         $em->close();
-    }
-
-    /**
-     * @throws Exception
-     */
-    private function isUsingSqlite(): bool
-    {
-        $em = static::getContainer()->get(EntityManagerInterface::class);
-        $connection = $em->getConnection();
-        $databasePlatform = $connection->getDatabasePlatform();
-        return $databasePlatform instanceof SqlitePlatform;
-    }
-
-    private function createSqliteSchema(): void
-    {
-        $em = static::getContainer()->get(EntityManagerInterface::class);
-        $metadata = $em->getMetadataFactory()->getAllMetadata();
-
-        $schemaTool = new SchemaTool($em);
-        $schemaTool->createSchema($metadata);
     }
 
     private static function assertHasValidUUID(string $uuid): void

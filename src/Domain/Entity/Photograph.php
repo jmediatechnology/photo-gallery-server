@@ -12,9 +12,9 @@ use App\Domain\ValueObject\UUID;
 class Photograph
 {
     public function __construct(
-        private ?UUID        $uuid = null,
+        private ?UUID        $uuid,
         private Title        $title,
-        private ?Description $description = null,
+        private ?Description $description,
         private FilePath     $filePath,
         private CreatedAt    $createdAt,
         private UpdatedAt    $updatedAt,

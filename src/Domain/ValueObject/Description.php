@@ -2,7 +2,6 @@
 
 namespace App\Domain\ValueObject;
 
-use InvalidArgumentException;
 use Stringable;
 
 class Description implements Stringable
