@@ -7,4 +7,6 @@ docker compose exec server php -d xdebug.mode=coverage vendor/bin/phpunit -d mem
 ```
 
 Load the code coverage report in your IDE, for example, PHPStorm: View → Tool Windows → Coverage.
-Import report from file: var/reports/coverage/clover.xml.
+
+Import report from file: `var/reports/coverage/clover.xml`.
+
