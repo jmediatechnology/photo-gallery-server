@@ -54,13 +54,13 @@ class GenerateDescriptionHandler
     {
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
         if ($finfo === false) {
-            throw new RuntimeException('Unable to open fileinfo.');
+            throw new RuntimeException('Unable to open fileinfo.'); // @codeCoverageIgnore
         }
 
         $filename = $this->publicImageDir . '/' . $filePath->getBasename();
         $mimeType = finfo_file($finfo, $filename);
         if ($mimeType === false) {
-            throw new RuntimeException(sprintf('Unable to determine MIME type for "%s".', $filename));
+            throw new RuntimeException(sprintf('Unable to determine MIME type for "%s".', $filename)); // @codeCoverageIgnore
         }
 
         return $mimeType;
