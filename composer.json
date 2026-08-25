@@ -55,7 +55,8 @@
         "symfony/var-dumper": "^8.1",
         "symfony/var-exporter": "^8.1",
         "symfony/yaml": "^8.1",
-        "ext-fileinfo": "*"
+        "ext-fileinfo": "*",
+        "ext-libxml": "*"
     },
     "require-dev": {
         "dama/doctrine-test-bundle": "^8.6",
