@@ -1,20 +1,17 @@
-
-parameters:
-    public_images_dir: '%kernel.project_dir%/%env(UPLOAD_DIR)%'
-
 services:
+
     _defaults:
         autowire: true
         autoconfigure: true
         public: true
         bind:
+            $projectDir: '%kernel.project_dir%'
             $publicImageDir: '%public_images_dir%'
 
-    App\Infrastructure\Anthropic\Client\ImageDescriptionGenerator:
-        arguments:
-            $model: '%env(ANTHROPIC_MODEL)%'
-            $maxTokens: 150
+    App\Fixtures\:
+        resource: '../fixtures/*'
 
     App\Application\Handler\Photograph\GenerateDescriptionHandler:
+        tags: [ 'messenger.message_handler' ]
         arguments:
             $imageDescriptionGenerator: '@App\Infrastructure\Anthropic\Client\ImageDescriptionGeneratorCustom'

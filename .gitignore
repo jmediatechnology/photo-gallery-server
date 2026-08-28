@@ -9,7 +9,7 @@
 /vendor/
 ###< symfony/framework-bundle ###
 
-db/password.txt
+secrets/*.*
 
 ###> phpunit/phpunit ###
 /phpunit.xml

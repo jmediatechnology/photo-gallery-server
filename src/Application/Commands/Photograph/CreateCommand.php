@@ -7,9 +7,9 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class CreateCommand
 {
     public function __construct(
-        private ?string $uuid = null,
+        private ?string $uuid,
         private string $title,
-        private ?string $description = null,
+        private ?string $description,
         private UploadedFile $file,
     ) {
     }
