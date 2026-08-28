@@ -45,7 +45,7 @@
         <bootstrap class="DG\BypassFinals\PHPUnitExtension">
             <parameter name="bypassFinal" value="true"/>
             <parameter name="bypassReadOnly" value="false"/>
-            <parameter name="cacheDirectory" value="./cache"/>
+            <parameter name="cacheDirectory" value="var/cache/bypass-finals"/>
         </bootstrap>
         <bootstrap class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension"/>
     </extensions>

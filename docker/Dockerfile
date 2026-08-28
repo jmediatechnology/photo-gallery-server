@@ -1,12 +1,7 @@
 FROM composer:lts as composer-dev
 WORKDIR /app
 COPY . .
-########################################################################################################################
 
-FROM composer:lts as composer-prod
-WORKDIR /app
-COPY . .
-#RUN composer install --no-dev --no-interaction
 ########################################################################################################################
 
 FROM php:8.5-apache as php-base
@@ -38,6 +33,9 @@ WORKDIR /var/www/html
 
 FROM php-base as production
 
+RUN apt-get update && apt-get install -y --no-install-recommends unzip \
+    && rm -rf /var/lib/apt/lists/*
+
 RUN sed -i 's/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf \
     && sed -i 's/Require all denied/Require all granted/' /etc/apache2/apache2.conf \
     && a2enmod rewrite \
@@ -45,10 +43,16 @@ RUN sed -i 's/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf \
     && chmod -R 755 /var/www/html
 RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
 
-RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
+    && sed -i 's/variables_order = "GPCS"/variables_order = "EGPCS"/' "$PHP_INI_DIR/php.ini"
 
-COPY --from=composer-prod --chown=www-data:www-data /app /var/www/html/
-COPY --from=composer-prod /usr/bin/composer /usr/bin/composer
+ENV APP_ENV=prod
+ENV APP_DEBUG=0
+
+COPY --from=composer:lts /usr/bin/composer /usr/bin/composer
+COPY --chown=www-data:www-data . /var/www/html/
 
 WORKDIR /var/www/html
+RUN composer install --no-dev --no-interaction --optimize-autoloader && chown -R www-data:www-data vendor var
+
 USER www-data

@@ -6,7 +6,7 @@ Backend for Photo Gallery
 
 Run:
 ```
-printf "your-password" >> db/password.txt
+printf "your-password" >> secrets/password.txt
 docker compose -f compose.yaml -f compose.override.yaml -f compose.dev.yaml up -d --build
 ```
 
@@ -42,5 +42,20 @@ More information about can be found at [AI](docs/ai/AI.md).
 
 Run:
 ```
+export DB_PASSWORD_PROD="some-test-value"
 docker compose -f compose.yaml -f compose.prod.yaml up -d --build
+```
+Run only once when initializing this project:  
+```
+docker compose -f compose.yaml -f compose.prod.yaml exec server php bin/console doctrine:schema:create
+```
+
+Create a user:
+```
+docker compose exec server php bin/console app:user:create
+```
+
+Delete a user:
+```
+docker compose exec server php bin/console app:user:delete
 ```

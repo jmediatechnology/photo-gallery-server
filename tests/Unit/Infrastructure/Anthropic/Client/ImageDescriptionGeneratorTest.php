@@ -7,6 +7,7 @@ namespace App\Tests\Unit\Infrastructure\Anthropic\Client;
 use Anthropic\Client;
 use Anthropic\Messages\ContentBlock;
 use Anthropic\Messages\Message;
+use Anthropic\Messages\TextBlock;
 use Anthropic\Services\MessagesService;
 use App\Infrastructure\Anthropic\Client\ImageDescriptionGenerator;
 use PHPUnit\Framework\Attributes\Test;
@@ -22,15 +23,25 @@ class ImageDescriptionGeneratorTest extends TestCase
         $base64Image = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=';
         $mimeType = 'image/jpg';
 
-        $contentBlock = $this->createStub(ContentBlock::class);
-        $contentBlock->text = $description;
+        $contentBlock = TextBlock::with(
+            citations: null,
+            text: $description,
+        );
 
         $content = [
             $contentBlock
         ];
 
-        $message = $this->createStub(Message::class);
-        $message->content = $content;
+        $message = Message::with(
+            id: 'id',
+            container: null,
+            content: $content,
+            model: 'claude-haiku-4-5-20251001',
+            stopDetails: null,
+            stopReason: null,
+            stopSequence: null,
+            usage: [],
+        );
 
         $messages = $this->createMock(MessagesService::class);
         $messages

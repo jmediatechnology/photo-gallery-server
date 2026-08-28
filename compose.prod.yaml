@@ -4,20 +4,40 @@ services:
       context: .
       dockerfile: ./docker/Dockerfile
       target: production
-    user: "${UID:-1000}:${GID:-1000}"
-    volumes:
-      - ./:/var/www/html
     ports:
       - 9000:80
-    entrypoint: ["/var/www/html/docker/entrypoint-dev.sh"]
-    command: ["apache2-foreground"]
     depends_on:
       db:
         condition: service_healthy
     secrets:
-      - db-password
+      - anthropic-api-key
+      - db-password-prod
     environment:
-      - PASSWORD_FILE_PATH=/run/secrets/db-password
-      - DB_HOST=db
-      - DB_NAME=photo-gallery
-      - DB_USER=root
+      - DATABASE_URL=mysql://root:${DB_PASSWORD_PROD}@db:3306/photo-gallery?serverVersion=mariadb-10.5.8
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - ANTHROPIC_MODEL=claude-haiku-4-5-20251001
+#    environment:
+#      - PASSWORD_FILE_PATH=/run/secrets/db-password-prod
+#      - DB_HOST=db
+#      - DB_NAME=photo-gallery
+#      - DB_USER=root
+#      - DB_PASSWORD_PROD_FILE=/run/secrets/db-password-prod
+
+  db:
+    volumes:
+      - db-data-prod:/var/lib/mysql
+    secrets:
+      - db-password-prod
+    environment:
+      - MARIADB_ROOT_PASSWORD_FILE=/run/secrets/db-password-prod
+      - MARIADB_DATABASE=photo-gallery
+    ports: []
+
+volumes:
+  db-data-prod:
+
+secrets:
+  db-password-prod:
+    environment: "DB_PASSWORD_PROD"
+  anthropic-api-key:
+    environment: "ANTHROPIC_API_KEY"

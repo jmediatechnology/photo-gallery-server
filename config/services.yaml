@@ -23,9 +23,11 @@ services:
         resource: '../src/'
         exclude:
             - '../src/Application/Commands/*'
-
-    App\Fixtures\:
-        resource: '../fixtures/*'
+            - '../src/Application/Query/*'
+            - '../src/Domain/Entity/*'
+            - '../src/Domain/ValueObject/*'
+            - '../src/Infrastructure/Symfony/Security/User/*'
+            - '../src/Presentation/DTO/Photograph/*'
 
     App\Presentation\Action\:
         resource: '../src/Presentation/Action/*'
@@ -49,15 +51,10 @@ services:
 
 when@dev:
 
-    parameters:
-        public_images_dir: '%kernel.project_dir%/%env(UPLOAD_DIR)%'
-
     services:
-        _defaults:
-            autowire: true
-            autoconfigure: true
-            bind:
-                $publicImageDir: '%public_images_dir%'
+
+        App\Fixtures\:
+            resource: '../fixtures/*'
 
         App\Application\Handler\Photograph\GenerateDescriptionHandler:
             arguments:
@@ -65,15 +62,7 @@ when@dev:
 
 when@prod:
 
-    parameters:
-        public_images_dir: '%kernel.project_dir%/%env(UPLOAD_DIR)%'
-
     services:
-        _defaults:
-            autowire: true
-            autoconfigure: true
-            bind:
-                $publicImageDir: '%public_images_dir%'
 
         App\Application\Handler\Photograph\GenerateDescriptionHandler:
             arguments:

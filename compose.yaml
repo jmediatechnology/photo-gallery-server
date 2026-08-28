@@ -4,8 +4,6 @@ services:
       context: .
       dockerfile: ./docker/Dockerfile
       target: development
-    volumes:
-      - ./:/var/www/html
     ports:
       - 9000:80
     depends_on:
@@ -52,4 +50,4 @@ volumes:
 
 secrets:
   db-password:
-    file: db/password.txt
+    file: secrets/password.txt
