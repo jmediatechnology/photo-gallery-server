@@ -15,7 +15,6 @@ services:
         autowire: true
         autoconfigure: true
         bind:
-            $projectDir: '%kernel.project_dir%'
             $imagesDir: '%images_dir%'
             $publicImageDir: '%public_images_dir%'
 
