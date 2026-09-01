@@ -2,8 +2,6 @@
 
 namespace App\Tests\Unit\Presentation\Resolver\Photograph;
 
-use App\Presentation\DTO\Photograph\GetAllInputDTO;
-use App\Presentation\Resolver\Photograph\GetAllInputDTOResolver;
 use App\Presentation\Resolver\Photograph\UuidInputDTOResolver;
 use Generator;
 use PHPUnit\Framework\Attributes\Test;

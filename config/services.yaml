@@ -53,10 +53,18 @@ when@dev:
 
     services:
 
+        _defaults:
+            autowire: true
+            autoconfigure: true
+            bind:
+                $projectDir: '%kernel.project_dir%'
+                $publicImageDir: '%public_images_dir%'
+
         App\Fixtures\:
             resource: '../fixtures/*'
 
         App\Application\Handler\Photograph\GenerateDescriptionHandler:
+            tags: [ 'messenger.message_handler' ]
             arguments:
                 $imageDescriptionGenerator: '@App\Infrastructure\Anthropic\Client\ImageDescriptionGeneratorCustom'
 
@@ -64,6 +72,13 @@ when@prod:
 
     services:
 
+        _defaults:
+            autowire: true
+            autoconfigure: true
+            bind:
+                $publicImageDir: '%public_images_dir%'
+
         App\Application\Handler\Photograph\GenerateDescriptionHandler:
+            tags: [ 'messenger.message_handler' ]
             arguments:
                 $imageDescriptionGenerator: '@App\Infrastructure\Anthropic\Client\ImageDescriptionGenerator'
