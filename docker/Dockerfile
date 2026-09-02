@@ -23,6 +23,7 @@ RUN pecl install xdebug && docker-php-ext-enable xdebug
 
 COPY docker/php/conf.d/date.ini $PHP_INI_DIR/conf.d/date.ini
 COPY docker/php/conf.d/xdebug.ini $PHP_INI_DIR/conf.d/xdebug.ini
+COPY docker/php/conf.d/uploads.ini $PHP_INI_DIR/conf.d/uploads.ini
 
 COPY --from=composer-dev /usr/bin/composer /usr/bin/composer
 COPY --from=composer-dev --chown=www-data:www-data /app /var/www/html/
