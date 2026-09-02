@@ -6,6 +6,10 @@ COPY . .
 
 FROM php:8.5-apache as php-base
 RUN docker-php-ext-install pdo pdo_mysql
+
+COPY docker/php/conf.d/date.ini $PHP_INI_DIR/conf.d/date.ini
+COPY docker/php/conf.d/uploads.ini $PHP_INI_DIR/conf.d/uploads.ini
+
 ########################################################################################################################
 
 FROM php-base as development
@@ -21,9 +25,7 @@ RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 RUN apt-get update && apt-get install -y git unzip
 RUN pecl install xdebug && docker-php-ext-enable xdebug
 
-COPY docker/php/conf.d/date.ini $PHP_INI_DIR/conf.d/date.ini
 COPY docker/php/conf.d/xdebug.ini $PHP_INI_DIR/conf.d/xdebug.ini
-COPY docker/php/conf.d/uploads.ini $PHP_INI_DIR/conf.d/uploads.ini
 
 COPY --from=composer-dev /usr/bin/composer /usr/bin/composer
 COPY --from=composer-dev --chown=www-data:www-data /app /var/www/html/
