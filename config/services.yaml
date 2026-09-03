@@ -46,7 +46,7 @@ services:
 
     Anthropic\Client:
         arguments:
-            $apiKey: '%env(ANTHROPIC_API_KEY)%'
+            $apiKey: '%env(file:ANTHROPIC_API_KEY_FILE)%'
 
 when@dev:
 

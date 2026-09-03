@@ -56,6 +56,6 @@ COPY --from=composer:lts /usr/bin/composer /usr/bin/composer
 COPY --chown=www-data:www-data . /var/www/html/
 
 WORKDIR /var/www/html
-RUN composer install --no-dev --no-interaction --optimize-autoloader && chown -R www-data:www-data vendor var
+RUN composer install --no-dev --no-interaction --optimize-autoloader --no-scripts && chown -R www-data:www-data vendor var
 
 USER www-data

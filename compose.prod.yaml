@@ -6,6 +6,8 @@ services:
       target: production
     ports:
       - 9000:80
+    entrypoint: ["/var/www/html/docker/entrypoint-prod.sh"]
+    command: ["apache2-foreground"]
     depends_on:
       db:
         condition: service_healthy
@@ -13,15 +15,8 @@ services:
       - anthropic-api-key
       - db-password-prod
     environment:
-      - DATABASE_URL=mysql://root:${DB_PASSWORD_PROD}@db:3306/photo-gallery?serverVersion=mariadb-10.5.8
-      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
-      - ANTHROPIC_MODEL=claude-haiku-4-5-20251001
-#    environment:
-#      - PASSWORD_FILE_PATH=/run/secrets/db-password-prod
-#      - DB_HOST=db
-#      - DB_NAME=photo-gallery
-#      - DB_USER=root
-#      - DB_PASSWORD_PROD_FILE=/run/secrets/db-password-prod
+      - DB_PASSWORD_PROD_FILE=/run/secrets/db-password-prod
+      - ANTHROPIC_API_KEY_FILE=/run/secrets/anthropic-api-key
 
   db:
     volumes:
@@ -38,6 +33,6 @@ volumes:
 
 secrets:
   db-password-prod:
-    environment: "DB_PASSWORD_PROD"
+    file: secrets/db-password-prod.txt
   anthropic-api-key:
-    environment: "ANTHROPIC_API_KEY"
+    file: secrets/anthropic-api-key.txt

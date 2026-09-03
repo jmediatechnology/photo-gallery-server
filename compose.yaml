@@ -12,10 +12,7 @@ services:
     secrets:
       - db-password
     environment:
-      - PASSWORD_FILE_PATH=/run/secrets/db-password
-      - DB_HOST=db
-      - DB_NAME=photo-gallery
-      - DB_USER=root
+      - DB_PASSWORD_FILE=/run/secrets/db-password
 
   db:
     image: mariadb
@@ -28,10 +25,6 @@ services:
     environment:
       - MARIADB_ROOT_PASSWORD_FILE=/run/secrets/db-password
       - MARIADB_DATABASE=photo-gallery
-    expose:
-      - 3306
-    ports:
-      - "3306:3306"
     healthcheck:
       test:
         [
@@ -50,4 +43,4 @@ volumes:
 
 secrets:
   db-password:
-    file: secrets/password.txt
+    file: secrets/db-password.txt

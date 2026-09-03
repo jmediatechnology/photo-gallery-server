@@ -17,7 +17,4 @@ services:
     secrets:
       - db-password
     environment:
-      - PASSWORD_FILE_PATH=/run/secrets/db-password
-      - DB_HOST=db
-      - DB_NAME=photo-gallery
-      - DB_USER=root
+      - DB_PASSWORD_FILE=/run/secrets/db-password
