@@ -49,8 +49,8 @@ More information about can be found at [AI](docs/ai/AI.md).
 Create secrets:
 ```
 mkdir secrets
-vi secrets/db-password-prod.txt
-vi secrets/anthropic-api-key.txt
+nano secrets/db-password-prod.txt
+nano secrets/anthropic-api-key.txt
 ```
 
 Remove new lines from secrets: 
