@@ -43,4 +43,26 @@ class ObtainTokenActionTest extends ApiTestCase
         self::assertArrayHasKey('token', $json);
         self::assertStringStartsWith('ey', $json['token']);
     }
+
+    #[Test]
+    public function invalidCredentialsResultsInHTTPStatusCode401(): void
+    {
+        $this->client->jsonRequest(
+            method: 'POST',
+            uri: '/api/login_check',
+            parameters: [
+                'username' => 'admin',
+                'password' => 'invalid-credentials',
+            ],
+        );
+
+        $content = $this->client->getResponse()->getContent();
+        $json = json_decode($content, true);
+
+        self::assertResponseStatusCodeSame(401);
+
+        self::assertArrayNotHasKey('token', $json);
+        self::assertArrayHasKey('message', $json);
+        self::assertStringStartsWith('Invalid credentials', $json['message']);
+    }
 }
