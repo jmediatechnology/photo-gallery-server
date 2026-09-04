@@ -49,6 +49,7 @@ More information about can be found at [AI](docs/ai/AI.md).
 Create secrets:
 ```
 mkdir secrets
+touch secrets/db-password.txt
 nano secrets/db-password-prod.txt
 nano secrets/anthropic-api-key.txt
 ```
@@ -57,11 +58,6 @@ Remove new lines from secrets:
 ```
 sed -i -z 's/\n*$//' secrets/db-password-prod.txt
 sed -i -z 's/\n*$//' secrets/anthropic-api-key.txt
-```
-
-Change file permissions:
-```
-chmod 600 secrets/*.txt
 ```
 
 Generate a `.env.prod` file:
@@ -102,9 +98,10 @@ Find for www-data the UID
 ```
 docker compose -f compose.yaml -f compose.prod.yaml exec server id www-data
 ```
-Usually it's 33.
+Just make sure it's 33; it usually is. 
 
+Change owner to www-data, and set file permission to read-only for the owner.  
 ```
-chown 33:33 secrets/db-password-prod.txt
-chmod 400 secrets/db-password-prod.txt
+chown 33:33 secrets/*.txt
+chmod 400 secrets/*.txt
 ```
