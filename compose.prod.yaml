@@ -1,5 +1,6 @@
 services:
   server:
+    image: ghcr.io/jmediatechnology/photo-gallery-server:latest
     build:
       context: .
       dockerfile: ./docker/Dockerfile
