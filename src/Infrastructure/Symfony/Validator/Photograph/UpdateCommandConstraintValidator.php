@@ -23,9 +23,14 @@ class UpdateCommandConstraintValidator extends ConstraintValidator
             throw new UnexpectedValueException($constraint, UpdateCommandConstraint::class);
         }
 
-        $title = $value->title();
+        $oldTitle = $value->photograph()->title()->__toString();
+        $newTitle = $value->title();
+        if ($oldTitle === $newTitle) {
+            return;
+        }
+
         $photograph = $this->photographRepository->findOneBy([
-            'title' => $title
+            'title' => $newTitle
         ]);
 
         if ($photograph) {

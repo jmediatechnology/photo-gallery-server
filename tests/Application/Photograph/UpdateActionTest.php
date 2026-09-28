@@ -96,4 +96,48 @@ class UpdateActionTest extends ApiTestCase
         self::assertArrayHasKey('errors', $json);
         self::assertStringContainsString('Title is already in use.', $json['errors']);
     }
+
+    #[Test]
+    public function doesAllowUpdateWhenNewTitleIsSameAsOldTitle(): void
+    {
+        $photographA = new Photograph(
+            uuid: new UUID('10363ac5-cf7b-4e09-9085-e8d69083bb27'),
+            title: new Title('Title A'),
+            description: new Description('Description A'),
+            filePath: new FilePath('public/images/10363ac5-cf7b-4e09-9085-e8d69083bb27.jpg'),
+            createdAt: new CreatedAt(new DateTimeImmutable()),
+            updatedAt: new UpdatedAt(new DateTimeImmutable()),
+        );
+
+        $photographB = new Photograph(
+            uuid: new UUID('23995aba-99fc-468f-8eab-5116231a9ac2'),
+            title: new Title('Title B'),
+            description: new Description('Description B'),
+            filePath: new FilePath('public/images/23995aba-99fc-468f-8eab-5116231a9ac2.jpg'),
+            createdAt: new CreatedAt(new DateTimeImmutable()),
+            updatedAt: new UpdatedAt(new DateTimeImmutable()),
+        );
+
+        $this->photographRepository->save($photographA);
+        $this->photographRepository->save($photographB);
+
+
+        $json = $this->jsonRequest(
+            method: 'PATCH',
+            uri: '/photographs/23995aba-99fc-468f-8eab-5116231a9ac2',
+            parameters: [
+                'title' => 'Title B',
+                'description' => 'New description',
+            ]
+        );
+
+        self::assertResponseIsSuccessful();
+
+        $photograph = $this->photographRepository->find('23995aba-99fc-468f-8eab-5116231a9ac2');
+        self::assertInstanceOf(Photograph::class, $photograph);
+        self::assertEquals('23995aba-99fc-468f-8eab-5116231a9ac2', $photograph->uuid()?->__toString());
+        self::assertEquals('Title B', $photograph->title()->__toString());
+        self::assertEquals('New description', $photograph->description()?->__toString());
+        self::assertEquals('public/images/23995aba-99fc-468f-8eab-5116231a9ac2.jpg', $photograph->filePath()->__toString());
+    }
 }
