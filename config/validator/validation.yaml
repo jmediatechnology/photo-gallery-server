@@ -6,6 +6,14 @@ App\Application\Commands\Photograph\CreateCommand:
         title:
             - NotBlank: ~
 
+App\Application\Commands\Photograph\UpdateCommand:
+    constraints:
+        - App\Infrastructure\Symfony\Validator\Photograph\UpdateCommandConstraint:
+              message: 'Title is already in use.'
+    properties:
+        title:
+            - NotBlank: ~
+
 App\Application\Query\Photograph\GenerateDescriptionForKnownPhotographUuidQuery:
     constraints:
         - App\Infrastructure\Symfony\Validator\Photograph\GenerateDescriptionForKnownPhotographUuidConstraint:

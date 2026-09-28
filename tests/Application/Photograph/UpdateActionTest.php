@@ -57,4 +57,43 @@ class UpdateActionTest extends ApiTestCase
         self::assertEquals('New description', $photograph->description()?->__toString());
         self::assertEquals('public/images/f4bd198a-beac-4a71-b814-a6197fc55a6d.jpg', $photograph->filePath()->__toString());
     }
+
+    #[Test]
+    public function doesNotAllowUpdateWhenTitleIsNotUnique(): void
+    {
+        $photographA = new Photograph(
+            uuid: new UUID('1d6d6fb0-af82-49a3-a696-8e5137e7f07e'),
+            title: new Title('Title A'),
+            description: new Description('Description A'),
+            filePath: new FilePath('public/images/1d6d6fb0-af82-49a3-a696-8e5137e7f07e.jpg'),
+            createdAt: new CreatedAt(new DateTimeImmutable()),
+            updatedAt: new UpdatedAt(new DateTimeImmutable()),
+        );
+
+        $photographB = new Photograph(
+            uuid: new UUID('22f42911-bc23-407f-ab42-1f87db511cc8'),
+            title: new Title('Title B'),
+            description: new Description('Description B'),
+            filePath: new FilePath('public/images/22f42911-bc23-407f-ab42-1f87db511cc8.jpg'),
+            createdAt: new CreatedAt(new DateTimeImmutable()),
+            updatedAt: new UpdatedAt(new DateTimeImmutable()),
+        );
+
+        $this->photographRepository->save($photographA);
+        $this->photographRepository->save($photographB);
+
+
+        $json = $this->jsonRequest(
+            method: 'PATCH',
+            uri: '/photographs/22f42911-bc23-407f-ab42-1f87db511cc8',
+            parameters: [
+                'title' => 'Title A',
+                'description' => 'New description',
+            ]
+        );
+
+        self::assertResponseStatusCodeSame(422);
+        self::assertArrayHasKey('errors', $json);
+        self::assertStringContainsString('Title is already in use.', $json['errors']);
+    }
 }
