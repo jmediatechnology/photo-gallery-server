@@ -3,6 +3,7 @@
 namespace App\Infrastructure\Doctrine\Repository;
 
 use App\Domain\Entity\Photograph;
+use App\Domain\ValueObject\Title;
 use App\Domain\ValueObject\UUID;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -24,6 +25,19 @@ class PhotographRepository extends ServiceEntityRepository
             'uuid' => $uuid,
         ]);
         return $photograph instanceof Photograph ? $photograph : null;
+    }
+
+    /**
+     * @return array<Photograph>
+     */
+    public function findByPartialTitle(string $title): array
+    {
+        return $this->createQueryBuilder('photograph')
+            ->where('LOWER(photograph.title) LIKE LOWER(:title) ESCAPE \'\\\'')
+            ->setParameter('title', '%' . addcslashes($title, '%_\\') . '%')
+            ->orderBy('photograph.title', 'ASC')
+            ->getQuery()
+            ->getResult();
     }
 
     public function save(Photograph $entity): void

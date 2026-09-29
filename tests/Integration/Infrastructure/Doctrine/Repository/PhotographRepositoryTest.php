@@ -314,6 +314,61 @@ class PhotographRepositoryTest extends KernelTestCase
         $this->assertNull($photographAfterRemove);
     }
 
+    #[Test]
+    public function canFindByPartialTitle(): void
+    {
+        $photograph1 = new Photograph(
+            uuid: new UUID('11b47022-b1bb-447e-8956-4e60bcd34d7c'),
+            title:  new Title('My awesome title number 1'),
+            description: new Description('Description for photograph 1'),
+            filePath: new FilePath('public/images/11b47022-b1bb-447e-8956-4e60bcd34d7c.jpg'),
+            createdAt:  new CreatedAt(new DateTimeImmutable('01-01-2026 08:30:00')),
+            updatedAt: new UpdatedAt(new DateTimeImmutable('01-01-2026 08:30:00')),
+        );
+
+        $photograph2 = new Photograph(
+            uuid: new UUID('2510a8b6-5749-4f3f-8e2b-7183fb8024b8'),
+            title: new Title('My awesome title number 2'),
+            description: new Description('Description for photograph 2'),
+            filePath: new FilePath('public/images/2510a8b6-5749-4f3f-8e2b-7183fb8024b8.jpg'),
+            createdAt: new CreatedAt(new DateTimeImmutable('01-01-2026 08:30:00')),
+            updatedAt: new UpdatedAt(new DateTimeImmutable('01-01-2026 08:30:00')),
+        );
+
+        $photograph3 = new Photograph(
+            uuid: new UUID('31454994-6718-4813-9889-1e40e0d4d262'),
+            title: new Title('My title number 3'),
+            description: new Description('Description for photograph 3'),
+            filePath: new FilePath('public/images/31454994-6718-4813-9889-1e40e0d4d262.jpg'),
+            createdAt: new CreatedAt(new DateTimeImmutable('01-01-2026 08:30:00')),
+            updatedAt: new UpdatedAt(new DateTimeImmutable('01-01-2026 08:30:00')),
+        );
+
+        $this->photographRepository->save($photograph1);
+        $this->photographRepository->save($photograph2);
+        $this->photographRepository->save($photograph3);
+
+        $photographs = $this->photographRepository->findByPartialTitle('awesome');
+
+        $this->assertCount(2, $photographs);
+
+        [$foundPhotograph1, $foundPhotograph2] = $photographs;
+
+        $this->assertEquals($photograph1->uuid(), $foundPhotograph1->uuid());
+        $this->assertEquals($photograph1->title(), $foundPhotograph1->title());
+        $this->assertEquals($photograph1->description(), $foundPhotograph1->description());
+        $this->assertEquals($photograph1->filePath(), $foundPhotograph1->filePath());
+        $this->assertEquals($photograph1->createdAt(), $foundPhotograph1->createdAt());
+        $this->assertEquals($photograph1->updatedAt(), $foundPhotograph1->updatedAt());
+
+        $this->assertEquals($photograph2->uuid(), $foundPhotograph2->uuid());
+        $this->assertEquals($photograph2->title(), $foundPhotograph2->title());
+        $this->assertEquals($photograph2->description(), $foundPhotograph2->description());
+        $this->assertEquals($photograph2->filePath(), $foundPhotograph2->filePath());
+        $this->assertEquals($photograph2->createdAt(), $foundPhotograph2->createdAt());
+        $this->assertEquals($photograph2->updatedAt(), $foundPhotograph2->updatedAt());
+    }
+
     protected function tearDown(): void
     {
         parent::tearDown();

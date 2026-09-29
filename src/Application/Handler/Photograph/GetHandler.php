@@ -21,10 +21,6 @@ class GetHandler
             return $this->photographRepository->findAll();
         }
 
-        $photographs = $this->photographRepository->findBy([
-            'title' => $title,
-        ]);
-
-        return $photographs;
+        return $this->photographRepository->findByPartialTitle($title);
     }
 }

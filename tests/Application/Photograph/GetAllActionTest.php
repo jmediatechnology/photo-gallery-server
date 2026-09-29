@@ -88,7 +88,7 @@ class GetAllActionTest extends ApiTestCase
     }
 
     #[Test]
-    public function canGetAllPhotographsByTitle(): void
+    public function canGetAllPhotographsByExactTitle(): void
     {
         $photograph1 = new Photograph(
             uuid: new UUID('0fec74d1-fa33-42af-b01b-da43f868a659'),
@@ -140,6 +140,71 @@ class GetAllActionTest extends ApiTestCase
         self::assertSame('photograph 1', $photograph1['title']);
         self::assertSame('Description for photograph 1', $photograph1['description']);
         self::assertSame('public/images/0fec74d1-fa33-42af-b01b-da43f868a659.jpg', $photograph1['filePath']);
+
+        self::assertResponseIsSuccessful();
+    }
+
+    #[Test]
+    public function canGetAllPhotographsByPartiallyContainingTitle(): void
+    {
+        $photograph1 = new Photograph(
+            uuid: new UUID('11b47022-b1bb-447e-8956-4e60bcd34d7c'),
+            title:  new Title('My awesome title number 1'),
+            description: new Description('Description for photograph 1'),
+            filePath: new FilePath('public/images/11b47022-b1bb-447e-8956-4e60bcd34d7c.jpg'),
+            createdAt:  new CreatedAt(new DateTimeImmutable()),
+            updatedAt: new UpdatedAt(new DateTimeImmutable()),
+        );
+
+        $photograph2 = new Photograph(
+            uuid: new UUID('2510a8b6-5749-4f3f-8e2b-7183fb8024b8'),
+            title: new Title('My awesome title number 2'),
+            description: new Description('Description for photograph 2'),
+            filePath: new FilePath('public/images/2510a8b6-5749-4f3f-8e2b-7183fb8024b8.jpg'),
+            createdAt: new CreatedAt(new DateTimeImmutable()),
+            updatedAt: new UpdatedAt(new DateTimeImmutable()),
+        );
+
+        $photograph3 = new Photograph(
+            uuid: new UUID('31454994-6718-4813-9889-1e40e0d4d262'),
+            title: new Title('My title number 3'),
+            description: new Description('Description for photograph 3'),
+            filePath: new FilePath('public/images/31454994-6718-4813-9889-1e40e0d4d262.jpg'),
+            createdAt: new CreatedAt(new DateTimeImmutable()),
+            updatedAt: new UpdatedAt(new DateTimeImmutable()),
+        );
+
+        $this->photographRepository->save($photograph1);
+        $this->photographRepository->save($photograph2);
+        $this->photographRepository->save($photograph3);
+
+        $json = $this->jsonRequest(
+            method: 'GET',
+            uri: '/photographs',
+            parameters: [
+                'title' => 'awesome',
+            ]
+        );
+
+        self::assertCount(2, $json);
+
+        [$photograph1, $photograph2] = $json;
+
+        self::assertArrayHasKey('uuid', $photograph1);
+        self::assertArrayHasKey('title', $photograph1);
+        self::assertArrayHasKey('description', $photograph1);
+        self::assertSame('11b47022-b1bb-447e-8956-4e60bcd34d7c', $photograph1['uuid']);
+        self::assertSame('My awesome title number 1', $photograph1['title']);
+        self::assertSame('Description for photograph 1', $photograph1['description']);
+        self::assertSame('public/images/11b47022-b1bb-447e-8956-4e60bcd34d7c.jpg', $photograph1['filePath']);
+
+        self::assertArrayHasKey('uuid', $photograph2);
+        self::assertArrayHasKey('title', $photograph2);
+        self::assertArrayHasKey('description', $photograph2);
+        self::assertSame('2510a8b6-5749-4f3f-8e2b-7183fb8024b8', $photograph2['uuid']);
+        self::assertSame('My awesome title number 2', $photograph2['title']);
+        self::assertSame('Description for photograph 2', $photograph2['description']);
+        self::assertSame('public/images/2510a8b6-5749-4f3f-8e2b-7183fb8024b8.jpg', $photograph2['filePath']);
 
         self::assertResponseIsSuccessful();
     }
