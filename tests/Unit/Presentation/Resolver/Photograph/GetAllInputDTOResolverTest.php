@@ -37,4 +37,29 @@ class GetAllInputDTOResolverTest extends TestCase
         $this->assertInstanceOf(GetAllInputDTO::class, $dto);
         $this->assertSame($title, $dto->title());
     }
+
+    #[Test]
+    public function canGetTitleFromQueryString(): void
+    {
+        $title = 'awesome title';
+
+        $request = Request::create(
+            uri: '/photographs',
+            parameters: ['title' => $title]
+        );
+
+        $argument = $this->createMock(ArgumentMetadata::class);
+        $argument
+            ->expects($this->once())
+            ->method('getType')
+            ->willReturn(GetAllInputDTO::class);
+
+        /** @var $iterable Generator */
+        $iterable = new GetAllInputDTOResolver()->resolve($request, $argument);
+
+        $dto = $iterable->current();
+
+        $this->assertInstanceOf(GetAllInputDTO::class, $dto);
+        $this->assertSame($title, $dto->title());
+    }
 }

@@ -27,6 +27,10 @@ class GetAllInputDTOResolver implements ValueResolverInterface
             $title = $request->request->get('title');
         }
 
+        if ($title === null) {
+            $title = $request->query->get('title');
+        }
+
         yield new GetAllInputDTO(
             title: $title,
         );
