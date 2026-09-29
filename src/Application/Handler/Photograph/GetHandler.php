@@ -17,7 +17,7 @@ class GetHandler
     {
         $title = $query->title();
 
-        if ($title === null) {
+        if (!$title) {
             return $this->photographRepository->findAll();
         }
 

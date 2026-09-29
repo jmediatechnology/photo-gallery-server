@@ -64,7 +64,7 @@ final class GetHandlerTest extends TestCase
 
         $photographRepository
             ->expects($this->once())
-            ->method('findBy')
+            ->method('findByPartialTitle')
             ->willReturn($photographs);
 
         $actual = new GetHandler($photographRepository)->__invoke($query);

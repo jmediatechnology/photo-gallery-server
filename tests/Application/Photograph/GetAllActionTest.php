@@ -208,4 +208,78 @@ class GetAllActionTest extends ApiTestCase
 
         self::assertResponseIsSuccessful();
     }
+
+
+    #[Test]
+    public function canGetAllPhotographsByEmptyTitle(): void
+    {
+        $photograph1 = new Photograph(
+            uuid: new UUID('af3164aa-e97d-419c-b5ed-30c06f54d80e'),
+            title:  new Title('My awesome title number 1'),
+            description: new Description('Description for photograph 1'),
+            filePath: new FilePath('public/images/af3164aa-e97d-419c-b5ed-30c06f54d80e.jpg'),
+            createdAt:  new CreatedAt(new DateTimeImmutable()),
+            updatedAt: new UpdatedAt(new DateTimeImmutable()),
+        );
+
+        $photograph2 = new Photograph(
+            uuid: new UUID('bcaf4b21-934b-41d9-b366-af7ab465c5ef'),
+            title: new Title('My awesome title number 2'),
+            description: new Description('Description for photograph 2'),
+            filePath: new FilePath('public/images/bcaf4b21-934b-41d9-b366-af7ab465c5ef.jpg'),
+            createdAt: new CreatedAt(new DateTimeImmutable()),
+            updatedAt: new UpdatedAt(new DateTimeImmutable()),
+        );
+
+        $photograph3 = new Photograph(
+            uuid: new UUID('c59c6eaf-1051-4f19-8548-eaff623095a6'),
+            title: new Title('My awesome title number 3'),
+            description: new Description('Description for photograph 3'),
+            filePath: new FilePath('public/images/c59c6eaf-1051-4f19-8548-eaff623095a6.jpg'),
+            createdAt: new CreatedAt(new DateTimeImmutable()),
+            updatedAt: new UpdatedAt(new DateTimeImmutable()),
+        );
+
+        $this->photographRepository->save($photograph1);
+        $this->photographRepository->save($photograph2);
+        $this->photographRepository->save($photograph3);
+
+        $json = $this->jsonRequest(
+            method: 'GET',
+            uri: '/photographs',
+            parameters: [
+                'title' => '',
+            ]
+        );
+
+        self::assertCount(3, $json);
+
+        [$photograph1, $photograph2, $photograph3] = $json;
+
+        self::assertArrayHasKey('uuid', $photograph1);
+        self::assertArrayHasKey('title', $photograph1);
+        self::assertArrayHasKey('description', $photograph1);
+        self::assertSame('af3164aa-e97d-419c-b5ed-30c06f54d80e', $photograph1['uuid']);
+        self::assertSame('My awesome title number 1', $photograph1['title']);
+        self::assertSame('Description for photograph 1', $photograph1['description']);
+        self::assertSame('public/images/af3164aa-e97d-419c-b5ed-30c06f54d80e.jpg', $photograph1['filePath']);
+
+        self::assertArrayHasKey('uuid', $photograph2);
+        self::assertArrayHasKey('title', $photograph2);
+        self::assertArrayHasKey('description', $photograph2);
+        self::assertSame('bcaf4b21-934b-41d9-b366-af7ab465c5ef', $photograph2['uuid']);
+        self::assertSame('My awesome title number 2', $photograph2['title']);
+        self::assertSame('Description for photograph 2', $photograph2['description']);
+        self::assertSame('public/images/bcaf4b21-934b-41d9-b366-af7ab465c5ef.jpg', $photograph2['filePath']);
+
+        self::assertArrayHasKey('uuid', $photograph3);
+        self::assertArrayHasKey('title', $photograph3);
+        self::assertArrayHasKey('description', $photograph3);
+        self::assertSame('c59c6eaf-1051-4f19-8548-eaff623095a6', $photograph3['uuid']);
+        self::assertSame('My awesome title number 3', $photograph3['title']);
+        self::assertSame('Description for photograph 3', $photograph3['description']);
+        self::assertSame('public/images/c59c6eaf-1051-4f19-8548-eaff623095a6.jpg', $photograph3['filePath']);
+
+        self::assertResponseIsSuccessful();
+    }
 }
