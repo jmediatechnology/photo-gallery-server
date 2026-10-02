@@ -57,7 +57,7 @@ COPY --chown=www-data:www-data . /var/www/html/
 
 WORKDIR /var/www/html
 RUN composer install --no-dev --no-interaction --optimize-autoloader --no-scripts \
-    && mkdir -p var/cache var/log \
-    && chown -R www-data:www-data vendor var
+    && mkdir -p var/cache var/log public/uploads/photographs \
+    && chown -R www-data:www-data vendor var public/uploads
 
 USER www-data
