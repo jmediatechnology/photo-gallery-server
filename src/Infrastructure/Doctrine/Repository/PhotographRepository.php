@@ -5,7 +5,6 @@ namespace App\Infrastructure\Doctrine\Repository;
 use App\Domain\Criteria\PhotographListCriteria;
 use App\Domain\Entity\Photograph;
 use App\Domain\Enum\PhotographSortField;
-use App\Domain\ValueObject\Title;
 use App\Domain\ValueObject\UUID;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
