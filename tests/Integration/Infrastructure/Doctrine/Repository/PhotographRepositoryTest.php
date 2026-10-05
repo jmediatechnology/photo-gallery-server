@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Integration\Infrastructure\Doctrine\Repository;
 
+use App\Domain\Criteria\PhotographListCriteria;
 use App\Domain\Entity\Photograph;
+use App\Domain\Enum\PhotographSortDirection;
+use App\Domain\Enum\PhotographSortField;
 use App\Domain\ValueObject\CreatedAt;
 use App\Domain\ValueObject\Description;
 use App\Domain\ValueObject\FilePath;
@@ -348,7 +351,23 @@ class PhotographRepositoryTest extends KernelTestCase
         $this->photographRepository->save($photograph2);
         $this->photographRepository->save($photograph3);
 
-        $photographs = $this->photographRepository->findByPartialTitle('awesome');
+        $criteria = $this->createMock(PhotographListCriteria::class);
+        $criteria
+            ->expects($this->once())
+            ->method('title')
+            ->willReturn('awesome');
+
+        $criteria
+            ->expects($this->once())
+            ->method('sortField')
+            ->willReturn(PhotographSortField::Title);
+
+        $criteria
+            ->expects($this->once())
+            ->method('sortDirection')
+            ->willReturn(PhotographSortDirection::Asc);
+
+        $photographs = $this->photographRepository->findByCriteria($criteria);
 
         $this->assertCount(2, $photographs);
 

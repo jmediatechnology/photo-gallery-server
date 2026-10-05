@@ -3,6 +3,7 @@
 namespace App\Application\Handler\Photograph;
 
 use App\Application\Query\Photograph\GetQuery;
+use App\Domain\Criteria\PhotographListCriteria;
 use App\Domain\Entity\Photograph;
 use App\Infrastructure\Doctrine\Repository\PhotographRepository;
 
@@ -15,12 +16,11 @@ class GetHandler
      */
     public function __invoke(GetQuery $query): array
     {
-        $title = $query->title();
-
-        if (!$title) {
-            return $this->photographRepository->findAll();
-        }
-
-        return $this->photographRepository->findByPartialTitle($title);
+        $criteria = new PhotographListCriteria(
+            title: $query->title(),
+            sortField: $query->sortField(),
+            sortDirection: $query->sortDirection(),
+        );
+        return $this->photographRepository->findByCriteria($criteria);
     }
 }

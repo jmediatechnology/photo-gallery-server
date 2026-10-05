@@ -21,6 +21,8 @@ class GetAllAction
     {
         $envelope = $this->bus->dispatch(new GetQuery(
             title: $dto->title(),
+            sortField: $dto->sortField(),
+            sortDirection: $dto->sortDirection(),
         ));
 
         $handled = $envelope->last(HandledStamp::class);

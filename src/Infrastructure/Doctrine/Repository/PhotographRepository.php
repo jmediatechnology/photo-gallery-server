@@ -2,7 +2,9 @@
 
 namespace App\Infrastructure\Doctrine\Repository;
 
+use App\Domain\Criteria\PhotographListCriteria;
 use App\Domain\Entity\Photograph;
+use App\Domain\Enum\PhotographSortField;
 use App\Domain\ValueObject\Title;
 use App\Domain\ValueObject\UUID;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -30,12 +32,26 @@ class PhotographRepository extends ServiceEntityRepository
     /**
      * @return array<Photograph>
      */
-    public function findByPartialTitle(string $title): array
+    public function findByCriteria(PhotographListCriteria $criteria): array
     {
-        return $this->createQueryBuilder('photograph')
-            ->where('LOWER(photograph.title) LIKE LOWER(:title) ESCAPE \'\\\'')
-            ->setParameter('title', '%' . addcslashes($title, '%_\\') . '%')
-            ->orderBy('photograph.title', 'ASC')
+        $queryBuilder = $this->createQueryBuilder('photograph');
+
+        $title = $criteria->title();
+        if ($title !== null && $title !== '') {
+            $queryBuilder
+                ->andWhere('LOWER(photograph.title) LIKE LOWER(:title) ESCAPE \'\\\'')
+                ->setParameter('title', '%' . addcslashes($title, '%_\\') . '%');
+        }
+
+        $sortField = match ($criteria->sortField()) {
+            PhotographSortField::CreatedAt => 'photograph.createdAt',
+            PhotographSortField::UpdatedAt => 'photograph.updatedAt',
+            PhotographSortField::Title => 'photograph.title',
+        };
+        $sortDirection = $criteria->sortDirection()->value;
+
+        return $queryBuilder
+            ->orderBy($sortField, $sortDirection)
             ->getQuery()
             ->getResult();
     }
