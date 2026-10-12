@@ -318,6 +318,58 @@ class PhotographRepositoryTest extends KernelTestCase
     }
 
     #[Test]
+    public function canFindByUUIDsSkippingUnknownOnes(): void
+    {
+        $photograph1 = new Photograph(
+            uuid: new UUID('5c3f0e4e-8d2b-4b8e-9a51-2f6a7d1c9e01'),
+            title: new Title('Title of canFindByUUIDsSkippingUnknownOnes 1'),
+            description: null,
+            filePath: new FilePath('/images/5c3f0e4e-8d2b-4b8e-9a51-2f6a7d1c9e01.jpg'),
+            createdAt: new CreatedAt(new DateTimeImmutable('01-01-2026 08:30:00')),
+            updatedAt: new UpdatedAt(new DateTimeImmutable('01-01-2026 08:30:00')),
+        );
+
+        $photograph2 = new Photograph(
+            uuid: new UUID('7a1d2c3b-4e5f-4a6b-8c7d-9e0f1a2b3c02'),
+            title: new Title('Title of canFindByUUIDsSkippingUnknownOnes 2'),
+            description: null,
+            filePath: new FilePath('/images/7a1d2c3b-4e5f-4a6b-8c7d-9e0f1a2b3c02.jpg'),
+            createdAt: new CreatedAt(new DateTimeImmutable('01-01-2026 08:30:00')),
+            updatedAt: new UpdatedAt(new DateTimeImmutable('01-01-2026 08:30:00')),
+        );
+
+        $notRequested = new Photograph(
+            uuid: new UUID('2d4e6f80-1a3b-4c5d-8e7f-90a1b2c3d403'),
+            title: new Title('Title of canFindByUUIDsSkippingUnknownOnes 3'),
+            description: null,
+            filePath: new FilePath('/images/2d4e6f80-1a3b-4c5d-8e7f-90a1b2c3d403.jpg'),
+            createdAt: new CreatedAt(new DateTimeImmutable('01-01-2026 08:30:00')),
+            updatedAt: new UpdatedAt(new DateTimeImmutable('01-01-2026 08:30:00')),
+        );
+
+        $this->photographRepository->save($photograph1);
+        $this->photographRepository->save($photograph2);
+        $this->photographRepository->save($notRequested);
+
+        $photographs = $this->photographRepository->findByUUIDs([
+            new UUID('5c3f0e4e-8d2b-4b8e-9a51-2f6a7d1c9e01'),
+            new UUID('7a1d2c3b-4e5f-4a6b-8c7d-9e0f1a2b3c02'),
+            new UUID('9f8e7d6c-5b4a-4392-8170-6f5e4d3c2b03'),
+        ]);
+
+        $foundUuids = array_map(
+            callback: static fn (Photograph $photograph): string => (string) $photograph->uuid(),
+            array: $photographs,
+        );
+        sort($foundUuids);
+
+        $this->assertSame(
+            ['5c3f0e4e-8d2b-4b8e-9a51-2f6a7d1c9e01', '7a1d2c3b-4e5f-4a6b-8c7d-9e0f1a2b3c02'],
+            $foundUuids,
+        );
+    }
+
+    #[Test]
     public function canFindByPartialTitle(): void
     {
         $photograph1 = new Photograph(

@@ -40,6 +40,9 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/api, roles: PUBLIC_ACCESS }
+        # A download is a browser navigation in a new tab, which cannot send an Authorization header.
+        # The anonymous JWT protects nothing here: anyone can get one, and the image files are public anyway.
+        - { path: ^/photographs/download$, roles: PUBLIC_ACCESS }
         - { path: ^/photographs, roles: IS_AUTHENTICATED_FULLY }
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }

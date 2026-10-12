@@ -23,9 +23,11 @@ services:
         exclude:
             - '../src/Application/Commands/*'
             - '../src/Application/Query/*'
+            - '../src/Application/ValueObject/*'
             - '../src/Domain/Entity/*'
             - '../src/Domain/ValueObject/*'
             - '../src/Infrastructure/Symfony/Security/User/*'
+            - '../src/Presentation/Attribute/*'
             - '../src/Presentation/DTO/Photograph/*'
 
     App\Presentation\Action\:
@@ -38,6 +40,11 @@ services:
 
     App\Infrastructure\Symfony\Event\ExceptionEventListener:
         tags: [ 'kernel.event_listener' ]
+
+    App\Infrastructure\Symfony\Event\DownloadSlotEventListener:
+        tags:
+            - { name: 'kernel.event_listener', event: !php/const App\Infrastructure\Symfony\Event\DownloadSlotEventListener::REQUIRES_DOWNLOAD_SLOT_EVENT, method: 'claimSlot' }
+            - { name: 'kernel.event_listener', event: !php/const Symfony\Component\HttpKernel\KernelEvents::TERMINATE, method: 'releaseSlot' }
 
     App\Infrastructure\Anthropic\Client\ImageDescriptionGenerator:
         arguments:

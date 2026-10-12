@@ -21,3 +21,23 @@ App\Application\Query\Photograph\GenerateDescriptionForKnownPhotographUuidQuery:
     properties:
         uuid:
             - NotBlank: ~
+
+App\Application\Query\Photograph\DownloadQuery:
+    # Checks the shape of the selection first; looks the photographs up only when the shape is valid.
+    group_sequence:
+        - DownloadQuery
+        - KnownPhotographs
+    constraints:
+        - App\Infrastructure\Symfony\Validator\Photograph\DownloadForKnownPhotographUuidsConstraint:
+              message: 'Photographs not found: {{ uuids }}'
+              groups: [KnownPhotographs]
+    properties:
+        uuids:
+            - Count:
+                  min: 1
+                  max: !php/const App\Application\Query\Photograph\DownloadQuery::MAX_PHOTOGRAPHS
+                  minMessage: 'Select at least one photograph to download'
+                  maxMessage: 'Select at most {{ limit }} photographs to download'
+            - All:
+                  - Uuid:
+                        message: '{{ value }} is not a valid photograph id'

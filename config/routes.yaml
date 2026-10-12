@@ -13,12 +13,21 @@ photograph_create:
     defaults:
         _format: json
 
+photograph_download:
+    path:       /photographs/download
+    controller: App\Presentation\Action\Photograph\DownloadAction
+    methods:    GET
+    defaults:
+        _format: json
+
 photograph_delete:
     path:       /photographs/{id}
     controller: App\Presentation\Action\Photograph\DeleteAction
     methods:    DELETE
     defaults:
         _format: json
+    requirements:
+        id: !php/const Symfony\Component\Routing\Requirement\Requirement::UUID
 
 photograph_get_all:
     path:       /photographs
@@ -33,6 +42,8 @@ photograph_get_one:
     methods:    GET
     defaults:
         _format: json
+    requirements:
+        id: !php/const Symfony\Component\Routing\Requirement\Requirement::UUID
 
 photograph_update:
     path:       /photographs/{id}
@@ -40,6 +51,8 @@ photograph_update:
     methods:    PATCH
     defaults:
         _format: json
+    requirements:
+        id: !php/const Symfony\Component\Routing\Requirement\Requirement::UUID
 
 photograph_generate_description:
     path:       /photographs/{id}/generate-description
@@ -47,3 +60,5 @@ photograph_generate_description:
     methods:    POST
     defaults:
         _format: json
+    requirements:
+        id: !php/const Symfony\Component\Routing\Requirement\Requirement::UUID

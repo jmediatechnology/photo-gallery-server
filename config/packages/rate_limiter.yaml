@@ -1,0 +1,8 @@
+framework:
+    rate_limiter:
+        # Every download request counts, including retries: a re-download costs the server exactly as much as the first.
+        # See docs/features/Photograph_Download.md, phase 4.
+        photograph_download:
+            policy: sliding_window
+            limit: 20
+            interval: '60 minutes'

@@ -5,6 +5,13 @@ framework:
     # Note that the session will be started ONLY if you read or write from it.
     session: true
 
+    # In production Caddy proxies every request, so REMOTE_ADDR is Caddy's container IP.
+    # Trusting private ranges makes getClientIp() return the visitor's IP from X-Forwarded-For,
+    # which the per-IP rate limiters depend on.
+    # Safe only while Apache is reachable from the Docker network alone (photo-gallery-deploy: expose, no ports).
+    trusted_proxies: 'private_ranges'
+    trusted_headers: ['x-forwarded-for', 'x-forwarded-proto']
+
     #esi: true
     #fragments: true
 

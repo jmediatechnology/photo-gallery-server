@@ -10,6 +10,10 @@ RUN docker-php-ext-install pdo pdo_mysql
 COPY docker/php/conf.d/date.ini $PHP_INI_DIR/conf.d/date.ini
 COPY docker/php/conf.d/uploads.ini $PHP_INI_DIR/conf.d/uploads.ini
 
+COPY docker/apache/mpm_prefork.conf /etc/apache2/mods-available/mpm_prefork.conf
+COPY docker/apache/photo-gallery.conf /etc/apache2/conf-available/photo-gallery.conf
+RUN a2enconf photo-gallery
+
 ########################################################################################################################
 
 FROM php-base as development
@@ -22,7 +26,9 @@ RUN sed -i 's/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf \
 RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
 
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
-RUN apt-get update && apt-get install -y git unzip
+RUN apt-get update && apt-get install -y git unzip libzip-dev \
+    && docker-php-ext-install zip
+
 RUN pecl install xdebug && docker-php-ext-enable xdebug
 
 COPY docker/php/conf.d/xdebug.ini $PHP_INI_DIR/conf.d/xdebug.ini

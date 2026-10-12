@@ -46,4 +46,15 @@ class GetOneActionTest extends ApiTestCase
 
         self::assertResponseIsSuccessful();
     }
+
+    #[Test]
+    public function returnsNotFoundForAnIdThatIsNotAUuid(): void
+    {
+        $this->jsonRequest(
+            method: 'GET',
+            uri: '/photographs/not-a-uuid',
+        );
+
+        self::assertResponseStatusCodeSame(404);
+    }
 }

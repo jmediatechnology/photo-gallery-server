@@ -7,6 +7,7 @@ use App\Domain\Entity\Photograph;
 use App\Domain\Enum\PhotographSortField;
 use App\Domain\ValueObject\UUID;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\UnitOfWork;
@@ -26,6 +27,24 @@ class PhotographRepository extends ServiceEntityRepository
             'uuid' => $uuid,
         ]);
         return $photograph instanceof Photograph ? $photograph : null;
+    }
+
+    /**
+     * @param array<UUID> $uuids
+     * @return array<Photograph>
+     */
+    public function findByUUIDs(array $uuids): array
+    {
+        $uuidStrings = array_map(
+            callback: static fn (UUID $uuid): string => $uuid->__toString(),
+            array: $uuids,
+        );
+
+        return $this->createQueryBuilder('photograph')
+            ->andWhere('photograph.uuid IN (:uuids)')
+            ->setParameter('uuids', $uuidStrings, ArrayParameterType::STRING)
+            ->getQuery()
+            ->getResult();
     }
 
     /**
