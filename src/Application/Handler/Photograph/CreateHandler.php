@@ -24,7 +24,7 @@ class CreateHandler
 
         $uuid = $command->uuid();
         $filename = $uuid !== null
-            ? $uuid . '.' . $file->getExtension()
+            ? $uuid . '.' . $file->guessExtension()
             : $file->getClientOriginalName();
 
         $filePath = $this->filePathFactory->create(
