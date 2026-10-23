@@ -158,8 +158,6 @@
     createdAt: '2025-10-02 02:00:00'
     updatedAt: '2025-10-02 02:00:00'
 
-
-
 -
   uuid: 42da7891-7572-4489-ad22-5ad095845685
   title: 'Mediterranean Landscape'
@@ -960,3 +958,10 @@
     createdAt: '2026-01-02 00:00:33'
     updatedAt: '2025-01-02 00:00:33'
 
+-
+    uuid: 967e220e-4b53-432d-9be1-a1ca991bb43f
+    title: 'Untitled (monolith)'
+    description: 'Beksinski''s monolith.'
+    filepath: '/images/967e220e-4b53-432d-9be1-a1ca991bb43f.jpg'
+    createdAt: '2026-01-02 00:00:34'
+    updatedAt: '2025-01-02 00:00:34'
