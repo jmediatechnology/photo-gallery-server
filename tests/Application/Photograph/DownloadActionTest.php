@@ -24,24 +24,26 @@ use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\RateLimiter\RateLimiterFactoryInterface;
 use ZipArchive;
 
-class DownloadActionTest extends ApiTestCase
+final class DownloadActionTest extends ApiTestCase
 {
     use ClockSensitiveTrait;
 
     private const string FIXTURE_IMAGE = '03e05f1b-3952-4edb-adbf-3e6e12e49958.jpg';
 
-    private const string SUNSET_UUID = '5c3f0e4e-8d2b-4b8e-9a51-2f6a7d1c9e01';
-    private const string NIGHT_UUID = '7a1d2c3b-4e5f-4a6b-8c7d-9e0f1a2b3c02';
-    private const string UNKNOWN_UUID = '9f8e7d6c-5b4a-4392-8170-6f5e4d3c2b03';
+    private const string PHOTOGRAPH_UUID_A = '5c3f0e4e-8d2b-4b8e-9a51-2f6a7d1c9e01';
+    private const string PHOTOGRAPH_UUID_B = '7a1d2c3b-4e5f-4a6b-8c7d-9e0f1a2b3c02';
+    private const string PHOTOGRAPH_UUID_UNKNOWN = '9f8e7d6c-5b4a-4392-8170-6f5e4d3c2b03';
+
+    private const string VISITOR_IP_A = '203.0.113.10';
+    private const string VISITOR_IP_B = '198.51.100.20';
 
     private string $fixtureImagePath = '';
-
 
     /** @var list<string> */
     private array $copiedImagePaths = [];
 
     /** @var list<LockInterface> */
-    private array $downloadLocks = [];
+    private array $claimedDownloadSlots = [];
 
     protected function setUp(): void
     {
@@ -58,7 +60,7 @@ class DownloadActionTest extends ApiTestCase
     protected function tearDown(): void
     {
         new Filesystem()->remove($this->copiedImagePaths);
-        array_walk($this->downloadLocks, static fn (LockInterface $slot) => $slot->release());
+        array_walk($this->claimedDownloadSlots, static fn (LockInterface $slot) => $slot->release());
 
         parent::tearDown();
     }
@@ -68,25 +70,23 @@ class DownloadActionTest extends ApiTestCase
     {
         self::mockTime('2026-10-11 15:39:00');
 
-        $this->savePhotographWithImage(self::SUNSET_UUID, 'Sunset');
-        $this->savePhotographWithImage(self::NIGHT_UUID, 'Night');
+        $this->savePhotographWithImage(self::PHOTOGRAPH_UUID_A, 'Sunset');
+        $this->savePhotographWithImage(self::PHOTOGRAPH_UUID_B, 'Night');
 
-        $this->client->request(
-            method: 'GET',
-            uri: '/photographs/download?uuids=' . implode(',', [self::SUNSET_UUID, self::NIGHT_UUID])
-        );
+        $this->requestDownload([self::PHOTOGRAPH_UUID_A, self::PHOTOGRAPH_UUID_B]);
 
         self::assertResponseIsSuccessful();
         self::assertResponseHeaderSame('Content-Type', 'application/zip');
         self::assertResponseHeaderSame('Content-Disposition', 'attachment; filename=photographs-2026-10-11_15-39-00.zip');
 
         $archive = $this->client->getInternalResponse()->getContent();
+        $fixtureImage = new Filesystem()->readFile(filename: $this->fixtureImagePath);
 
         self::assertResponseHeaderSame('Content-Length', (string) strlen($archive));
         self::assertSame(
             [
-                'Sunset.jpg' => new Filesystem()->readFile(filename: $this->fixtureImagePath),
-                'Night.jpg' => new Filesystem()->readFile(filename: $this->fixtureImagePath),
+                'Sunset.jpg' => $fixtureImage,
+                'Night.jpg' => $fixtureImage,
             ],
             self::extractZipArchive($archive),
         );
@@ -98,23 +98,12 @@ class DownloadActionTest extends ApiTestCase
     #[Test]
     public function rejectsASelectionWithUnknownPhotographs(): void
     {
-        $this->savePhotographWithImage(self::SUNSET_UUID, 'Sunset');
+        $this->savePhotographWithImage(self::PHOTOGRAPH_UUID_A, 'Sunset');
 
-        $this->client->request(
-            method: 'GET',
-            uri: '/photographs/download?uuids=' . implode(',', [self::SUNSET_UUID, self::NIGHT_UUID])
-        );
+        $this->requestDownload([self::PHOTOGRAPH_UUID_A, self::PHOTOGRAPH_UUID_B]);
 
         self::assertResponseStatusCodeSame(422);
-
-        $json = json_decode(
-            json: $this->client->getResponse()->getContent(),
-            associative: true,
-            flags: JSON_THROW_ON_ERROR
-        );
-        $errors = $json['errors'];
-
-        self::assertSame('Photographs not found: ' . self::NIGHT_UUID  . '. ', $errors);
+        self::assertSame('Photographs not found: ' . self::PHOTOGRAPH_UUID_B . '. ', $this->getResponseErrors());
     }
 
     /**
@@ -128,38 +117,27 @@ class DownloadActionTest extends ApiTestCase
         $this->client->request(
             method: 'GET',
             uri: '/photographs/download',
-            parameters: $query
+            parameters: $query,
         );
 
         self::assertResponseStatusCodeSame(422);
-
-        $json = json_decode(
-            json: $this->client->getResponse()->getContent(),
-            associative: true,
-            flags: JSON_THROW_ON_ERROR
-        );
-        $errors = $json['errors'];
-
-        self::assertStringContainsString($expectedError, $errors);
+        self::assertStringContainsString($expectedError, $this->getResponseErrors());
     }
 
     #[Test]
     public function failsBeforeStreamingWhenAPhotographFileIsMissing(): void
     {
-        $this->savePhotograph(self::SUNSET_UUID, 'Sunset');
+        $this->savePhotograph(self::PHOTOGRAPH_UUID_A, 'Sunset');
 
         $this->expectException(HandlerFailedException::class);
         $this->expectExceptionMessage(sprintf(
             'Photograph file "%s/%s.jpg" is missing or not readable.',
             self::$publicImagesDir,
-            self::SUNSET_UUID,
+            self::PHOTOGRAPH_UUID_A,
         ));
 
         $this->client->catchExceptions(false);
-        $this->client->request(
-            method: 'GET',
-            uri: '/photographs/download?uuids=' . implode(',', [self::SUNSET_UUID])
-        );
+        $this->requestDownload([self::PHOTOGRAPH_UUID_A]);
     }
 
     /**
@@ -168,113 +146,93 @@ class DownloadActionTest extends ApiTestCase
     #[Test]
     public function returnsTooManyRequestsAfterTwentyDownloadsFromOneVisitor(): void
     {
-        $this->savePhotographWithImage(self::SUNSET_UUID, 'Sunset');
+        $this->savePhotographWithImage(self::PHOTOGRAPH_UUID_A, 'Sunset');
+        $this->exhaustDownloadLimitFor(self::VISITOR_IP_A);
 
-        $this->downloadNTimesAs(
-            amountOfDownloads: 20,
-            clientIp: '203.0.113.10'
-        );
-
-        $this->client->request(
-            method: 'GET',
-            uri: '/photographs/download?uuids=' . implode(',', [self::SUNSET_UUID]),
-            server: ['HTTP_X_FORWARDED_FOR' => '203.0.113.10'],
-        );
-
-        $json = json_decode(
-            json: $this->client->getResponse()->getContent(),
-            associative: true,
-            flags: JSON_THROW_ON_ERROR
-        );
-        $errors = $json['errors'];
+        $this->requestDownload([self::PHOTOGRAPH_UUID_A], self::VISITOR_IP_A);
 
         self::assertResponseStatusCodeSame(429);
-        self::assertSame('Too Many Requests', $errors);
+        self::assertSame('Too Many Requests', $this->getResponseErrors());
         self::assertGreaterThan(0, (int) $this->client->getResponse()->headers->get('Retry-After'));
     }
 
     #[Test]
     public function countsDownloadsPerVisitorBehindTheReverseProxy(): void
     {
-        $this->savePhotographWithImage(self::SUNSET_UUID, 'Sunset');
+        $this->savePhotographWithImage(self::PHOTOGRAPH_UUID_A, 'Sunset');
+        $this->exhaustDownloadLimitFor(self::VISITOR_IP_A);
 
-        $this->downloadNTimesAs(
-            amountOfDownloads: 20,
-            clientIp: '203.0.113.10'
-        );
-
-        $this->client->request(
-            method: 'GET',
-            uri: '/photographs/download?uuids=' . implode(',', [self::SUNSET_UUID]),
-            server: ['HTTP_X_FORWARDED_FOR' => '198.51.100.20'],
-        );
+        $this->requestDownload([self::PHOTOGRAPH_UUID_A], self::VISITOR_IP_B);
 
         self::assertResponseIsSuccessful();
-        self::assertSame(0, $this->getRemainingDownloadsFor('203.0.113.10'));
-        self::assertSame(19, $this->getRemainingDownloadsFor('198.51.100.20'));
+        self::assertSame(0, $this->getRemainingDownloadsFor(self::VISITOR_IP_A));
+        self::assertSame(19, $this->getRemainingDownloadsFor(self::VISITOR_IP_B));
     }
 
     /**
      * @throws JsonException
      */
     #[Test]
-    public function returnsServiceUnavailableWhenAllAvailableDownloadLocksAreExhausted(): void
+    public function returnsServiceUnavailableWhenAllDownloadSlotsAreTaken(): void
     {
-        $this->savePhotographWithImage(self::SUNSET_UUID, 'Sunset');
-        $this->claimDownloadLocks();
+        $this->savePhotographWithImage(self::PHOTOGRAPH_UUID_A, 'Sunset');
+        $this->claimAllDownloadSlots();
 
-        $this->client->request(
-            method: 'GET',
-            uri: '/photographs/download?uuids=' . implode(',', [self::SUNSET_UUID])
-        );
+        $this->requestDownload([self::PHOTOGRAPH_UUID_A]);
 
         self::assertResponseStatusCodeSame(503);
-
-        $json = json_decode(
-            json: $this->client->getResponse()->getContent(),
-            associative: true,
-            flags: JSON_THROW_ON_ERROR
-        );
-        $errors = $json['errors'];
-
         self::assertResponseHeaderSame('Retry-After', '30');
-        self::assertSame('Too many downloads in progress. Try again in a moment', $errors);
+        self::assertSame('Too many downloads in progress. Try again in a moment', $this->getResponseErrors());
     }
 
     #[Test]
-    public function releasesTheDownloadLocksOnceStreamingHasEnded(): void
+    public function releasesTheDownloadSlotOnceStreamingHasEnded(): void
     {
-        $this->savePhotographWithImage(self::SUNSET_UUID, 'Sunset');
+        $this->savePhotographWithImage(self::PHOTOGRAPH_UUID_A, 'Sunset');
 
-        $this->client->request(
-            method: 'GET',
-            uri: '/photographs/download?uuids=' . implode(',', [self::SUNSET_UUID])
-        );
+        $this->requestDownload([self::PHOTOGRAPH_UUID_A]);
         self::assertResponseIsSuccessful();
 
-        $this->claimDownloadLocks();
-        self::assertNotContains(null, $this->downloadLocks);
+        // Fails when the download kept its slot.
+        $this->claimAllDownloadSlots();
     }
 
-    private function downloadNTimesAs(int $amountOfDownloads, string $clientIp): void
+    /**
+     * @param list<string> $uuids
+     */
+    private function requestDownload(array $uuids, ?string $clientIp = null): void
     {
-        for ($download = 1; $download <= $amountOfDownloads; $download++) {
-            $this->client->request(
-                method: 'GET',
-                uri: '/photographs/download?uuids=' . implode(',', [self::UNKNOWN_UUID]),
-                server: ['HTTP_X_FORWARDED_FOR' => $clientIp],
-            );
+        $this->client->request(
+            method: 'GET',
+            uri: '/photographs/download?uuids=' . implode(',', $uuids),
+            server: $clientIp === null ? [] : ['HTTP_X_FORWARDED_FOR' => $clientIp],
+        );
+    }
+
+    /**
+     * Uses up the visitor's 20 downloads per hour with requests that are rejected before streaming.
+     */
+    private function exhaustDownloadLimitFor(string $clientIp): void
+    {
+        for ($download = 1; $download <= 20; $download++) {
+            $this->requestDownload([self::PHOTOGRAPH_UUID_UNKNOWN], $clientIp);
             self::assertResponseStatusCodeSame(422);
         }
     }
 
-    private function claimDownloadLocks(): void
+    private function claimAllDownloadSlots(): void
     {
         $downloadSlots = static::getContainer()->get(PhotographDownloadSlots::class);
         assert($downloadSlots instanceof PhotographDownloadSlots);
 
         for ($slot = 1; $slot <= PhotographDownloadSlots::COUNT; $slot++) {
-            $this->downloadLocks[] = $downloadSlots->claim();
+            $claimedDownloadSlot = $downloadSlots->claim();
+            self::assertNotNull(
+                $claimedDownloadSlot,
+                sprintf('Download slot %d of %d was already taken.', $slot, PhotographDownloadSlots::COUNT),
+            );
+
+            $this->claimedDownloadSlots[] = $claimedDownloadSlot;
         }
     }
 
@@ -285,7 +243,7 @@ class DownloadActionTest extends ApiTestCase
         $imagePath = self::$publicImagesDir . '/' . $uuid . '.jpg';
         new Filesystem()->copy(
             originFile: $this->fixtureImagePath,
-            targetFile: $imagePath
+            targetFile: $imagePath,
         );
         $this->copiedImagePaths[] = $imagePath;
     }
@@ -338,6 +296,19 @@ class DownloadActionTest extends ApiTestCase
         return $entries;
     }
 
+    /**
+     * @throws JsonException
+     */
+    private function getResponseErrors(): string
+    {
+        $json = json_decode(
+            json: $this->client->getResponse()->getContent(),
+            associative: true,
+            flags: JSON_THROW_ON_ERROR,
+        );
+
+        return $json['errors'];
+    }
 
     /**
      * @return array<string, array{array<string, string>, string}>

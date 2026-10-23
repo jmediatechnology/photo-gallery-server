@@ -10,8 +10,3 @@ services:
 
     App\Fixtures\:
         resource: '../fixtures/*'
-
-    App\Application\Handler\Photograph\GenerateDescriptionHandler:
-        tags: [ 'messenger.message_handler' ]
-        arguments:
-            $imageDescriptionGenerator: '@App\Infrastructure\Anthropic\Client\ImageDescriptionGeneratorCustom'

@@ -1,8 +1,22 @@
 # photo-gallery-server
-Backend for Photo Gallery
 
+Backend for Photo Gallery.
 
-## Getting Started on dev
+## AI
+
+Photo Gallery Server can generate image descriptions.
+Image description generation happens through an image description provider. 
+
+The provider is chosen by setting the environment variable: `IMAGE_DESCRIPTION_PROVIDER`.
+It supports: 
+
+- `anthropic`: Anthropic API (production)
+- `ollama`: local vision model via Ollama (optional in dev, see above)
+- `fake`: random text, no network (dev default)
+
+More information about can be found at [AI](docs/ai/AI.md).
+
+## Getting started on dev
 
 Create secrets:
 ```
@@ -11,10 +25,12 @@ printf "my-database-password" >> secrets/db-password.txt
 chmod 600 secrets/db-password.txt
 ```
 
-Build and run containers:
-```
-docker compose -f compose.yaml -f compose.override.yaml -f compose.dev.yaml up -d --build
-```
+Continue guide with:
+- [fake image description generator](docs/getting_started/FAKE_IMAGE_DESCRIPTION_GENERATOR.md).
+- [dockerized ollama service](docs/getting_started/DOCKERIZED_OLLAMA_SERVICE.md).
+- [host native ollama service](docs/getting_started/HOST_NATIVE_OLLAMA_SERVICE.md).
+
+## Database
 
 Recreate database for dev env:
 ```
@@ -37,71 +53,7 @@ Inspect the database.
 
 More information about running tests can be found at [Testing](docs/testing/Testing.md).
 
-## AI
-
-Anthropic AI SDK is integrated in Photo Gallery Server to generate text-by-image. 
-
-More information about can be found at [AI](docs/ai/AI.md).
-
-
 ## Start server on Production
 
-Create secrets:
-```
-mkdir secrets
-touch secrets/db-password.txt
-nano secrets/db-password-prod.txt
-nano secrets/anthropic-api-key.txt
-```
-
-Remove new lines from secrets: 
-```
-sed -i -z 's/\n*$//' secrets/db-password-prod.txt
-sed -i -z 's/\n*$//' secrets/anthropic-api-key.txt
-```
-
-Generate a `.env.prod` file:
-```
-vi .env.prod
-```
-Fill: `DATABASE_URL`, `CORS_ALLOW_ORIGIN`, and `ANTHROPIC_MODEL`.
-
-
-Build and run containers:
-```
-docker compose -f compose.yaml -f compose.prod.yaml up -d --build
-```
-
-Generate SSL keys:
-```
-docker compose exec server php bin/console lexik:jwt:generate-keypair --skip-if-exists
-```
-
-Initializing db schema (run only once):  
-```
-docker compose -f compose.yaml -f compose.prod.yaml exec server php bin/console doctrine:schema:create
-```
-
-Create a user:
-```
-docker compose exec server php bin/console app:user:create
-```
-
-Delete a user:
-```
-docker compose exec server php bin/console app:user:delete
-```
-
-### Harden file permissions for secrets
-
-Find for www-data the UID 
-```
-docker compose -f compose.yaml -f compose.prod.yaml exec server id www-data
-```
-Just make sure it's 33; it usually is. 
-
-Change owner to www-data, and set file permission to read-only for the owner.  
-```
-chown 33:33 secrets/*.txt
-chmod 400 secrets/*.txt
-```
+Getting started on production guide:
+- [getting started on prod](docs/getting_started/PROD.md).

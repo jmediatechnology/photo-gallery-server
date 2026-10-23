@@ -46,14 +46,37 @@ services:
             - { name: 'kernel.event_listener', event: !php/const App\Infrastructure\Symfony\Event\DownloadSlotEventListener::REQUIRES_DOWNLOAD_SLOT_EVENT, method: 'claimSlot' }
             - { name: 'kernel.event_listener', event: !php/const Symfony\Component\HttpKernel\KernelEvents::TERMINATE, method: 'releaseSlot' }
 
-    App\Infrastructure\Anthropic\Client\ImageDescriptionGenerator:
+    app.image_description_generator.anthropic:
+        class: App\Infrastructure\Symfony\Ai\ImageDescriptionGenerator
         arguments:
+            $platform: '@ai.platform.anthropic'
             $model: '%env(ANTHROPIC_MODEL)%'
-            $maxTokens: 150
 
-    Anthropic\Client:
+    app.image_description_generator.ollama:
+        class: App\Infrastructure\Symfony\Ai\ImageDescriptionGenerator
         arguments:
-            $apiKey: '%env(file:ANTHROPIC_API_KEY_FILE)%'
+            $platform: '@ai.platform.ollama'
+            $model: '%env(OLLAMA_MODEL)%'
+
+    app.image_description_generator.fake:
+        class: App\Infrastructure\ImageDescription\FakeImageDescription\FakeImageDescriptionGenerator
+
+    app.image_description_generator.locator:
+        class: Symfony\Component\DependencyInjection\ServiceLocator
+        arguments:
+            -
+                anthropic: '@app.image_description_generator.anthropic'
+                ollama: '@app.image_description_generator.ollama'
+                fake: '@app.image_description_generator.fake'
+        tags: [ 'container.service_locator' ]
+
+    App\Domain\Service\ImageDescriptionGeneratorInterface:
+        factory: [ '@App\Infrastructure\ImageDescription\Factory\ImageDescriptionGeneratorFactory', 'create' ]
+
+    App\Infrastructure\ImageDescription\Factory\ImageDescriptionGeneratorFactory:
+        arguments:
+            $generators: '@app.image_description_generator.locator'
+            $provider: '%env(enum:App\Infrastructure\ImageDescription\Enum\ImageDescriptionProvider:IMAGE_DESCRIPTION_PROVIDER)%'
 
 when@dev:
 
@@ -69,11 +92,6 @@ when@dev:
         App\Fixtures\:
             resource: '../fixtures/*'
 
-        App\Application\Handler\Photograph\GenerateDescriptionHandler:
-            tags: [ 'messenger.message_handler' ]
-            arguments:
-                $imageDescriptionGenerator: '@App\Infrastructure\Anthropic\Client\ImageDescriptionGeneratorCustom'
-
 when@prod:
 
     services:
@@ -84,7 +102,7 @@ when@prod:
             bind:
                 $publicImageDir: '%public_images_dir%'
 
-        App\Application\Handler\Photograph\GenerateDescriptionHandler:
-            tags: [ 'messenger.message_handler' ]
-            arguments:
-                $imageDescriptionGenerator: '@App\Infrastructure\Anthropic\Client\ImageDescriptionGenerator'
+#        App\Application\Handler\Photograph\GenerateDescriptionHandler:
+#            tags: [ 'messenger.message_handler' ]
+#            arguments:
+#                $imageDescriptionGenerator: '@App\Infrastructure\Anthropic\Client\ImageDescriptionGenerator'

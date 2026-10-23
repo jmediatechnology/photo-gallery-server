@@ -1,0 +1,50 @@
+# Opt-in local AI for image descriptions.
+#
+# Usage (on top of the dev stack):
+#   docker compose -f compose.yaml -f compose.override.yaml -f compose.dev.yaml -f compose.ollama.yaml up -d --build
+#
+# Override the model with OLLAMA_MODEL in your shell or a root .env file read by Compose,
+# e.g. OLLAMA_MODEL=gemma4:e4b
+
+services:
+  server:
+    environment:
+      IMAGE_DESCRIPTION_PROVIDER: ollama
+      OLLAMA_URL: http://ollama:11434
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-qwen3-vl:4b-instruct}
+
+  ollama:
+    image: ollama/ollama
+    ports:
+      - 11434:11434
+    volumes:
+      - ollama-models:/root/.ollama
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    # Uncomment on a Linux host with an NVIDIA GPU and the NVIDIA Container Toolkit:
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+
+  # One-shot job: downloads the model into the shared volume, then exits.
+  # Subsequent starts are fast because the model is already on disk.
+  ollama-model-pull:
+    image: ollama/ollama
+    entrypoint: ["ollama"]
+    command: ["pull", "${OLLAMA_MODEL:-qwen3-vl:4b-instruct}"]
+    environment:
+      OLLAMA_HOST: http://ollama:11434
+    depends_on:
+      ollama:
+        condition: service_healthy
+    restart: "no"
+
+volumes:
+  ollama-models:

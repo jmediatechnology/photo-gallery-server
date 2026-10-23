@@ -17,6 +17,7 @@
         <server name="APP_ENV" value="test" force="true" />
         <server name="SHELL_VERBOSITY" value="-1" />
         <env name="APP_ENV" value="test" />
+        <env name="IMAGE_DESCRIPTION_PROVIDER" value="fake" force="true" />
     </php>
 
     <testsuites>

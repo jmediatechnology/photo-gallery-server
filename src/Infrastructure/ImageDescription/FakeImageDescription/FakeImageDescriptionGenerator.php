@@ -1,12 +1,16 @@
 <?php
 
-namespace App\Infrastructure\Anthropic\Client;
+namespace App\Infrastructure\ImageDescription\FakeImageDescription;
 
-class ImageDescriptionGeneratorCustom implements ImageDescriptionGeneratorInterface
+use App\Domain\Entity\Photograph;
+use App\Domain\Service\ImageDescriptionGeneratorInterface;
+use App\Domain\ValueObject\Description;
+
+class FakeImageDescriptionGenerator implements ImageDescriptionGeneratorInterface
 {
-    public function describe(string $base64Image, string $mimeType): string
+    public function describe(Photograph $photograph): Description
     {
-        return $this->readable_random_sentence(40);
+        return new Description($this->readable_random_sentence(40));
     }
 
     // @link https://gist.github.com/sepehr/3371339
