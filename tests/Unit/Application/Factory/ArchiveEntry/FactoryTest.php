@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Application\Factory\ArchiveEntry;
 
-use App\Application\ValueObject\ArchiveEntry;
-use App\Application\ValueObject\PhotographArchive;
 use App\Application\Factory\ArchiveEntry\Factory;
+use App\Application\ValueObject\ArchiveEntry;
 use App\Domain\Entity\Photograph;
 use App\Domain\ValueObject\CreatedAt;
 use App\Domain\ValueObject\FilePath;

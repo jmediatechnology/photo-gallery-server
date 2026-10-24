@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Presentation\Resolver\Photograph;
 
 use App\Presentation\DTO\Photograph\DownloadInputDTO;
-use App\Presentation\DTO\Photograph\GetAllInputDTO;
 use App\Presentation\Resolver\Photograph\DownloadInputDTOResolver;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;

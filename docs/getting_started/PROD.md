@@ -14,16 +14,6 @@ sed -i -z 's/\n*$//' secrets/db-password-prod.txt
 sed -i -z 's/\n*$//' secrets/anthropic-api-key.txt
 ```
 
-Generate a `.env.prod` file:
-```
-vi .env.prod
-```
-Fill: `DATABASE_URL`, `CORS_ALLOW_ORIGIN`, and `ANTHROPIC_MODEL`.
-
-
-Pick `IMAGE_DESCRIPTION_PROVIDER`.
-For a production environment `anthropic` provides the best performance. 
-
 Build and run containers:
 ```
 docker compose -f compose.yaml -f compose.prod.yaml up -d --build

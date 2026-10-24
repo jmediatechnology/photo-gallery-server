@@ -31,5 +31,7 @@
 #**/secrets.dev.yaml
 #**/values.dev.yaml
 **/vendor
+var
+secrets
 #LICENSE
 #README.md

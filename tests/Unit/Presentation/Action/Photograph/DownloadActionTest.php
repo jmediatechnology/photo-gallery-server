@@ -2,7 +2,6 @@
 
 namespace App\Tests\Unit\Presentation\Action\Photograph;
 
-use App\Application\Commands\Photograph\CreateCommand;
 use App\Application\Query\Photograph\DownloadQuery;
 use App\Presentation\Action\Photograph\DownloadAction;
 use App\Presentation\DTO\Photograph\DownloadInputDTO;

@@ -51,12 +51,14 @@ services:
         arguments:
             $platform: '@ai.platform.anthropic'
             $model: '%env(ANTHROPIC_MODEL)%'
+            $options: { max_tokens: 150 }
 
     app.image_description_generator.ollama:
         class: App\Infrastructure\Symfony\Ai\ImageDescriptionGenerator
         arguments:
             $platform: '@ai.platform.ollama'
             $model: '%env(OLLAMA_MODEL)%'
+            $options: { num_predict: 150 }
 
     app.image_description_generator.fake:
         class: App\Infrastructure\ImageDescription\FakeImageDescription\FakeImageDescriptionGenerator

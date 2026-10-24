@@ -2,8 +2,8 @@
 
 namespace App\Presentation\Action\Photograph;
 
-use App\Application\ValueObject\PhotographArchive;
 use App\Application\Query\Photograph\DownloadQuery;
+use App\Application\ValueObject\PhotographArchive;
 use App\Presentation\Attribute\RequiresDownloadSlot;
 use App\Presentation\DTO\Photograph\DownloadInputDTO;
 use App\Presentation\Response\ArchiveResponseFactory;

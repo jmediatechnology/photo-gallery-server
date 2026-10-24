@@ -24,6 +24,7 @@ class ImageDescriptionGenerator implements ImageDescriptionGeneratorInterface
         private string            $model,
         private FilePathReader    $filePathReader,
         private SentenceTruncatorInterface $sentenceTruncator,
+        private array $options = [],
     ) {}
 
     /**
@@ -39,10 +40,17 @@ class ImageDescriptionGenerator implements ImageDescriptionGeneratorInterface
         $userMessage = Message::ofUser(self::PROMPT, $image);
         $messageBag = new MessageBag($userMessage);
 
-        $deferredResult = $this->platform->invoke($this->model, $messageBag);
+        $deferredResult = $this->platform->invoke(
+            model: $this->model,
+            input: $messageBag,
+            options: $this->options,
+        );
         $results = $deferredResult->asText();
 
-        $description = $this->sentenceTruncator->truncate($results, self::LENGTH);
+        $description = $this->sentenceTruncator->truncate(
+            text: $results,
+            maxLength: self::LENGTH
+        );
         return new Description($description);
     }
 }
