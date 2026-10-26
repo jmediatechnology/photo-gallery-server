@@ -52,6 +52,7 @@ services:
             $platform: '@ai.platform.anthropic'
             $model: '%env(ANTHROPIC_MODEL)%'
             $options: { max_tokens: 150 }
+            $maxImageBytes: 10485760   # Anthropic's documented limit, base64-encoded (https://platform.claude.com/docs/en/build-with-claude/vision#image-limits-and-costs)
 
     app.image_description_generator.ollama:
         class: App\Infrastructure\Symfony\Ai\ImageDescriptionGenerator
