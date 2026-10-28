@@ -82,7 +82,11 @@ class ImageDescriptionGenerator implements ImageDescriptionGeneratorInterface
     }
 
     /**
-     * The bridge sends the image base64-encoded, so compare the encoded size (4 chars per 3 bytes) without encoding.
+     * The limit applies to the base64 payload the bridge sends, not the raw file size.
+     * Base64 turns every 3-byte group into 4 chars, padding the last group.
+     * So the encoded length is 4 * ceil(n / 3).
+     *
+     * Computed arithmetically to avoid allocating the encoded string just to measure it.
      */
     private function exceedsImageLimit(string $bytes): bool
     {
