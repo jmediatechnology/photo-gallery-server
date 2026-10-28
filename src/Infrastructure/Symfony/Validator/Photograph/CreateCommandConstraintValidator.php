@@ -3,7 +3,8 @@
 namespace App\Infrastructure\Symfony\Validator\Photograph;
 
 use App\Application\Commands\Photograph\CreateCommand;
-use App\Infrastructure\Doctrine\Repository\PhotographRepository;
+use App\Domain\Repository\PhotographRepositoryInterface;
+use App\Domain\ValueObject\Title;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
@@ -11,7 +12,7 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
 class CreateCommandConstraintValidator extends ConstraintValidator
 {
-    public function __construct(private PhotographRepository $photographRepository) {}
+    public function __construct(private PhotographRepositoryInterface $photographRepository) {}
 
     public function validate(mixed $value, Constraint $constraint): void
     {
@@ -24,9 +25,8 @@ class CreateCommandConstraintValidator extends ConstraintValidator
         }
 
         $title = $value->title();
-        $photograph = $this->photographRepository->findOneBy([
-            'title' => $title
-        ]);
+
+        $photograph = $this->photographRepository->findOneByTitle(new Title($title));
 
         if ($photograph) {
             $this->context

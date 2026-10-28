@@ -9,15 +9,15 @@ use Symfony\Contracts\Service\ServiceProviderInterface;
 class ImageDescriptionGeneratorFactory
 {
     /**
-     * @param ServiceProviderInterface<ImageDescriptionGeneratorInterface> $generators
+     * @param ServiceProviderInterface<ImageDescriptionGeneratorInterface> $serviceProvider
      */
     public function __construct(
-        private ServiceProviderInterface $generators,
+        private ServiceProviderInterface $serviceProvider,
         private ImageDescriptionProvider $provider,
     ) {}
 
     public function create(): ImageDescriptionGeneratorInterface
     {
-        return $this->generators->get($this->provider->value);
+        return $this->serviceProvider->get($this->provider->value);
     }
 }

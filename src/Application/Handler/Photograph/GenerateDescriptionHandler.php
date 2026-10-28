@@ -4,8 +4,9 @@ namespace App\Application\Handler\Photograph;
 
 use App\Application\Query\Photograph\GenerateDescriptionForKnownPhotographUuidQuery;
 use App\Domain\Entity\Photograph;
+use App\Domain\Repository\PhotographRepositoryInterface;
 use App\Domain\Service\ImageDescriptionGeneratorInterface;
-use App\Infrastructure\Doctrine\Repository\PhotographRepository;
+use App\Domain\ValueObject\UUID;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use UnexpectedValueException;
 
@@ -13,15 +14,13 @@ use UnexpectedValueException;
 class GenerateDescriptionHandler
 {
     public function __construct(
-        private PhotographRepository $photographRepository,
+        private PhotographRepositoryInterface $photographRepository,
         private ImageDescriptionGeneratorInterface $imageDescriptionGenerator,
     ) {}
 
     public function __invoke(GenerateDescriptionForKnownPhotographUuidQuery $query): string
     {
-        $photograph = $this->photographRepository->findOneBy([
-            'uuid' => $query->uuid(),
-        ]);
+        $photograph = $this->photographRepository->findOneByUUID(new UUID($query->uuid()));
 
         if (!$photograph instanceof Photograph) {
             throw new UnexpectedValueException('Photograph not found');

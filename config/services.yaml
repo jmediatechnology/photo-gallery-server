@@ -64,21 +64,20 @@ services:
     app.image_description_generator.fake:
         class: App\Infrastructure\ImageDescription\FakeImageDescription\FakeImageDescriptionGenerator
 
-    app.image_description_generator.locator:
+    app.image_description_generator_locator:
         class: Symfony\Component\DependencyInjection\ServiceLocator
         arguments:
             -
                 anthropic: '@app.image_description_generator.anthropic'
                 ollama: '@app.image_description_generator.ollama'
                 fake: '@app.image_description_generator.fake'
-        tags: [ 'container.service_locator' ]
 
     App\Domain\Service\ImageDescriptionGeneratorInterface:
         factory: [ '@App\Infrastructure\ImageDescription\Factory\ImageDescriptionGeneratorFactory', 'create' ]
 
     App\Infrastructure\ImageDescription\Factory\ImageDescriptionGeneratorFactory:
         arguments:
-            $generators: '@app.image_description_generator.locator'
+            $serviceProvider: '@app.image_description_generator_locator'
             $provider: '%env(enum:App\Infrastructure\ImageDescription\Enum\ImageDescriptionProvider:IMAGE_DESCRIPTION_PROVIDER)%'
 
 when@dev:

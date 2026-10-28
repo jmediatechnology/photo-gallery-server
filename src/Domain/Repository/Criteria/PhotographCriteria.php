@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Domain\Criteria;
+namespace App\Domain\Repository\Criteria;
 
 use App\Domain\Enum\PhotographSortDirection;
 use App\Domain\Enum\PhotographSortField;
 
-readonly class PhotographListCriteria
+readonly class PhotographCriteria
 {
     public function __construct(
         private ?string $title,

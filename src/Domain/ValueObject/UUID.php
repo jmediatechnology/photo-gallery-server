@@ -7,7 +7,9 @@ use Stringable;
 
 class UUID implements Stringable
 {
-    public function __construct(private string|Stringable $value)
+    private string $value;
+
+    public function __construct(string|Stringable $value)
     {
         $isValid = (bool)preg_match("/^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$/", $value);
         if ($isValid === false) {

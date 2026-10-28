@@ -41,7 +41,7 @@ final class GetHandlerTest extends TestCase
         $photographRepository = $this->createMock(PhotographRepository::class);
         $photographRepository
             ->expects($this->once())
-            ->method('findByCriteria')
+            ->method('findMatching')
             ->willReturn($photographs);
 
         $actual = new GetHandler($photographRepository)->__invoke($query);
@@ -78,7 +78,7 @@ final class GetHandlerTest extends TestCase
         $photographRepository = $this->createMock(PhotographRepository::class);
         $photographRepository
             ->expects($this->once())
-            ->method('findByCriteria')
+            ->method('findMatching')
             ->willReturn($photographs);
 
         $actual = new GetHandler($photographRepository)->__invoke($query);

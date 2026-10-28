@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Integration\Infrastructure\Doctrine\Repository;
 
-use App\Domain\Criteria\PhotographListCriteria;
 use App\Domain\Entity\Photograph;
 use App\Domain\Enum\PhotographSortDirection;
 use App\Domain\Enum\PhotographSortField;
+use App\Domain\Repository\Criteria\PhotographCriteria;
 use App\Domain\ValueObject\CreatedAt;
 use App\Domain\ValueObject\Description;
 use App\Domain\ValueObject\FilePath;
@@ -36,6 +36,15 @@ class PhotographRepositoryTest extends KernelTestCase
         $container = static::getContainer();
 
         $this->photographRepository = $container->get(PhotographRepository::class);
+    }
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+
+        $em = self::getContainer()->get('doctrine')->getManager();
+        $em->getConnection()->close();
+        $em->close();
     }
 
     #[Test]
@@ -403,7 +412,7 @@ class PhotographRepositoryTest extends KernelTestCase
         $this->photographRepository->save($photograph2);
         $this->photographRepository->save($photograph3);
 
-        $criteria = $this->createMock(PhotographListCriteria::class);
+        $criteria = $this->createMock(PhotographCriteria::class);
         $criteria
             ->expects($this->once())
             ->method('title')
@@ -419,7 +428,7 @@ class PhotographRepositoryTest extends KernelTestCase
             ->method('sortDirection')
             ->willReturn(PhotographSortDirection::Asc);
 
-        $photographs = $this->photographRepository->findByCriteria($criteria);
+        $photographs = $this->photographRepository->findMatching($criteria);
 
         $this->assertCount(2, $photographs);
 
@@ -440,13 +449,71 @@ class PhotographRepositoryTest extends KernelTestCase
         $this->assertEquals($photograph2->updatedAt(), $foundPhotograph2->updatedAt());
     }
 
-    protected function tearDown(): void
+    #[Test]
+    public function canFindOneByTitle(): void
     {
-        parent::tearDown();
+        $photograph1 = new Photograph(
+            uuid: new UUID('d484e457-e3da-4246-bd98-752086ebe63e'),
+            title:  new Title('My awesome title number 1'),
+            description: new Description('Description for photograph 1'),
+            filePath: new FilePath('public/images/d484e457-e3da-4246-bd98-752086ebe63e.jpg'),
+            createdAt:  new CreatedAt(new DateTimeImmutable('01-01-2026 08:40:00')),
+            updatedAt: new UpdatedAt(new DateTimeImmutable('01-01-2026 08:40:00')),
+        );
 
-        $em = self::getContainer()->get('doctrine')->getManager();
-        $em->getConnection()->close();
-        $em->close();
+        $photograph2 = new Photograph(
+            uuid: new UUID('6f6096ce-2d71-4691-99bc-c87779a92387'),
+            title: new Title('My awesome title number 2'),
+            description: new Description('Description for photograph 2'),
+            filePath: new FilePath('public/images/6f6096ce-2d71-4691-99bc-c87779a92387.jpg'),
+            createdAt: new CreatedAt(new DateTimeImmutable('01-01-2026 08:45:00')),
+            updatedAt: new UpdatedAt(new DateTimeImmutable('01-01-2026 08:45:00')),
+        );
+
+        $photograph3 = new Photograph(
+            uuid: new UUID('7830252b-c1cc-44b1-bd00-95a9b0df6130'),
+            title: new Title('My title number 3'),
+            description: new Description('Description for photograph 3'),
+            filePath: new FilePath('public/images/7830252b-c1cc-44b1-bd00-95a9b0df6130.jpg'),
+            createdAt: new CreatedAt(new DateTimeImmutable('01-01-2026 08:50:00')),
+            updatedAt: new UpdatedAt(new DateTimeImmutable('01-01-2026 08:50:00')),
+        );
+
+        $this->photographRepository->save($photograph1);
+        $this->photographRepository->save($photograph2);
+        $this->photographRepository->save($photograph3);
+
+        $title = new Title('My awesome title number 2');
+
+        $foundPhotograph = $this->photographRepository->findOneByTitle($title);
+
+        $this->assertEquals($photograph2->uuid(), $foundPhotograph->uuid());
+        $this->assertEquals($photograph2->title(), $foundPhotograph->title());
+        $this->assertEquals($photograph2->description(), $foundPhotograph->description());
+        $this->assertEquals($photograph2->filePath(), $foundPhotograph->filePath());
+        $this->assertEquals($photograph2->createdAt(), $foundPhotograph->createdAt());
+        $this->assertEquals($photograph2->updatedAt(), $foundPhotograph->updatedAt());
+    }
+
+    #[Test]
+    public function unknownTitleGivesNull(): void
+    {
+        $photograph = new Photograph(
+            uuid: new UUID('a3523093-209b-4883-a488-e02267e095e7'),
+            title:  new Title('My awesome title number 1'),
+            description: new Description('Description for photograph 1'),
+            filePath: new FilePath('public/images/a3523093-209b-4883-a488-e02267e095e7.jpg'),
+            createdAt:  new CreatedAt(new DateTimeImmutable('01-01-2026 10:45:00')),
+            updatedAt: new UpdatedAt(new DateTimeImmutable('01-01-2026 10:45:00')),
+        );
+
+        $this->photographRepository->save($photograph);
+
+        $title = new Title('some unknown title');
+
+        $foundPhotograph = $this->photographRepository->findOneByTitle($title);
+
+        $this->assertNull($foundPhotograph);
     }
 
     private static function assertHasValidUUID(string $uuid): void

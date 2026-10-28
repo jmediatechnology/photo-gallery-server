@@ -2,9 +2,11 @@
 
 namespace App\Infrastructure\Doctrine\Repository;
 
-use App\Domain\Criteria\PhotographListCriteria;
 use App\Domain\Entity\Photograph;
 use App\Domain\Enum\PhotographSortField;
+use App\Domain\Repository\Criteria\PhotographCriteria;
+use App\Domain\Repository\PhotographRepositoryInterface;
+use App\Domain\ValueObject\Title;
 use App\Domain\ValueObject\UUID;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\ArrayParameterType;
@@ -14,7 +16,7 @@ use Doctrine\ORM\UnitOfWork;
 use Doctrine\Persistence\ManagerRegistry;
 use LogicException;
 
-class PhotographRepository extends ServiceEntityRepository
+class PhotographRepository extends ServiceEntityRepository implements PhotographRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -25,6 +27,14 @@ class PhotographRepository extends ServiceEntityRepository
     {
         $photograph = $this->findOneBy([
             'uuid' => $uuid,
+        ]);
+        return $photograph instanceof Photograph ? $photograph : null;
+    }
+
+    public function findOneByTitle(Title $title): ?Photograph
+    {
+        $photograph = $this->findOneBy([
+            'title' => $title,
         ]);
         return $photograph instanceof Photograph ? $photograph : null;
     }
@@ -50,7 +60,7 @@ class PhotographRepository extends ServiceEntityRepository
     /**
      * @return array<Photograph>
      */
-    public function findByCriteria(PhotographListCriteria $criteria): array
+    public function findMatching(PhotographCriteria $criteria): array
     {
         $queryBuilder = $this->createQueryBuilder('photograph');
 
