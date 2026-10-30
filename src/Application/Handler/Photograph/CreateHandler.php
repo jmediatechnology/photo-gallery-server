@@ -2,8 +2,8 @@
 
 namespace App\Application\Handler\Photograph;
 
-use App\Application\Factory\Filename\Factory as FilenameFactory;
 use App\Application\Commands\Photograph\CreateCommand;
+use App\Application\Factory\Filename\Factory as FilenameFactory;
 use App\Application\Factory\FilePath\Factory as FilePathFactory;
 use App\Application\Factory\Photograph\Factory as PhotographFactory;
 use App\Application\Upload\FileUploader;
