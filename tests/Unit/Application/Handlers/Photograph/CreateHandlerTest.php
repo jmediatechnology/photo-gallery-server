@@ -3,8 +3,9 @@
 namespace App\Tests\Unit\Application\Handlers\Photograph;
 
 use App\Application\Commands\Photograph\CreateCommand;
+use App\Application\Factory\Filename\Factory as FilenameFactory;
 use App\Application\Factory\FilePath\Factory as FilePathFactory;
-use App\Application\Factory\Photograph\Factory;
+use App\Application\Factory\Photograph\Factory as PhotographFactory;
 use App\Application\Handler\Photograph\CreateHandler;
 use App\Application\Upload\FileUploader;
 use App\Domain\Entity\Photograph;
@@ -17,12 +18,14 @@ final class CreateHandlerTest extends TestCase
     #[Test]
     public function canSave(): void
     {
+        $filenameFactory = $this->createStub(FilenameFactory::class);
+
         $photograph = $this->createStub(Photograph::class);
         $command = $this->createStub(CreateCommand::class);
         $fileUploader = $this->createStub(FileUploader::class);
 
-        $factory = $this->createMock(Factory::class);
-        $factory
+        $photographFactory = $this->createMock(PhotographFactory::class);
+        $photographFactory
             ->expects($this->once())
             ->method('createByCreateCommand')
             ->with($command)
@@ -37,10 +40,11 @@ final class CreateHandlerTest extends TestCase
         $filePathFactory = $this->createStub(FilePathFactory::class);
 
         $actual = new CreateHandler(
-            $photographRepository,
-            $factory,
-            $fileUploader,
+            $filenameFactory,
             $filePathFactory,
+            $fileUploader,
+            $photographFactory,
+            $photographRepository,
         )->__invoke($command);
 
         $this->assertInstanceOf(Photograph::class, $photograph);
