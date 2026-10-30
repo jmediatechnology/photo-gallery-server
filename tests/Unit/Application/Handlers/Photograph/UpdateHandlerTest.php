@@ -5,7 +5,7 @@ namespace App\Tests\Unit\Application\Handlers\Photograph;
 use App\Application\Commands\Photograph\UpdateCommand;
 use App\Application\Handler\Photograph\UpdateHandler;
 use App\Domain\Entity\Photograph;
-use App\Infrastructure\Doctrine\Repository\PhotographRepository;
+use App\Domain\Repository\PhotographRepositoryInterface;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
@@ -50,7 +50,7 @@ final class UpdateHandlerTest extends TestCase
             ->method('withUpdatedAt')
             ->willReturnSelf();
 
-        $photographRepository = $this->createMock(PhotographRepository::class);
+        $photographRepository = $this->createMock(PhotographRepositoryInterface::class);
         $photographRepository
             ->expects($this->once())
             ->method('save')

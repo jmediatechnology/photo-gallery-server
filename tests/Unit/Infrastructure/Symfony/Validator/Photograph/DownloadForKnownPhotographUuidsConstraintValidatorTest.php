@@ -2,7 +2,8 @@
 
 namespace App\Tests\Unit\Infrastructure\Symfony\Validator\Photograph;
 
-use App\Infrastructure\Doctrine\Repository\PhotographRepository;
+use App\Application\Query\Photograph\DownloadQuery;
+use App\Domain\Repository\PhotographRepositoryInterface;
 use App\Infrastructure\Symfony\Validator\Photograph\DownloadForKnownPhotographUuidsConstraint;
 use App\Infrastructure\Symfony\Validator\Photograph\DownloadForKnownPhotographUuidsConstraintValidator;
 use PHPUnit\Framework\Attributes\Test;
@@ -16,14 +17,14 @@ use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
 final class DownloadForKnownPhotographUuidsConstraintValidatorTest extends ConstraintValidatorTestCase
 {
-    private PhotographRepository|MockObject $photographRepository;
+    private PhotographRepositoryInterface|MockObject $photographRepository;
 
     #[Test]
     public function throwsUnexpectedTypeExceptionWhenConstraintIsNotInstanceOfDownloadForKnownPhotographUuidsConstraint(): void
     {
         $this->expectException(UnexpectedTypeException::class);
 
-        $value = '';
+        $value = $this->createStub(DownloadQuery::class);
         $constraint = $this->createStub(Constraint::class);
         $this->validator->validate($value, $constraint);
     }
@@ -40,7 +41,7 @@ final class DownloadForKnownPhotographUuidsConstraintValidatorTest extends Const
 
     protected function createValidator(): ConstraintValidatorInterface
     {
-        $photographRepository = $this->createStub(PhotographRepository::class);
+        $photographRepository = $this->createStub(PhotographRepositoryInterface::class);
         $this->photographRepository = $photographRepository;
 
         return new DownloadForKnownPhotographUuidsConstraintValidator($this->photographRepository);

@@ -9,8 +9,8 @@ use App\Application\Handler\Photograph\DownloadHandler;
 use App\Application\Query\Photograph\DownloadQuery;
 use App\Application\ValueObject\ArchiveEntry;
 use App\Domain\Entity\Photograph;
+use App\Domain\Repository\PhotographRepositoryInterface;
 use App\Domain\ValueObject\UUID;
-use App\Infrastructure\Doctrine\Repository\PhotographRepository;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Clock\MockClock;
@@ -32,7 +32,7 @@ final class DownloadHandlerTest extends TestCase
             new ArchiveEntry(name: 'Night.jpg', path: '/images/night.jpg', size: 2048),
         ];
 
-        $photographRepository = $this->createMock(PhotographRepository::class);
+        $photographRepository = $this->createMock(PhotographRepositoryInterface::class);
         $photographRepository
             ->expects($this->once())
             ->method('findByUUIDs')
@@ -59,7 +59,7 @@ final class DownloadHandlerTest extends TestCase
     public function namesTheArchiveAfterTheMomentOfTheDownload(): void
     {
         $archive = new DownloadHandler(
-            $this->createStub(PhotographRepository::class),
+            $this->createStub(PhotographRepositoryInterface::class),
             $this->createStub(ArchiveEntryFactory::class),
             new MockClock('2026-10-11 15:39:00'),
         )->__invoke(new DownloadQuery(uuids: [self::SUNSET_UUID]));

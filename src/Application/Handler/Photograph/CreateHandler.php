@@ -7,15 +7,15 @@ use App\Application\Factory\FilePath\Factory as FilePathFactory;
 use App\Application\Factory\Photograph\Factory;
 use App\Application\Upload\FileUploader;
 use App\Domain\Entity\Photograph;
-use App\Infrastructure\Doctrine\Repository\PhotographRepository;
+use App\Domain\Repository\PhotographRepositoryInterface;
 
 class CreateHandler
 {
     public function __construct(
-        private PhotographRepository $photographRepository,
-        private Factory              $photographFactory,
-        private FileUploader         $fileUploader,
-        private FilePathFactory      $filePathFactory,
+        private PhotographRepositoryInterface $photographRepository,
+        private Factory                       $photographFactory,
+        private FileUploader                  $fileUploader,
+        private FilePathFactory               $filePathFactory,
     ) {}
 
     public function __invoke(CreateCommand $command): Photograph

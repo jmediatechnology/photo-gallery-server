@@ -5,7 +5,7 @@ namespace App\Tests\Unit\Application\Handlers\Photograph;
 use App\Application\Commands\Photograph\DeleteCommand;
 use App\Application\Handler\Photograph\DeleteHandler;
 use App\Domain\Entity\Photograph;
-use App\Infrastructure\Doctrine\Repository\PhotographRepository;
+use App\Domain\Repository\PhotographRepositoryInterface;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
@@ -22,7 +22,7 @@ final class DeleteHandlerTest extends TestCase
             ->method('photograph')
             ->willReturn($photograph);
 
-        $photographRepository = $this->createMock(PhotographRepository::class);
+        $photographRepository = $this->createMock(PhotographRepositoryInterface::class);
         $photographRepository
             ->expects($this->once())
             ->method('remove')
@@ -30,7 +30,6 @@ final class DeleteHandlerTest extends TestCase
 
         $actual = new DeleteHandler($photographRepository)->__invoke($command);
 
-        $this->assertInstanceOf(Photograph::class, $actual);
-        $this->assertSame($actual, $photograph);
+        $this->assertSame($photograph, $actual);
     }
 }

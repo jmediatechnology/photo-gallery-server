@@ -4,8 +4,8 @@ namespace App\Infrastructure\Symfony\Validator\Photograph;
 
 use App\Application\Query\Photograph\DownloadQuery;
 use App\Domain\Entity\Photograph;
+use App\Domain\Repository\PhotographRepositoryInterface;
 use App\Domain\ValueObject\UUID;
-use App\Infrastructure\Doctrine\Repository\PhotographRepository;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
@@ -13,16 +13,18 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
 class DownloadForKnownPhotographUuidsConstraintValidator extends ConstraintValidator
 {
-    public function __construct(private PhotographRepository $photographRepository) {}
+    public function __construct(private PhotographRepositoryInterface $photographRepository) {}
 
+    /** @var $value DownloadQuery */
+    /** @var $constraint DownloadForKnownPhotographUuidsConstraint */
     public function validate(mixed $value, Constraint $constraint): void
     {
-        if (!$constraint instanceof DownloadForKnownPhotographUuidsConstraint) {
-            throw new UnexpectedTypeException($constraint, DownloadForKnownPhotographUuidsConstraint::class);
-        }
-
         if (!$value instanceof DownloadQuery) {
             throw new UnexpectedValueException($value, DownloadQuery::class);
+        }
+
+        if (!$constraint instanceof DownloadForKnownPhotographUuidsConstraint) {
+            throw new UnexpectedTypeException($constraint, DownloadForKnownPhotographUuidsConstraint::class);
         }
 
         $missingUuids = $this->findMissingUuids($value->uuids());

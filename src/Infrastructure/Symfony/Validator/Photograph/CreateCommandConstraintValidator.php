@@ -14,6 +14,8 @@ class CreateCommandConstraintValidator extends ConstraintValidator
 {
     public function __construct(private PhotographRepositoryInterface $photographRepository) {}
 
+    /** @var $value CreateCommand */
+    /** @var $constraint CreateCommandConstraint */
     public function validate(mixed $value, Constraint $constraint): void
     {
         if (!$value instanceof CreateCommand) {
@@ -25,7 +27,6 @@ class CreateCommandConstraintValidator extends ConstraintValidator
         }
 
         $title = $value->title();
-
         $photograph = $this->photographRepository->findOneByTitle(new Title($title));
 
         if ($photograph) {

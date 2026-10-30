@@ -5,11 +5,11 @@ namespace App\Application\Handler\Photograph;
 use App\Application\Query\Photograph\GetQuery;
 use App\Domain\Entity\Photograph;
 use App\Domain\Repository\Criteria\PhotographCriteria;
-use App\Infrastructure\Doctrine\Repository\PhotographRepository;
+use App\Domain\Repository\PhotographRepositoryInterface;
 
 class GetHandler
 {
-    public function __construct(private PhotographRepository $photographRepository) {}
+    public function __construct(private PhotographRepositoryInterface $photographRepository) {}
 
     /**
      * @return array<Photograph>

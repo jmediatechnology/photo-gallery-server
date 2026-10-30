@@ -8,7 +8,7 @@ use App\Application\Factory\Photograph\Factory;
 use App\Application\Handler\Photograph\CreateHandler;
 use App\Application\Upload\FileUploader;
 use App\Domain\Entity\Photograph;
-use App\Infrastructure\Doctrine\Repository\PhotographRepository;
+use App\Domain\Repository\PhotographRepositoryInterface;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
@@ -28,7 +28,7 @@ final class CreateHandlerTest extends TestCase
             ->with($command)
             ->willReturn($photograph);
 
-        $photographRepository = $this->createMock(PhotographRepository::class);
+        $photographRepository = $this->createMock(PhotographRepositoryInterface::class);
         $photographRepository
             ->expects($this->once())
             ->method('save')

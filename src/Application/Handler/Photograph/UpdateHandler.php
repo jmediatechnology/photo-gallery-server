@@ -3,18 +3,18 @@
 namespace App\Application\Handler\Photograph;
 
 use App\Application\Commands\Photograph\UpdateCommand;
-use App\Domain\Entity\photograph;
+use App\Domain\Entity\Photograph;
+use App\Domain\Repository\PhotographRepositoryInterface;
 use App\Domain\ValueObject\Description;
 use App\Domain\ValueObject\Title;
 use App\Domain\ValueObject\UpdatedAt;
-use App\Infrastructure\Doctrine\Repository\PhotographRepository;
 use DateTimeImmutable;
 
 class UpdateHandler
 {
-    public function __construct(private PhotographRepository $photographRepository) {}
+    public function __construct(private PhotographRepositoryInterface $photographRepository) {}
 
-    public function __invoke(UpdateCommand $command): photograph
+    public function __invoke(UpdateCommand $command): Photograph
     {
         $title = new Title($command->title());
         $description = $command->description() !== null ? new Description($command->description()) : null;

@@ -14,6 +14,8 @@ class UpdateCommandConstraintValidator extends ConstraintValidator
 {
     public function __construct(private PhotographRepositoryInterface $photographRepository) {}
 
+    /** @var $value UpdateCommand */
+    /** @var $constraint UpdateCommandConstraint */
     public function validate(mixed $value, Constraint $constraint): void
     {
         if (!$value instanceof UpdateCommand) {
@@ -30,7 +32,8 @@ class UpdateCommandConstraintValidator extends ConstraintValidator
             return;
         }
 
-        $photograph = $this->photographRepository->findOneByTitle(new Title($newTitle));
+        $title = new Title($newTitle);
+        $photograph = $this->photographRepository->findOneByTitle($title);
 
         if ($photograph) {
             $this->context

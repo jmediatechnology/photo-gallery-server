@@ -3,7 +3,8 @@
 namespace App\Infrastructure\Symfony\Validator\Photograph;
 
 use App\Application\Query\Photograph\GenerateDescriptionForKnownPhotographUuidQuery;
-use App\Infrastructure\Doctrine\Repository\PhotographRepository;
+use App\Domain\Repository\PhotographRepositoryInterface;
+use App\Domain\ValueObject\UUID;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
@@ -11,8 +12,10 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
 class GenerateDescriptionForKnownPhotographUuidConstraintValidator extends ConstraintValidator
 {
-    public function __construct(private PhotographRepository $photographRepository) {}
+    public function __construct(private PhotographRepositoryInterface $photographRepository) {}
 
+    /** @var $value GenerateDescriptionForKnownPhotographUuidQuery */
+    /** @var $constraint GenerateDescriptionForKnownPhotographUuidConstraint */
     public function validate(mixed $value, Constraint $constraint): void
     {
         if (!$value instanceof GenerateDescriptionForKnownPhotographUuidQuery) {
@@ -23,9 +26,8 @@ class GenerateDescriptionForKnownPhotographUuidConstraintValidator extends Const
             throw new UnexpectedValueException($constraint, GenerateDescriptionForKnownPhotographUuidConstraint::class);
         }
 
-        $photograph = $this->photographRepository->findOneBy([
-            'uuid' => $value->uuid()
-        ]);
+        $uuid = $value->uuid();
+        $photograph = $this->photographRepository->findOneByUUID(new UUID($uuid));
 
         if ($photograph === null) {
             $this->context

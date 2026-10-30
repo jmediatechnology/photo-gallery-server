@@ -5,8 +5,8 @@ namespace App\Application\Handler\Photograph;
 use App\Application\Factory\ArchiveEntry\Factory as ArchiveEntryFactory;
 use App\Application\Query\Photograph\DownloadQuery;
 use App\Application\ValueObject\PhotographArchive;
+use App\Domain\Repository\PhotographRepositoryInterface;
 use App\Domain\ValueObject\UUID;
-use App\Infrastructure\Doctrine\Repository\PhotographRepository;
 use Psr\Clock\ClockInterface;
 
 class DownloadHandler
@@ -15,7 +15,7 @@ class DownloadHandler
     private const string ARCHIVE_NAME_DATE_TIME_FORMAT = 'Y-m-d_H-i-s';
 
     public function __construct(
-        private PhotographRepository $photographRepository,
+        private PhotographRepositoryInterface $photographRepository,
         private ArchiveEntryFactory $archiveEntryFactory,
         private ClockInterface $clock,
     ) {}
