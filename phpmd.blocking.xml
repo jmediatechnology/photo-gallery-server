@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<ruleset name="photo-gallery-server (blocking)"
+         xmlns="http://pmd.sf.net/ruleset/1.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0 http://pmd.sf.net/ruleset_xml_schema.xsd"
+         xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd">
+    <description>Any violation of these rules fails the deployment.</description>
+
+    <!-- Built-in rulesets; rules that are tuned or moved to advisory are excluded here. -->
+    <rule ref="rulesets/cleancode.xml">
+        <exclude name="ElseExpression"/>
+        <exclude name="StaticAccess"/>
+        <exclude name="UndefinedVariable"/>
+    </rule>
+    <rule ref="rulesets/codesize.xml">
+        <exclude name="ExcessiveMethodLength"/>
+    </rule>
+    <rule ref="rulesets/controversial.xml">
+        <exclude name="CamelCaseMethodName"/>
+        <exclude name="CamelCaseVariableName"/>
+    </rule>
+    <rule ref="rulesets/design.xml">
+        <exclude name="CouplingBetweenObjects"/>
+    </rule>
+    <rule ref="rulesets/naming.xml">
+        <exclude name="LongVariable"/>
+        <exclude name="ShortVariable"/>
+        <exclude name="LongClassName"/>
+        <exclude name="LongMethodName"/>
+    </rule>
+    <rule ref="rulesets/unusedcode.xml">
+        <exclude name="UnusedPrivateField"/>
+        <exclude name="UnusedLocalVariable"/>
+        <exclude name="UnusedFormalParameter"/>
+    </rule>
+
+    <!-- The one that really matters. Default is 100 lines incl. blank lines: too loose to ever fire here. -->
+    <rule ref="rulesets/codesize.xml/ExcessiveMethodLength">
+        <properties>
+            <property name="minimum" value="40"/>
+            <property name="ignore-whitespace" value="true"/>
+        </properties>
+    </rule>
+</ruleset>

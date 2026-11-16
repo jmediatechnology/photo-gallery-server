@@ -63,14 +63,15 @@
         "symfony/yaml": "^8.1.5"
     },
     "require-dev": {
+        "ext-zip": "*",
         "dama/doctrine-test-bundle": "^8.6",
         "dg/bypass-finals": "^1.11",
         "doctrine/doctrine-fixtures-bundle": "^4.3.1",
         "liip/test-fixtures-bundle": "^3.9",
+        "phpmd/phpmd": "^3.0",
         "phpunit/phpunit": "^12.5.34",
         "symfony/browser-kit": "^8.1.5",
-        "symfony/css-selector": "^8.1.5",
-        "ext-zip": "*"
+        "symfony/css-selector": "^8.1.5"
     },
     "config": {
         "allow-plugins": {
@@ -116,6 +117,8 @@
         "post-update-cmd": [
             "@auto-scripts"
         ],
+        "phpmd": "phpmd analyze src/ --ruleset phpmd.blocking.xml",
+        "phpmd:advisory": "phpmd analyze src/ --ruleset phpmd.advisory.xml --ignore-violations-on-exit",
         "test-execute": [
             "bin/console --env=test cache:clear",
             "./vendor/bin/phpunit tests || true"

@@ -53,6 +53,17 @@ Inspect the database.
 
 More information about running tests can be found at [Testing](docs/testing/Testing.md).
 
+## QA
+
+Run: 
+
+```
+docker compose exec server composer phpmd
+docker compose exec server composer phpmd:advisory
+```
+
+More information about running tests can be found at [Testing](docs/testing/Testing.md).
+
 ## Start server on Production
 
 Getting started on production guide:
