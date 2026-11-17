@@ -101,10 +101,48 @@ jobs:
                   path: var/reports/coverage/clover.xml
                   retention-days: 7
 
+    phpmd:
+        name: PHP Mess Detector
+        runs-on: ubuntu-latest
+        needs: [validate]
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ env.PHP_VERSION }}
+                  extensions: ctype, iconv, simplexml, fileinfo, libxml, mbstring, pdo_sqlite, sqlite3, zip
+                  coverage: none
+                  tools: composer:v2
+
+            - name: Get Composer cache directory
+              id: composer-cache
+              run: echo "dir=$(composer config cache-files-dir)" >> "$GITHUB_OUTPUT"
+
+            - name: Cache Composer packages
+              uses: actions/cache@v4
+              with:
+                  path: ${{ steps.composer-cache.outputs.dir }}
+                  key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+                  restore-keys: |
+                      ${{ runner.os }}-composer-
+
+            - name: Install dependencies
+              run: composer install --no-interaction --no-progress --prefer-dist
+
+            - name: PHPMD (blocking)
+              run: composer phpmd
+
+            - name: PHPMD (advisory)
+              if: always()
+              run: composer phpmd:advisory
+
     build-and-push:
         name: Build & Push to GHCR
         runs-on: ubuntu-latest
-        needs: [validate, test]
+        needs: [validate, test, phpmd]
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         permissions:
             contents: read
@@ -144,11 +182,11 @@ jobs:
             - name: Deploy to Hetzner via SSH
               uses: appleboy/ssh-action@v1
               with:
-                 host: ${{ vars.HETZNER_HOST }}
-                 username: ${{ vars.HETZNER_USER }}
-                 key: ${{ secrets.HETZNER_SSH_KEY }}
-                 script: |
-                   cd ~/hetzner-deploy
-                   docker compose pull server
-                   docker compose up -d server
-                   docker image prune -f
+                  host: ${{ vars.HETZNER_HOST }}
+                  username: ${{ vars.HETZNER_USER }}
+                  key: ${{ secrets.HETZNER_SSH_KEY }}
+                  script: |
+                      cd ~/hetzner-deploy
+                      docker compose pull server
+                      docker compose up -d server
+                      docker image prune -f

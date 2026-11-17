@@ -38,8 +38,13 @@ services:
         resource: '../src/Application/Handler/*'
         tags: [ 'messenger.message_handler' ]
 
+    App\Infrastructure\Symfony\Event\MessengerExceptionListener:
+        tags:
+            - { name: 'kernel.event_listener', event: !php/const Symfony\Component\HttpKernel\KernelEvents::EXCEPTION, priority: 10 }
+
     App\Infrastructure\Symfony\Event\ExceptionEventListener:
-        tags: [ 'kernel.event_listener' ]
+        tags:
+            - { name: 'kernel.event_listener', event: !php/const Symfony\Component\HttpKernel\KernelEvents::EXCEPTION, priority: -10 }
 
     App\Infrastructure\Symfony\Event\DownloadSlotEventListener:
         tags:

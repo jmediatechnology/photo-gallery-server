@@ -43,6 +43,7 @@
         "symfony/lock": "^8.1",
         "symfony/messenger": "^8.1.5",
         "symfony/mime": "^8.1.5",
+        "symfony/monolog-bundle": "^4.1",
         "symfony/password-hasher": "^8.1",
         "symfony/property-access": "^8.1.4",
         "symfony/property-info": "^8.1.5",
@@ -117,8 +118,14 @@
         "post-update-cmd": [
             "@auto-scripts"
         ],
-        "phpmd": "phpmd analyze src/ --ruleset phpmd.blocking.xml",
-        "phpmd:advisory": "phpmd analyze src/ --ruleset phpmd.advisory.xml --ignore-violations-on-exit",
+        "phpmd": [
+            "rm -rf /tmp/pdepend",
+            "phpmd analyze src/ --ruleset phpmd.blocking.xml"
+        ],
+        "phpmd:advisory": [
+            "rm -rf /tmp/pdepend",
+            "phpmd analyze src/ --ruleset phpmd.advisory.xml --ignore-violations-on-exit"
+        ],
         "test-execute": [
             "bin/console --env=test cache:clear",
             "./vendor/bin/phpunit tests || true"

@@ -1,6 +1,7 @@
 services:
   server:
     image: ghcr.io/jmediatechnology/photo-gallery-server:latest
+    restart: unless-stopped
     build:
       context: .
       dockerfile: ./docker/Dockerfile
@@ -18,6 +19,11 @@ services:
     environment:
       - DB_PASSWORD_PROD_FILE=/run/secrets/db-password-prod
       - ANTHROPIC_API_KEY_FILE=/run/secrets/anthropic-api-key
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   db:
     volumes:
@@ -28,6 +34,11 @@ services:
       - MARIADB_ROOT_PASSWORD_FILE=/run/secrets/db-password-prod
       - MARIADB_DATABASE=photo-gallery
     ports: []
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
 
 volumes:
   db-data-prod:

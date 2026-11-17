@@ -11,4 +11,5 @@ return [
     Liip\TestFixturesBundle\LiipTestFixturesBundle::class => ['test' => true],
     DAMA\DoctrineTestBundle\DAMADoctrineTestBundle::class => ['test' => true],
     Symfony\AI\AiBundle\AiBundle::class => ['all' => true],
+    Symfony\Bundle\MonologBundle\MonologBundle::class => ['all' => true],
 ];
