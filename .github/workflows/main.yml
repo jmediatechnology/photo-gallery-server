@@ -78,20 +78,7 @@ jobs:
                   ./vendor/bin/phpunit tests --coverage-clover=var/reports/coverage/clover.xml
 
             - name: Enforce coverage threshold
-              env:
-                  MIN_COVERAGE: "100"
-              run: |
-                  COVERAGE=$(php bin/coverage-percentage.php ./var/reports/coverage/clover.xml | tail -n1 | tr -d '[:space:]%')
-                  echo "Coverage: ${COVERAGE}%"
-                  if [ -z "$COVERAGE" ]; then
-                    echo "::error::Could not parse a coverage percentage from the script output."
-                    exit 1
-                  fi
-                  if awk "BEGIN { exit !($COVERAGE < $MIN_COVERAGE) }"; then
-                    echo "::error::Coverage ${COVERAGE}% is below the required ${MIN_COVERAGE}%."
-                    exit 1
-                  fi
-                  echo "Coverage ${COVERAGE}% meets the ${MIN_COVERAGE}% threshold."
+              run: php bin/coverage-percentage.php var/reports/coverage/clover.xml --min=100
 
             - name: Upload coverage report
               uses: actions/upload-artifact@v4
